@@ -41,12 +41,36 @@
   transform: scale(1.07);
 }
 
+.sophia-category::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.35s ease;
+  z-index: 2;
+}
+
+.sophia-category:hover::after {
+  transform: scaleX(1);
+}
+
 .sophia-category span {
   padding: 0 18px 34px;
   font-size: 12px;
   letter-spacing: 0.4px;
   text-align: center;
   color: var(--champagne);
+  transition: color 0.3s ease;
+}
+
+.sophia-category:hover span {
+  color: #fff;
+  text-shadow: 0 0 18px rgba(255, 104, 8, 0.6);
 }
 
 /* ── Responsive ── */

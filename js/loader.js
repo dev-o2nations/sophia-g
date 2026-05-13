@@ -16,6 +16,7 @@ const COMPONENTS = [
   { slot: "services",    path: "components/services/services.html" },
   { slot: "subscribe",   path: "components/subscribe/subscribe.html" },
   { slot: "footer",      path: "components/footer/footer.html" },
+  { slot: "closing",     path: "components/closing/closing.html" },
   { slot: "scroll-top",  path: "components/scroll-top/scroll-top.html" },
 ];
 

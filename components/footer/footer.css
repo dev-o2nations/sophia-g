@@ -1,442 +1,475 @@
-/* ─── Footer — Gucci 3-column + field rows structure ─── */
+/* ─── Footer ─── */
 
-.sophia-footer {
-  background: var(--black);
-  color: var(--champagne);
+.sf {
+  display: block;
+  width: 100%;
+  background: #DB2E6D;
+  color: rgba(255,255,255,0.82);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  border-top: 3px solid #FF6808;
 }
 
-/* ══ 3-column grid ══ */
-.sophia-footer__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.6fr;
-  padding: 72px 7vw 60px;
-  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
+/* ── Top: flex row of 3 columns ── */
+.sf__top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0;
+  padding: 64px 7vw 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-.sophia-footer__col + .sophia-footer__col {
-  padding-left: 52px;
-  border-left: 1px solid rgba(252, 233, 210, 0.09);
+.sf__col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-right: 40px;
+  border-right: 1px solid rgba(255,255,255,0.12);
 }
 
-/* Column head — 9px muted all-caps like Gucci */
-.sophia-footer__col-head {
+.sf__col + .sf__col {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.sf__col--right {
+  flex: 1.4;
+  padding-left: 40px;
+  padding-right: 0;
+  border-right: none;
+}
+
+/* ── Column heading ── */
+.sf__heading {
   font-size: 9px;
   letter-spacing: 2.8px;
   text-transform: uppercase;
   font-weight: 700;
-  color: rgba(252, 233, 210, 0.38);
-  margin-bottom: 20px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 14px;
+  margin-top: 24px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 104, 8, 0.30);
 }
 
-/* Link list */
-.sophia-footer__col-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.sf__col .sf__heading:first-child,
+.sf__col--right .sf__heading:first-child {
+  margin-top: 0;
 }
 
-.sophia-footer__col-list a {
+/* ── Links ── */
+.sf__col a {
   font-size: 13px;
-  line-height: 2.15;
-  color: rgba(252, 233, 210, 0.68);
+  line-height: 2.2;
+  color: rgba(255,255,255,0.78);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: transparent;
-  display: inline-block;
-  transition: color 0.22s ease, text-decoration-color 0.22s ease;
+  transition: color 0.2s, text-decoration-color 0.2s;
 }
 
-.sophia-footer__col-list a:hover {
-  color: var(--champagne);
-  text-decoration-color: rgba(252, 233, 210, 0.35);
+.sf__col a:hover {
+  color: #fff;
+  text-decoration-color: rgba(255,255,255,0.45);
 }
 
-/* Right column */
-.sophia-footer__col--right {
-  padding-left: 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+/* ── Description text ── */
+.sf__desc {
+  font-size: 11px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 10px;
 }
 
-/* ── Field sections (Gucci's right column blocks) ── */
-.sophia-footer__field-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sophia-footer__field-desc {
-  font-size: 12px;
-  line-height: 1.7;
-  color: rgba(252, 233, 210, 0.50);
-  margin-bottom: 14px;
-}
-
-.sophia-footer__inline-link {
-  color: rgba(252, 233, 210, 0.50);
+.sf__desc a {
+  color: rgba(255,255,255,0.50);
   text-decoration: underline;
   text-underline-offset: 2px;
+  font-size: 11px;
 }
 
-/* Field row — underline with right-arrow (Gucci's "E-Mail >" + "LAND/REGION >" style) */
-.sophia-footer__field-row {
+/* ── Field row (underline + right arrow) ── */
+.sf__field-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(252, 233, 210, 0.25);
-  padding: 11px 0;
-  color: rgba(252, 233, 210, 0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  padding: 9px 0;
   font-size: 13px;
-  transition: border-color 0.25s ease, color 0.25s ease;
+  color: rgba(255,255,255,0.78);
+  transition: border-color 0.22s, color 0.22s;
   cursor: pointer;
 }
 
-.sophia-footer__field-row:hover {
-  border-bottom-color: var(--champagne);
-  color: var(--champagne);
+.sf__field-row:hover {
+  border-bottom-color: #fff;
+  color: #fff;
 }
 
-.sophia-footer__field-value {
-  font-size: 13px;
-  color: rgba(252, 233, 210, 0.55);
+.sf__field-row:hover svg {
+  color: var(--orange);
 }
 
-.sophia-footer__field-arrow {
+.sf__field-row svg {
   flex-shrink: 0;
-  color: rgba(252, 233, 210, 0.45);
-  transition: color 0.22s ease, transform 0.22s ease;
+  color: rgba(255,255,255,0.40);
+  transition: color 0.22s, transform 0.22s;
 }
 
-.sophia-footer__field-row:hover .sophia-footer__field-arrow {
-  color: var(--champagne);
+.sf__field-row:hover svg {
   transform: translateX(3px);
 }
 
-/* Email field row */
-.sophia-footer__field-row--form {
+/* Email form row */
+.sf__field-row--form {
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  padding: 4px 0;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(252, 233, 210, 0.25);
-  padding: 4px 0;
-  transition: border-color 0.25s ease;
+  gap: 8px;
 }
 
-.sophia-footer__field-row--form:focus-within {
-  border-bottom-color: var(--champagne);
+.sf__field-row--form:focus-within {
+  border-bottom-color: #fff;
 }
 
-.sophia-footer__field-input {
+.sf__input {
   flex: 1;
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-sans);
   font-size: 13px;
-  color: var(--champagne);
+  color: #fff;
   padding: 8px 0;
-  letter-spacing: 0.3px;
 }
 
-.sophia-footer__field-input::placeholder {
-  color: rgba(252, 233, 210, 0.38);
+.sf__input::placeholder {
+  color: rgba(255,255,255,0.38);
 }
 
-.sophia-footer__field-submit {
+.sf__submit {
   background: none;
   border: none;
   cursor: pointer;
-  color: rgba(252, 233, 210, 0.45);
-  padding: 4px 0 4px 8px;
+  color: rgba(255,255,255,0.45);
   display: flex;
   align-items: center;
-  transition: color 0.22s ease, transform 0.22s ease;
+  padding: 4px;
+  transition: color 0.22s, transform 0.22s;
 }
 
-.sophia-footer__field-submit:hover {
+.sf__submit:hover {
   color: var(--orange);
   transform: translateX(2px);
 }
 
-/* Select field row */
-.sophia-footer__field-row--select {
-  border-bottom: 1px solid rgba(252, 233, 210, 0.25);
+/* Select row */
+.sf__field-row--select {
   position: relative;
-  transition: border-color 0.25s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  padding: 4px 0;
+  transition: border-color 0.22s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.sophia-footer__select {
-  width: 100%;
+.sf__field-row--select:hover {
+  border-bottom-color: #fff;
+}
+
+.sf__select {
+  flex: 1;
   background: transparent;
   border: none;
   outline: none;
-  color: rgba(252, 233, 210, 0.72);
+  color: rgba(255,255,255,0.78);
   font-family: var(--font-sans);
   font-size: 13px;
-  padding: 11px 28px 11px 0;
+  padding: 8px 24px 8px 0;
   appearance: none;
   cursor: pointer;
 }
 
-.sophia-footer__select option {
-  background: #111;
-  color: var(--champagne);
+.sf__select option {
+  background: #DB2E6D;
+  color: #fff;
 }
 
-.sophia-footer__field-row--select .sophia-footer__field-arrow {
+.sf__select-arrow {
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
   pointer-events: none;
+  color: rgba(255,255,255,0.40);
 }
 
 /* Social icons */
-.sophia-footer__social-row {
+.sf__social {
   display: flex;
   gap: 16px;
-  align-items: center;
+  padding-top: 6px;
 }
 
-.sophia-footer__social-icon {
-  color: rgba(252, 233, 210, 0.55);
-  line-height: 0;
-  transition: color 0.25s ease;
-}
-
-.sophia-footer__social-icon:hover {
-  color: var(--orange);
-}
-
-/* ══ Services — left-aligned, partial width (Gucci bottom-left) ══ */
-.sophia-footer__services {
-  padding: 44px 7vw 52px;
-  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
-  max-width: 420px;         /* Left-aligned, partial width — like Gucci */
-}
-
-.sophia-footer__services-label {
-  font-size: 9px;
-  letter-spacing: 2.8px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: rgba(252, 233, 210, 0.35);
-  margin-bottom: 20px;
-}
-
-.sophia-footer__services-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sophia-footer__services-list a {
-  font-size: 13px;
-  /* Generous line-height like Gucci — each link has breathing room */
-  line-height: 2.6;
-  color: rgba(252, 233, 210, 0.68);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(252, 233, 210, 0.30);
-  display: inline-block;
-  transition: color 0.22s ease, text-decoration-color 0.22s ease;
-}
-
-.sophia-footer__services-list a:hover {
-  color: var(--orange);
-  text-decoration-color: var(--orange);
-}
-
-/* ══ Brand identities row (Gucci: Osteria icon + Palazzo text) ══ */
-.sophia-footer__brands {
-  padding: 36px 7vw;
-  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
+.sf__social-icon {
+  color: rgba(255,255,255,0.55);
   display: flex;
   align-items: center;
-  gap: 48px;
+  transition: color 0.22s;
 }
 
-/* Identity block */
-.sophia-footer__brand-identity {
+.sf__social-icon:hover {
+  color: var(--orange);
+}
+
+/* ── Services strip ── */
+.sf__services {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 7vw 44px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sf__services .sf__heading {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.sf__services a {
+  font-size: 13px;
+  line-height: 2.8;
+  color: rgba(255,255,255,0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255,255,255,0.20);
+  transition: color 0.22s, text-decoration-color 0.22s;
+}
+
+.sf__services a:hover {
+  color: #fff;
+  text-decoration-color: rgba(255,255,255,0.60);
+}
+
+/* ── Brand marks ── */
+.sf__brands {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+  padding: 28px 7vw;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sf__brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  opacity: 0.65;
+  opacity: 0.60;
+  transition: opacity 0.25s;
 }
 
-/* Circular emblem (like Gucci Osteria's circle icon) */
-.sophia-footer__brand-emblem {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(252, 233, 210, 0.35);
+.sf__brand:hover { opacity: 1; }
+
+.sf__emblem {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.35);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
-.sophia-footer__emblem-img {
-  width: 26px;
-  height: 26px;
+.sf__emblem-img {
+  width: 22px;
+  height: 22px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   display: block;
 }
 
-.sophia-footer__brand-name {
-  font-family: var(--font-sans);
+.sf__brand-label {
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
-  color: rgba(252, 233, 210, 0.65);
-  line-height: 1.4;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.45;
 }
 
-.sophia-footer__brand-sub {
+.sf__brand-sub {
+  display: block;
   font-size: 8px;
   letter-spacing: 1.5px;
-  color: rgba(252, 233, 210, 0.38);
+  color: rgba(255,255,255,0.38);
   text-transform: uppercase;
 }
 
-/* Long wordmark identity (like "PALAZZO GUCCI") */
-.sophia-footer__brand-identity--text {
-  gap: 0;
-  border-left: 1px solid rgba(252, 233, 210, 0.15);
+.sf__brand--logo {
+  border-left: 1px solid rgba(255,255,255,0.18);
   padding-left: 48px;
-  align-items: center;
+  gap: 0;
 }
 
-.sophia-footer__brand-logo-long {
-  height: 28px;
+.sf__logo-long {
+  height: 22px;
   width: auto;
   display: block;
   filter: brightness(0) invert(1);
-  opacity: 0.72;
-  transition: opacity 0.25s ease;
+  opacity: 0.75;
+  transition: opacity 0.25s;
 }
 
-.sophia-footer__brand-identity--text:hover .sophia-footer__brand-logo-long {
-  opacity: 1;
+.sf__brand--logo:hover .sf__logo-long { opacity: 1; }
+
+/* ── Copyright ── */
+.sf__copyright {
+  padding: 16px 7vw 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-/* ══ Copyright — cerise, full-width long line (Gucci style) ══ */
-.sophia-footer__copyright {
-  padding: 20px 7vw 24px;
-  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
-}
-
-.sophia-footer__copyright p {
+.sf__copyright p {
   font-size: 10px;
-  color: var(--cerise);
+  color: rgba(255,255,255,0.40);
   letter-spacing: 0.2px;
   line-height: 1.7;
 }
 
-.sophia-footer__copyright a {
-  color: var(--cerise);
-  opacity: 0.78;
-  transition: opacity 0.2s ease;
+.sf__copyright a {
+  color: rgba(255,255,255,0.40);
+  transition: color 0.2s;
 }
 
-.sophia-footer__copyright a:hover {
-  opacity: 1;
-}
+.sf__copyright a:hover { color: #fff; }
 
-/* ══ Closing wordmark — Gucci's massive full-width overflowing logo ══ */
-.sophia-footer__wordmark {
-  width: 100%;
-  overflow: hidden;
-  background: var(--black);
-  padding: 48px 0 0;
+/* ── Closing wordmark ── */
+.sf__wordmark {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  /* Min height so the section has presence even if image loads slowly */
-  min-height: clamp(160px, 26vw, 380px);
+  overflow: hidden;
+  padding-top: 36px;
+  min-height: clamp(120px, 18vw, 280px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.sophia-footer__wordmark-img {
+.sf__wordmark-img {
   width: 100%;
-  max-width: min(100%, 1280px);
   height: auto;
-  max-height: min(28vw, 240px);
+  max-height: min(20vw, 220px);
   display: block;
-  margin: 0 auto;
   filter: brightness(0) invert(1);
-  opacity: 1;
+  opacity: 0.22;
   object-fit: contain;
   object-position: center bottom;
 }
 
 /* ── Responsive ── */
-@media (max-width: 1024px) {
-  .sophia-footer__grid {
-    grid-template-columns: 1fr 1fr;
-    padding: 60px 6vw 52px;
+/* Tablet */
+@media (max-width: 900px) {
+  .sf__top {
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 52px 6vw 44px;
   }
 
-  .sophia-footer__col--right {
-    grid-column: 1 / -1;
+  .sf__col {
+    flex: 1 1 44%;
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 32px;
+  }
+
+  .sf__col + .sf__col {
+    padding-left: 28px;
+  }
+
+  .sf__col--right {
+    flex: 1 1 100%;
     padding-left: 0;
-    border-left: 0;
-    border-top: 1px solid rgba(252, 233, 210, 0.09);
-    padding-top: 40px;
-    margin-top: 4px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 32px;
+  }
+
+  /* Right column: 2-col mini grid for fields */
+  .sf__col--right {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px 48px;
+    gap: 0 32px;
+  }
+
+  .sf__col--right .sf__social {
+    grid-column: 1 / -1;
   }
 }
 
-@media (max-width: 768px) {
-  .sophia-footer__grid {
-    grid-template-columns: 1fr;
-    padding: 52px 22px 44px;
+/* Mobile */
+@media (max-width: 600px) {
+  .sf__top {
+    flex-direction: column;
+    padding: 40px 22px 32px;
+    gap: 0;
   }
 
-  .sophia-footer__col + .sophia-footer__col {
-    padding-left: 0;
-    border-left: 0;
-    border-top: 1px solid rgba(252, 233, 210, 0.09);
-    padding-top: 36px;
-    margin-top: 4px;
+  .sf__col {
+    flex: 1 1 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 28px;
+    margin-bottom: 4px;
   }
 
-  .sophia-footer__col--right {
-    grid-column: auto;
-    grid-template-columns: 1fr;
+  .sf__col--right {
+    display: flex;
+    flex-direction: column;
+    border-top: none;
+    padding-top: 24px;
   }
 
-  .sophia-footer__services {
-    max-width: 100%;
-    padding: 40px 22px 44px;
+  .sf__field-row {
+    height: 44px;
   }
 
-  .sophia-footer__brands {
+  .sf__services { padding: 28px 22px 36px; }
+
+  .sf__brands {
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
-    padding: 28px 22px;
+    gap: 18px;
+    padding: 24px 22px;
   }
 
-  .sophia-footer__brand-identity--text {
-    border-left: 0;
+  .sf__brand--logo {
+    border-left: none;
     padding-left: 0;
-    border-top: 1px solid rgba(252, 233, 210, 0.12);
-    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 16px;
+    width: 100%;
   }
 
-  .sophia-footer__copyright {
-    padding-left: 22px;
-    padding-right: 22px;
+  .sf__logo-long { max-width: 140px; }
+
+  .sf__copyright {
+    padding: 14px 22px;
+    font-size: 9px;
+    flex-direction: column;
+    gap: 6px;
   }
 
-  .sophia-footer__wordmark-img {
-    max-height: min(36vw, 160px);
-    max-width: 100%;
+  .sf__copyright p {
+    line-height: 1.8;
   }
+
+  .sf__wordmark-img { max-height: min(28vw, 100px); }
+
+  .sf__social { gap: 14px; }
 }

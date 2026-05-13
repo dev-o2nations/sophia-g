@@ -18,7 +18,17 @@
   letter-spacing: 4px;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgba(26, 18, 8, 0.38);
+  color: var(--orange);
+  opacity: 0.72;
+}
+
+.sophia-services__eyebrow::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--orange);
+  margin: 10px auto 0;
 }
 
 /* ── Boxed 3-column grid ── */
@@ -92,7 +102,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  border-top: 2px solid var(--cerise);
+  border-top: 2px solid var(--orange);
   position: relative;
   overflow: hidden;
   background: #ffffff;
@@ -116,7 +126,7 @@
 }
 
 .sophia-service-card:hover .sophia-service-card__num {
-  color: rgba(255, 104, 8, 0.12);
+  color: rgba(255, 104, 8, 0.18);
 }
 
 .sophia-service-card__badge {

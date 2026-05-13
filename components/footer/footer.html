@@ -1,154 +1,86 @@
-<footer class="sophia-footer" id="footer">
+<footer class="sf">
 
-  <!-- ══ 3-column nav grid ══ -->
-  <div class="sophia-footer__grid">
+  <!-- Top: 3 columns -->
+  <div class="sf__top">
 
-    <!-- Col 1 — Can we help? -->
-    <div class="sophia-footer__col">
-      <h4 class="sophia-footer__col-head">Can we help?</h4>
-      <ul class="sophia-footer__col-list">
-        <li><a href="#">Contact us</a></li>
-        <li><a href="#">Book a styling appointment</a></li>
-        <li><a href="#">Shipping &amp; returns</a></li>
-        <li><a href="#">FAQs</a></li>
-        <li><a href="#">Unsubscribe from newsletter</a></li>
-        <li><a href="#">Sitemap</a></li>
-      </ul>
+    <div class="sf__col">
+      <p class="sf__heading">Can we help?</p>
+      <a href="#">Contact us</a>
+      <a href="#">Book a styling appointment</a>
+      <a href="#">Shipping &amp; returns</a>
+      <a href="#">FAQs</a>
+      <a href="#">Unsubscribe from newsletter</a>
+      <a href="#">Sitemap</a>
     </div>
 
-    <!-- Col 2 — Brand & values (avoid duplicating “The House” services line) -->
-    <div class="sophia-footer__col">
-      <h4 class="sophia-footer__col-head">Discover SOPHIA-G</h4>
-      <ul class="sophia-footer__col-list">
-        <li><a href="#">About SOPHIA-G</a></li>
-        <li><a href="#">Our values</a></li>
-        <li><a href="#">Ethics &amp; responsibility</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Business terms &amp; conditions</a></li>
-        <li><a href="#">Privacy policy</a></li>
-        <li><a href="#">Cookie settings</a></li>
-        <li><a href="#">Company information</a></li>
-      </ul>
+    <div class="sf__col">
+      <p class="sf__heading">The House</p>
+      <a href="#">About SOPHIA-G</a>
+      <a href="#">Our values</a>
+      <a href="#">Ethics &amp; responsibility</a>
+      <a href="#">Careers</a>
+      <a href="#">Terms &amp; conditions</a>
+      <a href="#">Privacy policy</a>
+      <a href="#">Cookie settings</a>
+      <a href="#">Company information</a>
     </div>
 
-    <!-- Col 3 — Right: field rows (Gucci "FILIALSUCHE + UPDATES + SPRACHE + LAND") -->
-    <div class="sophia-footer__col sophia-footer__col--right">
+    <div class="sf__col sf__col--right">
 
-      <!-- Book appointment (adapted from Gucci's store finder) -->
-      <div class="sophia-footer__field-section">
-        <h4 class="sophia-footer__col-head">Book an Appointment</h4>
-        <a href="#" class="sophia-footer__field-row">
-          <span class="sophia-footer__field-value">City, Country</span>
-          <svg class="sophia-footer__field-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <p class="sf__heading">Find a Boutique</p>
+      <a href="#" class="sf__field-row">
+        <span>Country / Region, City</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <p class="sf__heading">SOPHIA-G Updates</p>
+      <p class="sf__desc">Subscribe to receive exclusive news on new Collections, events and more. See our <a href="#">Privacy policy</a>.</p>
+      <form class="sf__field-row sf__field-row--form" onsubmit="return false">
+        <input type="email" placeholder="E-mail" class="sf__input" aria-label="E-mail">
+        <button type="submit" class="sf__submit" aria-label="Subscribe">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+
+      <p class="sf__heading">Language</p>
+      <div class="sf__field-row sf__field-row--select">
+        <select class="sf__select" aria-label="Language">
+          <option>English</option>
+          <option>Arabic — العربية</option>
+          <option>French — Français</option>
+        </select>
+        <svg class="sf__select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+
+      <p class="sf__heading">Country / Region</p>
+      <a href="#" class="sf__field-row">
+        <span>Egypt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+
+      <p class="sf__heading">Follow SOPHIA-G</p>
+      <div class="sf__social">
+        <a href="#" aria-label="Instagram" class="sf__social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok" class="sf__social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+        </a>
+        <a href="#" aria-label="Pinterest" class="sf__social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </a>
       </div>
 
-      <!-- Newsletter subscribe -->
-      <div class="sophia-footer__field-section">
-        <h4 class="sophia-footer__col-head">SOPHIA-G Updates — Subscribe</h4>
-        <p class="sophia-footer__field-desc">
-          By entering your e-mail address you consent to receive our newsletter
-          with information on new Collections, events and initiatives from the
-          world of SOPHIA-G. More information in our
-          <a href="#" class="sophia-footer__inline-link">Privacy policy</a>.
-        </p>
-        <form class="sophia-footer__field-row sophia-footer__field-row--form" onsubmit="return false">
-          <input
-            type="email"
-            placeholder="E-mail"
-            aria-label="Subscribe to SOPHIA-G newsletter"
-            class="sophia-footer__field-input"
-          >
-          <button type="submit" class="sophia-footer__field-submit" aria-label="Subscribe">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
-      </div>
-
-      <!-- Language -->
-      <div class="sophia-footer__field-section">
-        <h4 class="sophia-footer__col-head">Language</h4>
-        <div class="sophia-footer__field-row sophia-footer__field-row--select">
-          <select class="sophia-footer__select" aria-label="Language">
-            <option>English</option>
-            <option>Arabic — العربية</option>
-            <option>French — Français</option>
-          </select>
-          <svg class="sophia-footer__field-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-      </div>
-
-      <!-- Follow -->
-      <div class="sophia-footer__field-section">
-        <h4 class="sophia-footer__col-head">Follow SOPHIA-G</h4>
-        <div class="sophia-footer__social-row">
-          <a href="#" aria-label="Instagram" class="sophia-footer__social-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a href="#" aria-label="TikTok" class="sophia-footer__social-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
-          </a>
-          <a href="#" aria-label="Pinterest" class="sophia-footer__social-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-          </a>
-        </div>
-      </div>
-
     </div>
-
   </div>
 
-  <!-- ══ Services — left-aligned, partial width (Gucci bottom-left strip) ══ -->
-  <div class="sophia-footer__services">
-    <p class="sophia-footer__services-label">SOPHIA-G Services</p>
-    <ul class="sophia-footer__services-list">
-      <li><a href="#">The House — Luxury Line</a></li>
-      <li><a href="#">The Life — Lifestyle Line</a></li>
-      <li><a href="#">The Atelier — Bespoke &amp; Events</a></li>
-    </ul>
-  </div>
-
-  <!-- ══ Brand identities row (Gucci: Osteria icon + "PALAZZO GUCCI") ══ -->
-  <div class="sophia-footer__brands">
-
-    <!-- Emblem mark (circular icon + label) -->
-    <div class="sophia-footer__brand-identity">
-      <div class="sophia-footer__brand-emblem">
-        <img src="assets/images/sophia-logo.webp" alt="" class="sophia-footer__emblem-img">
-      </div>
-      <span class="sophia-footer__brand-name">SOPHIA-G<br><span class="sophia-footer__brand-sub">Atelier</span></span>
-    </div>
-
-    <!-- Long wordmark — like "PALAZZO GUCCI" text logo -->
-    <div class="sophia-footer__brand-identity sophia-footer__brand-identity--text">
-      <img
-        src="assets/images/logo-long.webp"
-        alt="SOPHIA-G"
-        class="sophia-footer__brand-logo-long"
-      >
-    </div>
-
-  </div>
-
-  <!-- ══ Copyright — long legal line, cerise like Gucci's orange ══ -->
-  <div class="sophia-footer__copyright">
-    <p>
-      &copy; 2026 SOPHIA-G. All rights reserved. &nbsp;&mdash;&nbsp;
-      Born to celebrate all layers of you. &nbsp;&mdash;&nbsp;
-      <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp;
-      <a href="#">Cookie Settings</a> &nbsp;&middot;&nbsp;
-      <a href="#">Terms &amp; Conditions</a> &nbsp;&middot;&nbsp;
-      <a href="#">Sitemap</a>
+  <!-- Copyright -->
+  <div class="sf__copyright">
+    <p>&copy; 2026 SOPHIA-G. All rights reserved. &mdash; Born to celebrate all layers of you.
+      &nbsp;&middot;&nbsp; <a href="#">Privacy Policy</a>
+      &nbsp;&middot;&nbsp; <a href="#">Cookie Settings</a>
+      &nbsp;&middot;&nbsp; <a href="#">Terms &amp; Conditions</a>
     </p>
-  </div>
-
-  <!-- ══ Full-width logo — Gucci's massive closing "GUCCI" ══ -->
-  <div class="sophia-footer__wordmark" aria-hidden="true">
-    <img
-      src="assets/images/logo-long.webp"
-      alt=""
-      class="sophia-footer__wordmark-img"
-    >
   </div>
 
 </footer>

@@ -138,28 +138,92 @@
 }
 
 /* ── Responsive ── */
+
+/* Tablet */
 @media (max-width: 1024px) {
-  .sophia-header { padding: 0 24px; }
+  .sophia-header {
+    padding: 0 24px;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .sophia-header__left {
+    gap: 18px;
+  }
+
   .sophia-header__logo { height: 24px; }
 }
 
-@media (max-width: 768px) {
+/* Large mobile — hide one nav link */
+@media (max-width: 860px) {
+  .sophia-header__left a:last-child {
+    display: none;
+  }
+}
+
+/* Mobile — collapse to logo + icons only */
+@media (max-width: 640px) {
   .sophia-header {
-    height: 60px;
-    padding: 0 16px;
+    height: 58px;
+    padding: 0 14px;
+    /* Switch to simple flex: [icons-left] [logo-center] [icons-right] */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  /* Hide secondary left link on mobile */
-  .sophia-header__left a:not(:first-child) {
+  /* Hide the whole left nav */
+  .sophia-header__left {
     display: none;
   }
 
-  /* Hide account only on mobile — keep bag, search, menu (matches Gucci mobile) */
+  /* Logo: stays in natural flow, grows to push actions right */
+  .sophia-header__brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sophia-header__logo {
+    height: 18px;
+    max-width: 140px;
+  }
+
+  /* Right actions — keep bag, search, theme, menu; hide account */
+  .sophia-header__actions {
+    gap: 0;
+  }
+
+  /* Hide account icon on mobile */
   .sophia-header__actions li:nth-child(2) {
     display: none;
   }
 
-  .sophia-header__logo { height: 20px; max-width: 160px; }
+  /* Hide MENU text label — keep hamburger icon only */
+  .sophia-header__menu-label {
+    display: none;
+  }
+
+  .sophia-header__icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
+  .sophia-header {
+    padding: 0 10px;
+  }
+
+  /* Also hide theme toggle to save space */
+  .sophia-header__actions li:nth-child(4) {
+    display: none;
+  }
+
+  .sophia-header__logo {
+    height: 16px;
+    max-width: 120px;
+  }
 }
 
 /* -- Theme toggle icons -- */

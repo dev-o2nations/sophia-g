@@ -1,0 +1,134 @@
+/* ============================================================
+   Closing Section — services strip + full-bleed wordmark
+   ============================================================ */
+
+.sc {
+  display: block;
+  width: 100%;
+  background: #050505;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 104, 8, 0.25);
+}
+
+/* ── Services strip ── */
+.sc__services {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 0 7vw;
+}
+
+.sc__services-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  min-height: 64px;
+}
+
+.sc__service-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 24px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.sc__service-link svg {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.sc__service-link:hover {
+  color: var(--orange, #FF6808);
+}
+
+.sc__service-link:hover svg {
+  opacity: 1;
+}
+
+.sc__dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 104, 8, 0.45);
+  flex-shrink: 0;
+}
+
+/* ── Closing wordmark ── */
+.sc__wordmark {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  padding: 56px 7vw 0;
+  min-height: clamp(140px, 20vw, 300px);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sc__wordmark-img {
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  max-height: clamp(100px, 16vw, 240px);
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.18;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sc__services-inner {
+    gap: 0;
+    justify-content: center;
+  }
+
+  .sc__service-link {
+    padding: 14px 12px;
+    font-size: 9px;
+    gap: 6px;
+  }
+
+  .sc__dot { display: none; }
+
+  .sc__wordmark {
+    padding: 36px 22px 0;
+    min-height: clamp(90px, 24vw, 170px);
+  }
+
+  .sc__wordmark-img {
+    max-height: clamp(60px, 18vw, 130px);
+    opacity: 0.14;
+  }
+}
+
+@media (max-width: 480px) {
+  .sc__services-inner {
+    flex-wrap: wrap;
+  }
+
+  .sc__service-link {
+    flex: 1 1 45%;
+    justify-content: center;
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .sc__wordmark {
+    padding: 28px 16px 0;
+    min-height: clamp(70px, 22vw, 130px);
+  }
+}
