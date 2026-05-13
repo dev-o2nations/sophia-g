@@ -1,8 +1,8 @@
 /* ─── Collections Component ─── */
 
 .sophia-section-label {
-  background: var(--black);
-  color: var(--champagne);
+  background: var(--champagne);
+  color: var(--black);
   text-align: center;
   padding: 48px 20px 30px;
   font-size: 10px;
@@ -19,14 +19,15 @@
   height: 1px;
   background: var(--orange);
   margin: 14px auto 0;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .sophia-collections {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  background: var(--black);
+  background: var(--champagne);
   color: var(--champagne);
+  gap: 3px;
 }
 
 /* ── Each card: tall enough to scroll through ── */
