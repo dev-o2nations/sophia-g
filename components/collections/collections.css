@@ -211,11 +211,27 @@
   }
 
   .sophia-collection__content {
-    padding: 0 18px;
-    top: 72px;
+    padding: 72px 22px 28px; /* top padding clears the header */
+    top: 58px;
+    max-width: 100%;
   }
 
   .sophia-collection h2 {
     font-size: clamp(28px, 8vw, 44px);
+  }
+}
+
+@media (max-width: 480px) {
+  .sophia-collection {
+    min-height: 520px;
+  }
+
+  .sophia-collection__content {
+    padding: 64px 18px 24px;
+    gap: 14px;
+  }
+
+  .sophia-collection h2 {
+    font-size: clamp(26px, 9vw, 38px);
   }
 }

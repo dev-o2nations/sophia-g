@@ -165,10 +165,10 @@
   .sophia-header {
     height: 58px;
     padding: 0 14px;
-    /* Switch to simple flex: [icons-left] [logo-center] [icons-right] */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed; /* ensure absolute children are contained */
   }
 
   /* Hide the whole left nav */
@@ -176,11 +176,13 @@
     display: none;
   }
 
-  /* Logo: stays in natural flow, grows to push actions right */
+  /* Logo: absolute center within the fixed header */
   .sophia-header__brand {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
   }
 
   .sophia-header__logo {
@@ -224,6 +226,154 @@
     height: 16px;
     max-width: 120px;
   }
+}
+
+/* ═══════════════════════════════════════════
+   Full-screen Nav Drawer
+   ═══════════════════════════════════════════ */
+
+.sg-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 198;
+  background: rgba(5, 5, 5, 0.97);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  display: flex;
+  flex-direction: column;
+
+  /* Hidden state */
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(-16px);
+  transition:
+    opacity    0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    transform  0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.38s step-end;
+}
+
+.sg-drawer.is-open {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity    0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    transform  0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s step-start;
+}
+
+.sg-drawer__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 80px 7vw 48px;
+  position: relative;
+}
+
+/* Close button */
+.sg-drawer__close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.sg-drawer__close:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+/* Nav links */
+.sg-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+.sg-drawer__link {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 72px);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(252, 233, 210, 0.72);
+  text-decoration: none;
+  line-height: 1.2;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.25s ease, padding-left 0.3s ease;
+
+  /* Staggered reveal animation */
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    color        0.25s ease,
+    padding-left 0.3s ease,
+    opacity      0.38s calc(var(--i) * 0.07s + 0.12s) ease,
+    transform    0.38s calc(var(--i) * 0.07s + 0.12s) ease;
+}
+
+.sg-drawer.is-open .sg-drawer__link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sg-drawer__link:hover {
+  color: #fff;
+  padding-left: 14px;
+}
+
+.sg-drawer__link:hover .sg-drawer__plus,
+.sg-drawer__plus {
+  color: var(--orange);
+  font-style: normal;
+}
+
+/* Bottom brand mark */
+.sg-drawer__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.4s 0.35s ease;
+}
+
+.sg-drawer.is-open .sg-drawer__foot {
+  opacity: 1;
+}
+
+.sg-drawer__logo {
+  height: 22px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+}
+
+.sg-drawer__tagline {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
 }
 
 /* -- Theme toggle icons -- */

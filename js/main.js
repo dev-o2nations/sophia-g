@@ -10,6 +10,7 @@ window.__sophiaInit = function () {
   initReveal();
   initHeroEffects();
   initHeader();
+  initMenu();
   initServicesDrag();
   initScrollTop();
 };
@@ -152,6 +153,43 @@ function initScrollTop() {
 
   btn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+/* ─── Nav Drawer ─── */
+function initMenu() {
+  const openBtn  = document.getElementById("menu-icon-btn");
+  const closeBtn = document.getElementById("nav-close");
+  const drawer   = document.getElementById("nav-drawer");
+  const body     = document.body;
+
+  if (!openBtn || !drawer) return;
+
+  function openDrawer() {
+    drawer.classList.add("is-open");
+    drawer.setAttribute("aria-hidden", "false");
+    body.style.overflow = "hidden"; // prevent background scroll
+    openBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+    body.style.overflow = "";
+    openBtn.setAttribute("aria-expanded", "false");
+  }
+
+  openBtn.addEventListener("click", openDrawer);
+  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+
+  // Close when clicking the dark backdrop (outside the inner panel)
+  drawer.addEventListener("click", (e) => {
+    if (e.target === drawer) closeDrawer();
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && drawer.classList.contains("is-open")) closeDrawer();
   });
 }
 

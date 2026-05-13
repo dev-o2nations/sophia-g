@@ -442,10 +442,13 @@
   .sf__services { padding: 28px 22px 36px; }
 
   .sf__brands {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 18px;
     padding: 24px 22px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .sf__brand--logo {
@@ -454,9 +457,17 @@
     border-top: 1px solid rgba(255,255,255,0.12);
     padding-top: 16px;
     width: 100%;
+    display: flex;
+    align-items: center;
   }
 
-  .sf__logo-long { max-width: 140px; }
+  .sf__logo-long {
+    display: block;
+    height: 20px;
+    width: auto;
+    max-width: 160px;
+    opacity: 0.82;
+  }
 
   .sf__copyright {
     padding: 14px 22px;
@@ -469,7 +480,15 @@
     line-height: 1.8;
   }
 
-  .sf__wordmark-img { max-height: min(28vw, 100px); }
+  .sf__wordmark {
+    min-height: clamp(80px, 22vw, 140px);
+    padding-top: 24px;
+  }
+
+  .sf__wordmark-img {
+    max-height: min(28vw, 100px);
+    opacity: 0.28;
+  }
 
   .sf__social { gap: 14px; }
 }
