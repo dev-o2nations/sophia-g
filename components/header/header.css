@@ -30,6 +30,16 @@
   border-bottom-color: rgba(255, 104, 8, 0.22);
 }
 
+/* ── Left wrap (holds nav on desktop, icon pair on mobile) ── */
+.sophia-header__left-wrap {
+  display: contents; /* transparent on desktop — children lay out normally */
+}
+
+/* Mobile-only icon pair — hidden on desktop */
+.sophia-header__mobile-left {
+  display: none;
+}
+
 /* ── Left nav ── */
 .sophia-header__left {
   display: flex;
@@ -160,23 +170,36 @@
   }
 }
 
-/* Mobile — collapse to logo + icons only */
+/* Mobile — logo center, 2 icons left, 2 icons right */
 @media (max-width: 640px) {
   .sophia-header {
     height: 58px;
-    padding: 0 14px;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed; /* ensure absolute children are contained */
+    position: fixed;
   }
 
-  /* Hide the whole left nav */
+  /* ── Left wrap becomes a real flex container ── */
+  .sophia-header__left-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Hide desktop nav links */
   .sophia-header__left {
     display: none;
   }
 
-  /* Logo: absolute center within the fixed header */
+  /* Show mobile-left icon pair */
+  .sophia-header__mobile-left {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Logo: absolute center */
   .sophia-header__brand {
     position: absolute;
     left: 50%;
@@ -187,20 +210,20 @@
 
   .sophia-header__logo {
     height: 18px;
-    max-width: 140px;
+    max-width: 130px;
   }
 
-  /* Right actions — keep bag, search, theme, menu; hide account */
+  /* Right actions: only theme toggle + menu */
   .sophia-header__actions {
     gap: 0;
   }
 
-  /* Hide account icon on mobile */
-  .sophia-header__actions li:nth-child(2) {
+  /* Hide bag, account, search from right — they're on the left now */
+  .sophia-header__desktop-only {
     display: none;
   }
 
-  /* Hide MENU text label — keep hamburger icon only */
+  /* Hide MENU text */
   .sophia-header__menu-label {
     display: none;
   }
@@ -214,17 +237,12 @@
 /* Very small screens */
 @media (max-width: 380px) {
   .sophia-header {
-    padding: 0 10px;
-  }
-
-  /* Also hide theme toggle to save space */
-  .sophia-header__actions li:nth-child(4) {
-    display: none;
+    padding: 0 6px;
   }
 
   .sophia-header__logo {
     height: 16px;
-    max-width: 120px;
+    max-width: 110px;
   }
 }
 
