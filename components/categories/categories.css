@@ -1,0 +1,67 @@
+/* ─── Categories Strip Component ─── */
+
+.sophia-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--black);
+  color: var(--champagne);
+}
+
+.sophia-category {
+  position: relative;
+  min-height: 410px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  isolation: isolate;
+  cursor: pointer;
+}
+
+.sophia-category img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+  z-index: -2;
+}
+
+.sophia-category::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.72), transparent 52%),
+    radial-gradient(circle at 50% 30%, rgba(255, 104, 8, 0.14), transparent 45%);
+  z-index: -1;
+}
+
+.sophia-category:hover img {
+  transform: scale(1.07);
+}
+
+.sophia-category span {
+  padding: 0 18px 34px;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  color: var(--champagne);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sophia-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sophia-categories {
+    grid-template-columns: 1fr;
+  }
+
+  .sophia-category {
+    min-height: 360px;
+  }
+}

@@ -1,0 +1,64 @@
+/* ─── Scroll to top — Gucci-style minimal square ─── */
+
+.sophia-scroll-top {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 250;
+
+  /* Square, no radius — Gucci aesthetic */
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+
+  background: var(--black);
+  border: 1px solid rgba(255, 104, 8, 0.45);
+  color: var(--champagne);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform 0.3s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.sophia-scroll-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sophia-scroll-top:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--black);
+}
+
+.sophia-scroll-top:focus-visible {
+  outline: 1px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.sophia-scroll-top__icon {
+  display: block;
+  /* Slightly thinner stroke for a lighter feel */
+  stroke-width: 1.5;
+}
+
+@media (max-width: 768px) {
+  .sophia-scroll-top {
+    right: 18px;
+    bottom: 18px;
+    width: 40px;
+    height: 40px;
+  }
+}

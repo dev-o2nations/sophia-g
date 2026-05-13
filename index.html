@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOPHIA-G — Born to celebrate all layers of you.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Component styles -->
+  <link rel="stylesheet" href="components/header/header.css">
+  <link rel="stylesheet" href="components/hero/hero.css">
+  <link rel="stylesheet" href="components/categories/categories.css">
+  <link rel="stylesheet" href="components/collections/collections.css">
+  <link rel="stylesheet" href="components/services/services.css">
+  <link rel="stylesheet" href="components/subscribe/subscribe.css">
+  <link rel="stylesheet" href="components/footer/footer.css">
+  <link rel="stylesheet" href="components/scroll-top/scroll-top.css">
+</head>
+
+<body>
+
+  <!-- ░░ Component slots — filled by js/loader.js ░░ -->
+
+  <div data-component="header"></div>
+
+  <!-- Hero sits outside the pattern wrapper — needs a clean dark canvas -->
+  <div data-component="hero"></div>
+
+  <!-- Light sections (white page band) -->
+  <main class="sophia-page">
+    <div data-component="categories"></div>
+    <div data-component="collections"></div>
+    <div data-component="services"></div>
+    <div data-component="subscribe"></div>
+  </main>
+
+  <div data-component="footer"></div>
+  <div data-component="scroll-top"></div>
+
+  <!-- main.js must be parsed before loader.js so __sophiaInit is defined when loader calls it -->
+  <script src="js/main.js" defer></script>
+  <script src="js/loader.js" defer></script>
+
+</body>
+</html>

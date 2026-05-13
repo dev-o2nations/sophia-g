@@ -1,0 +1,442 @@
+/* ─── Footer — Gucci 3-column + field rows structure ─── */
+
+.sophia-footer {
+  background: var(--black);
+  color: var(--champagne);
+}
+
+/* ══ 3-column grid ══ */
+.sophia-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr;
+  padding: 72px 7vw 60px;
+  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
+}
+
+.sophia-footer__col + .sophia-footer__col {
+  padding-left: 52px;
+  border-left: 1px solid rgba(252, 233, 210, 0.09);
+}
+
+/* Column head — 9px muted all-caps like Gucci */
+.sophia-footer__col-head {
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(252, 233, 210, 0.38);
+  margin-bottom: 20px;
+}
+
+/* Link list */
+.sophia-footer__col-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sophia-footer__col-list a {
+  font-size: 13px;
+  line-height: 2.15;
+  color: rgba(252, 233, 210, 0.68);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  display: inline-block;
+  transition: color 0.22s ease, text-decoration-color 0.22s ease;
+}
+
+.sophia-footer__col-list a:hover {
+  color: var(--champagne);
+  text-decoration-color: rgba(252, 233, 210, 0.35);
+}
+
+/* Right column */
+.sophia-footer__col--right {
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Field sections (Gucci's right column blocks) ── */
+.sophia-footer__field-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sophia-footer__field-desc {
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(252, 233, 210, 0.50);
+  margin-bottom: 14px;
+}
+
+.sophia-footer__inline-link {
+  color: rgba(252, 233, 210, 0.50);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Field row — underline with right-arrow (Gucci's "E-Mail >" + "LAND/REGION >" style) */
+.sophia-footer__field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(252, 233, 210, 0.25);
+  padding: 11px 0;
+  color: rgba(252, 233, 210, 0.72);
+  font-size: 13px;
+  transition: border-color 0.25s ease, color 0.25s ease;
+  cursor: pointer;
+}
+
+.sophia-footer__field-row:hover {
+  border-bottom-color: var(--champagne);
+  color: var(--champagne);
+}
+
+.sophia-footer__field-value {
+  font-size: 13px;
+  color: rgba(252, 233, 210, 0.55);
+}
+
+.sophia-footer__field-arrow {
+  flex-shrink: 0;
+  color: rgba(252, 233, 210, 0.45);
+  transition: color 0.22s ease, transform 0.22s ease;
+}
+
+.sophia-footer__field-row:hover .sophia-footer__field-arrow {
+  color: var(--champagne);
+  transform: translateX(3px);
+}
+
+/* Email field row */
+.sophia-footer__field-row--form {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(252, 233, 210, 0.25);
+  padding: 4px 0;
+  transition: border-color 0.25s ease;
+}
+
+.sophia-footer__field-row--form:focus-within {
+  border-bottom-color: var(--champagne);
+}
+
+.sophia-footer__field-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--champagne);
+  padding: 8px 0;
+  letter-spacing: 0.3px;
+}
+
+.sophia-footer__field-input::placeholder {
+  color: rgba(252, 233, 210, 0.38);
+}
+
+.sophia-footer__field-submit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(252, 233, 210, 0.45);
+  padding: 4px 0 4px 8px;
+  display: flex;
+  align-items: center;
+  transition: color 0.22s ease, transform 0.22s ease;
+}
+
+.sophia-footer__field-submit:hover {
+  color: var(--orange);
+  transform: translateX(2px);
+}
+
+/* Select field row */
+.sophia-footer__field-row--select {
+  border-bottom: 1px solid rgba(252, 233, 210, 0.25);
+  position: relative;
+  transition: border-color 0.25s ease;
+}
+
+.sophia-footer__select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(252, 233, 210, 0.72);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 11px 28px 11px 0;
+  appearance: none;
+  cursor: pointer;
+}
+
+.sophia-footer__select option {
+  background: #111;
+  color: var(--champagne);
+}
+
+.sophia-footer__field-row--select .sophia-footer__field-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Social icons */
+.sophia-footer__social-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.sophia-footer__social-icon {
+  color: rgba(252, 233, 210, 0.55);
+  line-height: 0;
+  transition: color 0.25s ease;
+}
+
+.sophia-footer__social-icon:hover {
+  color: var(--orange);
+}
+
+/* ══ Services — left-aligned, partial width (Gucci bottom-left) ══ */
+.sophia-footer__services {
+  padding: 44px 7vw 52px;
+  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
+  max-width: 420px;         /* Left-aligned, partial width — like Gucci */
+}
+
+.sophia-footer__services-label {
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(252, 233, 210, 0.35);
+  margin-bottom: 20px;
+}
+
+.sophia-footer__services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sophia-footer__services-list a {
+  font-size: 13px;
+  /* Generous line-height like Gucci — each link has breathing room */
+  line-height: 2.6;
+  color: rgba(252, 233, 210, 0.68);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(252, 233, 210, 0.30);
+  display: inline-block;
+  transition: color 0.22s ease, text-decoration-color 0.22s ease;
+}
+
+.sophia-footer__services-list a:hover {
+  color: var(--orange);
+  text-decoration-color: var(--orange);
+}
+
+/* ══ Brand identities row (Gucci: Osteria icon + Palazzo text) ══ */
+.sophia-footer__brands {
+  padding: 36px 7vw;
+  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+/* Identity block */
+.sophia-footer__brand-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.65;
+}
+
+/* Circular emblem (like Gucci Osteria's circle icon) */
+.sophia-footer__brand-emblem {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(252, 233, 210, 0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sophia-footer__emblem-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  display: block;
+}
+
+.sophia-footer__brand-name {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(252, 233, 210, 0.65);
+  line-height: 1.4;
+}
+
+.sophia-footer__brand-sub {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: rgba(252, 233, 210, 0.38);
+  text-transform: uppercase;
+}
+
+/* Long wordmark identity (like "PALAZZO GUCCI") */
+.sophia-footer__brand-identity--text {
+  gap: 0;
+  border-left: 1px solid rgba(252, 233, 210, 0.15);
+  padding-left: 48px;
+  align-items: center;
+}
+
+.sophia-footer__brand-logo-long {
+  height: 28px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.72;
+  transition: opacity 0.25s ease;
+}
+
+.sophia-footer__brand-identity--text:hover .sophia-footer__brand-logo-long {
+  opacity: 1;
+}
+
+/* ══ Copyright — cerise, full-width long line (Gucci style) ══ */
+.sophia-footer__copyright {
+  padding: 20px 7vw 24px;
+  border-bottom: 1px solid rgba(252, 233, 210, 0.09);
+}
+
+.sophia-footer__copyright p {
+  font-size: 10px;
+  color: var(--cerise);
+  letter-spacing: 0.2px;
+  line-height: 1.7;
+}
+
+.sophia-footer__copyright a {
+  color: var(--cerise);
+  opacity: 0.78;
+  transition: opacity 0.2s ease;
+}
+
+.sophia-footer__copyright a:hover {
+  opacity: 1;
+}
+
+/* ══ Closing wordmark — Gucci's massive full-width overflowing logo ══ */
+.sophia-footer__wordmark {
+  width: 100%;
+  overflow: hidden;
+  background: var(--black);
+  padding: 48px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  /* Min height so the section has presence even if image loads slowly */
+  min-height: clamp(160px, 26vw, 380px);
+}
+
+.sophia-footer__wordmark-img {
+  width: 100%;
+  max-width: min(100%, 1280px);
+  height: auto;
+  max-height: min(28vw, 240px);
+  display: block;
+  margin: 0 auto;
+  filter: brightness(0) invert(1);
+  opacity: 1;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sophia-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 60px 6vw 52px;
+  }
+
+  .sophia-footer__col--right {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(252, 233, 210, 0.09);
+    padding-top: 40px;
+    margin-top: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sophia-footer__grid {
+    grid-template-columns: 1fr;
+    padding: 52px 22px 44px;
+  }
+
+  .sophia-footer__col + .sophia-footer__col {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(252, 233, 210, 0.09);
+    padding-top: 36px;
+    margin-top: 4px;
+  }
+
+  .sophia-footer__col--right {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .sophia-footer__services {
+    max-width: 100%;
+    padding: 40px 22px 44px;
+  }
+
+  .sophia-footer__brands {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 28px 22px;
+  }
+
+  .sophia-footer__brand-identity--text {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid rgba(252, 233, 210, 0.12);
+    padding-top: 20px;
+  }
+
+  .sophia-footer__copyright {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .sophia-footer__wordmark-img {
+    max-height: min(36vw, 160px);
+    max-width: 100%;
+  }
+}

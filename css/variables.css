@@ -1,0 +1,133 @@
+/* ─── SOPHIA-G · Global Variables & Base Reset ─── */
+
+/* ── Immutable brand palette ── */
+:root {
+  --orange:    #FF6808;
+  --champagne: #FCE9D2;
+  --cerise:    #DB2E6D;
+  --lavender:  #FEC9FC;
+  --black:     #050505;
+  --white:     #ffffff;
+  --dark-soft: #111111;
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans:  "Jost", sans-serif;
+}
+
+/* ── DARK theme (default) ── */
+[data-theme="dark"],
+:root {
+  --bg-page:        #ffffff;          /* light sections — unified white */
+  --bg-body:        var(--champagne);
+  --bg-dark-section:#050505;          /* services / subscribe / footer */
+  --bg-header-scroll: rgba(5,5,5,0.48);
+  --header-border-scroll: rgba(255,104,8,0.22);
+
+  --text-primary:   var(--black);
+  --text-on-dark:   var(--champagne);
+  --text-muted-dark: rgba(252,233,210,0.62);
+
+  --logo-filter:    brightness(0) invert(1); /* white on dark bg */
+  --icon-color:     rgba(252,233,210,0.82);
+}
+
+/* ── LIGHT theme ── */
+[data-theme="light"] {
+  --bg-page:        #ffffff;
+  --bg-body:        #f7f2eb;
+  --bg-dark-section:#1a1208;          /* slightly warmer, not pure black */
+  --bg-header-scroll: rgba(255,250,245,0.88);
+  --header-border-scroll: rgba(255,104,8,0.20);
+
+  --text-primary:   #1a1208;
+  --text-on-dark:   var(--champagne);
+  --text-muted-dark: rgba(252,233,210,0.62);
+
+  --logo-filter:    brightness(0) invert(1); /* still white inside dark sections */
+  --icon-color:     rgba(26,18,8,0.78);
+}
+
+/* ── Light theme: header transparent state shows dark text on white bg ── */
+[data-theme="light"] .sophia-header {
+  color: rgba(26,18,8,0.82);
+}
+
+[data-theme="light"] .sophia-header:not(.is-scrolled) {
+  background: rgba(255,250,245,0.92);
+  border-bottom-color: rgba(255,104,8,0.12);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .sophia-header.is-scrolled {
+  background: var(--bg-header-scroll);
+  border-bottom-color: var(--header-border-scroll);
+}
+
+[data-theme="light"] .sophia-header__link,
+[data-theme="light"] .sophia-header__icon-btn,
+[data-theme="light"] .sophia-header__menu-btn {
+  color: var(--icon-color);
+}
+
+/* Light mode: invert logo inside the header so it shows dark on light bg */
+[data-theme="light"] .sophia-header__logo {
+  filter: brightness(0); /* dark logo on light header */
+}
+
+/* ── Light theme: page background ── */
+[data-theme="light"] body {
+  background: var(--bg-body);
+}
+
+[data-theme="light"] .sophia-page {
+  background: var(--bg-page);
+}
+
+/* ── Smooth theme transition ── */
+body,
+.sophia-header,
+.sophia-page,
+.sophia-services,
+.sophia-subscribe,
+.sophia-footer {
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  width: 100%;
+  display: block;
+}
+
+/* Page wrapper — light sections */
+.sophia-page {
+  background: var(--bg-page);
+}

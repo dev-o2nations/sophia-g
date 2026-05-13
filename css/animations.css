@@ -1,0 +1,30 @@
+/* ─── SOPHIA-G · Scroll Reveal Animations ─── */
+
+.sophia-reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.sophia-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Light → Dark section bridge (reusable) ── */
+.sophia-fade-to-dark {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, #ffffff 0%, var(--black) 100%);
+  pointer-events: none;
+  display: block;
+}
+
+/* ── Dark → Light section bridge ── */
+.sophia-fade-to-light {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, var(--black) 0%, #ffffff 100%);
+  pointer-events: none;
+  display: block;
+}

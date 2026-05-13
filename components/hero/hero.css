@@ -1,0 +1,173 @@
+/* ─── Hero — Gucci floating-product style ─── */
+
+/*
+  .sophia-hero  →  200vh tall scroll container
+  .sophia-hero__stage  →  100vh sticky stage (pins to viewport while you scroll through)
+*/
+
+.sophia-hero {
+  height: 200vh;
+  position: relative;
+}
+
+/* ── Sticky stage ── */
+.sophia-hero__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--champagne);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* ── Product image (fills the stage like Gucci's bag shot) ── */
+.sophia-hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  will-change: transform;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: none;
+}
+
+/* ── Vignette overlay — darkens edges, keeps product vivid at center ── */
+.sophia-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    /* top bar — matches Gucci dark header blending */
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 18%),
+    /* bottom fade into next section */
+    linear-gradient(to top,    rgba(0,0,0,0.72) 0%, transparent 38%),
+    /* subtle edge vignette */
+    radial-gradient(ellipse at 50% 50%,
+      transparent 42%,
+      rgba(0,0,0,0.38) 100%
+    );
+}
+
+/* ── Bottom label + CTA (Gucci minimal — label above solid button) ── */
+.sophia-hero__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding-bottom: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* "The Hannah Fan" label — mirrors Gucci's "Taschen" */
+.sophia-hero__label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--champagne);
+}
+
+/* Solid CTA — mirrors Gucci's "KAUFEN" button */
+.sophia-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 44px;
+  background: var(--champagne);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
+}
+
+.sophia-hero__cta:hover {
+  background: var(--cerise);
+  color: var(--champagne);
+  transform: translateY(-2px);
+}
+
+/* ── Scroll hint ── */
+.sophia-hero__scroll-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.sophia-hero__scroll-hint span {
+  display: block;
+  width: 1px;
+  height: 7px;
+  background: rgba(252, 233, 210, 0.45);
+  animation: scrollPulse 1.9s ease-in-out infinite;
+}
+
+.sophia-hero__scroll-hint span:nth-child(2) { animation-delay: 0.22s; }
+.sophia-hero__scroll-hint span:nth-child(3) { animation-delay: 0.44s; }
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.6); }
+  50%       { opacity: 1;   transform: scaleY(1.5); }
+}
+
+/* ── Shared .sophia-btn (used in other sections) ── */
+.sophia-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 116px;
+  height: 40px;
+  padding: 0 24px;
+  border: 1px solid currentColor;
+  background: var(--champagne);
+  color: var(--black);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  transition: background 0.35s ease, color 0.35s ease,
+              border-color 0.35s ease, transform 0.35s ease;
+}
+
+.sophia-btn:hover {
+  background: var(--cerise);
+  color: var(--champagne);
+  border-color: var(--cerise);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sophia-hero {
+    height: 175vh;
+  }
+
+  .sophia-hero__content {
+    padding-bottom: 44px;
+  }
+
+  .sophia-hero__img {
+    object-position: center 30%;
+  }
+}

@@ -1,0 +1,118 @@
+/* ─── Collections Component ─── */
+
+.sophia-section-label {
+  background: var(--black);
+  color: var(--champagne);
+  text-align: center;
+  padding: 48px 20px 30px;
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.sophia-collections {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: var(--black);
+  color: var(--champagne);
+}
+
+.sophia-collection {
+  min-height: 760px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  isolation: isolate;
+  cursor: pointer;
+}
+
+.sophia-collection img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
+  transition: transform 1s ease;
+}
+
+.sophia-collection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.72), transparent 54%),
+    linear-gradient(135deg, rgba(219, 46, 109, 0.18), rgba(255, 104, 8, 0.14));
+  z-index: -2;
+}
+
+.sophia-collection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../../assets/images/pattern.png");
+  background-size: 360px;
+  opacity: 0.09;
+  z-index: -1;
+}
+
+.sophia-collection:hover img {
+  transform: scale(1.05);
+}
+
+.sophia-collection__content {
+  padding: 0 26px 54px;
+}
+
+.sophia-collection h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 4vw, 54px);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.sophia-collection p {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: rgba(252, 233, 210, 0.82);
+}
+
+.sophia-outline-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  min-width: 112px;
+  border: 1px solid rgba(252, 233, 210, 0.75);
+  color: var(--champagne);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.sophia-outline-btn:hover {
+  background: var(--champagne);
+  color: var(--black);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sophia-collections {
+    grid-template-columns: 1fr;
+  }
+
+  .sophia-collection {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sophia-collection {
+    min-height: 560px;
+  }
+}
