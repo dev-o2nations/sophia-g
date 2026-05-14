@@ -5,16 +5,13 @@
 .sc {
   display: block;
   width: 100%;
-  background: #050505;
+  background: var(--orange);
   overflow: hidden;
-  border-top: 1px solid rgba(219, 46, 109, 0.25);
 }
 
 /* ── Services strip ── */
 .sc__services {
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   padding: 0 7vw;
 }
 
@@ -37,7 +34,7 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(252, 233, 210, 0.88);
   text-decoration: none;
   transition: color 0.2s ease;
   white-space: nowrap;
@@ -50,7 +47,7 @@
   right: 24px;
   bottom: 10px;
   height: 1px;
-  background: var(--orange, #ff6808);
+  background: var(--champagne);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -68,7 +65,7 @@
 }
 
 .sc__service-link:hover {
-  color: var(--orange, #FF6808);
+  color: var(--champagne);
 }
 
 .sc__service-link:hover svg {
@@ -80,7 +77,7 @@
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: rgba(255, 104, 8, 0.45);
+  background: var(--cerise);
   flex-shrink: 0;
 }
 
@@ -101,11 +98,10 @@
   height: auto;
   max-height: clamp(100px, 16vw, 240px);
   display: block;
-  opacity: 1;
+  opacity: 0.88;
   object-fit: contain;
   object-position: center bottom;
-  /* Force pure white regardless of source image color */
-  filter: brightness(0) invert(1) !important;
+  filter: brightness(0) invert(1);
 
   /* JS animates transform on scroll */
   transform: scaleY(1.18) translateY(8%);
@@ -141,7 +137,7 @@
 
   .sc__wordmark-img {
     max-height: clamp(60px, 18vw, 130px);
-    opacity: 0.14;
+    opacity: 0.52;
   }
 }
 
@@ -154,7 +150,6 @@
     flex: 1 1 45%;
     justify-content: center;
     padding: 12px 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
   .sc__service-link::after {

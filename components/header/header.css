@@ -24,7 +24,7 @@
 
 /* ── Scrolled state — glassmorphism ── */
 .sophia-header.is-scrolled {
-  background: rgba(5, 5, 5, 0.48);
+  background: rgba(77, 61, 88, 0.52);
   backdrop-filter: blur(22px) saturate(1.6);
   -webkit-backdrop-filter: blur(22px) saturate(1.6);
   border-bottom-color: rgba(255, 104, 8, 0.22);
@@ -255,9 +255,9 @@
   inset: 0;
   /* Above sticky header (200) & scroll-top (250) so close button is visible */
   z-index: 500;
-  background: rgba(5, 5, 5, 0.97);
-  backdrop-filter: blur(28px) saturate(1.4);
-  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  background: rgba(252, 233, 210, 0.97);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
   display: flex;
   flex-direction: column;
 
@@ -307,9 +307,9 @@
 
   box-sizing: border-box;
   border: 1px solid transparent;
-  background-color: var(--black);
+  background-color: var(--champagne);
   box-shadow: none;
-  color: var(--champagne);
+  color: var(--black);
   cursor: pointer;
 
   opacity: 0;
@@ -373,11 +373,11 @@
   font-size: clamp(36px, 8vw, 72px);
   font-weight: 400;
   font-style: italic;
-  color: rgba(252, 233, 210, 0.72);
+  color: rgba(77, 61, 88, 0.82);
   text-decoration: none;
   line-height: 1.2;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(77, 61, 88, 0.12);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -399,7 +399,7 @@
 }
 
 .sg-drawer__link:hover {
-  color: #fff;
+  color: var(--cerise);
   padding-left: 14px;
 }
 
@@ -415,7 +415,7 @@
   flex-direction: column;
   gap: 10px;
   padding-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(77, 61, 88, 0.14);
   opacity: 0;
   transition: opacity 0.4s 0.35s ease;
 }
@@ -429,8 +429,8 @@
   width: auto;
   max-width: 160px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.55;
+  filter: brightness(0.32);
+  opacity: 0.72;
 }
 
 .sg-drawer__tagline {
@@ -438,7 +438,7 @@
   font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
+  color: rgba(77, 61, 88, 0.46);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -142,7 +142,7 @@
 
 .sophia-category:hover .sophia-category__label {
   letter-spacing: 0.17em;
-  color: #000000;
+  color: var(--black);
 }
 
 /* ── Responsive ── */

@@ -11,10 +11,10 @@
   height: 44px;
   border-radius: 0;
 
-  background: var(--black);
+  background: var(--champagne);
   /* Border ramps up when revealed (smooth “square fills in”) */
-  border: 1px solid rgba(255, 104, 8, 0.12);
-  color: var(--champagne);
+  border: 1px solid rgba(255, 104, 8, 0.22);
+  color: var(--black);
   cursor: pointer;
   box-shadow: none;
 

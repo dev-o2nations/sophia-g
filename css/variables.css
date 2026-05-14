@@ -6,9 +6,20 @@
   --champagne: #FCE9D2;
   --cerise:    #DB2E6D;
   --lavender:  #FEC9FC;
-  --black:     #050505;
+  /* Brand “black” — deep plum/violet (no #000 / #050505) */
+  --black:     #4d3d58;
   --white:     #ffffff;
-  --dark-soft: #111111;
+  --dark-soft: #635170;
+  /* Main footer (.sf): Princeton Orange — champagne / white type & rules */
+  --footer-surface: var(--orange);
+  --sf-text:        rgba(255, 255, 255, 0.96);
+  --sf-text-mid:    rgba(252, 233, 210, 0.88);
+  --sf-text-dim:    rgba(252, 233, 210, 0.70);
+  --sf-text-faint:  rgba(252, 233, 210, 0.52);
+  --sf-border:      rgba(255, 255, 255, 0.28);
+  --sf-border-soft: rgba(255, 255, 255, 0.20);
+  --sf-border-faint: rgba(255, 255, 255, 0.14);
+  --sf-option-bg:   #fff8f4;
 
   --font-serif: "Cormorant Garamond", serif;
   --font-sans:  "Jost", sans-serif;
@@ -19,8 +30,8 @@
 :root {
   --bg-page:        #ffffff;          /* light sections — unified white */
   --bg-body:        var(--champagne);
-  --bg-dark-section:#050505;          /* services / subscribe / footer */
-  --bg-header-scroll: rgba(5,5,5,0.48);
+  --bg-dark-section: #574066;          /* hero stage — plum */
+  --bg-header-scroll: rgba(77, 61, 88, 0.52);
   --header-border-scroll: rgba(255,104,8,0.22);
 
   --text-primary:   var(--black);
@@ -35,11 +46,11 @@
 [data-theme="light"] {
   --bg-page:        #ffffff;
   --bg-body:        #f7f2eb;
-  --bg-dark-section:#1a1208;          /* slightly warmer, not pure black */
+  --bg-dark-section: #5c4868;          /* plum — no pure black */
   --bg-header-scroll: rgba(255,250,245,0.88);
   --header-border-scroll: rgba(255,104,8,0.20);
 
-  --text-primary:   #1a1208;
+  --text-primary:   #453a52;
   --text-on-dark:   var(--champagne);
   --text-muted-dark: rgba(252,233,210,0.62);
 
