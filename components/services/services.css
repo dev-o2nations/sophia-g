@@ -145,27 +145,6 @@
   background: #ffffff;
 }
 
-/* Ghost Roman numerals — brand tint */
-.sophia-service-card__num {
-  position: absolute;
-  bottom: -10px;
-  right: 14px;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 110px;
-  font-weight: 600;
-  line-height: 1;
-  color: rgba(219, 46, 109, 0.06);
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: 6px;
-  transition: color 0.4s ease;
-}
-
-.sophia-service-card:hover .sophia-service-card__num {
-  color: rgba(255, 104, 8, 0.18);
-}
-
 .sophia-service-card__badge {
   display: flex;
   align-items: center;
