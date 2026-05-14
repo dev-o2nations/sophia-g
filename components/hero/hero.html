@@ -3,12 +3,15 @@
   <!-- 200vh tall → sticky stage pins for the full scroll-through -->
   <div class="sophia-hero__stage">
 
-    <!-- Product image — floats against the gradient bg (Gucci style) -->
-    <img
-      class="sophia-hero__img"
-      src="assets/images/hero-img-2.png"
-      alt="SOPHIA-G — The Hannah Fan, Chapter One"
-    >
+    <!-- Full-bleed hero video -->
+    <video
+      class="sophia-hero__video"
+      src="assets/videos/hero.mp4"
+      muted
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    ></video>
 
     <!-- Dark vignette overlay -->
     <div class="sophia-hero__overlay" aria-hidden="true"></div>
@@ -19,7 +22,7 @@
       <a href="#" class="sophia-hero__cta sophia-reveal">Shop Now</a>
     </div>
 
-    <!-- Scroll hint -->
+    <!-- Scroll hint (below Shop Now — centered on stage) -->
     <div class="sophia-hero__scroll-hint" aria-hidden="true">
       <span></span><span></span><span></span>
     </div>

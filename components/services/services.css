@@ -80,19 +80,56 @@
   transform: scale(1.04);
 }
 
-.sophia-service-card__pause {
+.sophia-service-card__vp-btn {
   position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.75);
-  font-family: var(--font-sans);
-  letter-spacing: 1px;
-  pointer-events: none;
-  user-select: none;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: auto;
+  height: auto;
+  padding: 2px;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.sophia-service-card__media--img .sophia-service-card__pause {
+.sophia-service-card__vp-btn:hover,
+.sophia-service-card__vp-btn:focus-visible {
+  color: #fff;
+  opacity: 1;
+}
+
+.sophia-service-card__vp-btn:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 2px;
+}
+
+.sophia-service-card:hover .sophia-service-card__vp-btn {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.sophia-service-card__vp-btn svg {
+  display: block;
+}
+
+.sophia-service-card__vp-icon--play  { display: none; }
+.sophia-service-card__vp-icon--pause { display: block; }
+
+.sophia-service-card__vp-btn.is-paused .sophia-service-card__vp-icon--pause { display: none; }
+.sophia-service-card__vp-btn.is-paused .sophia-service-card__vp-icon--play  { display: block; }
+
+.sophia-service-card__media--img .sophia-service-card__vp-btn {
   display: none;
 }
 

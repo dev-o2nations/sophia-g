@@ -1,7 +1,8 @@
 /**
  * SOPHIA-G Main Script
  * — Scroll-reveal (IntersectionObserver)
- * — Hero product image slow zoom on scroll
+ * — Hero media (image or video): slow zoom on scroll
+ * — Hero video: smooth scroll‑scrubs timeline (eased scrub)
  * — Hero content fade-up as hero section exits
  */
 
@@ -13,6 +14,9 @@ window.__sophiaInit = function () {
   initMenu();
   initServicesDrag();
   initScrollTop();
+  initWordmarkStretch();
+  initHeroScrollVideo();
+  initServiceVideoControls();
 };
 
 /* ─── Header scroll state ─── */
@@ -107,6 +111,8 @@ function initServicesDrag() {
 function initHeroEffects() {
   const hero    = document.querySelector(".sophia-hero");
   const img     = document.querySelector(".sophia-hero__img");
+  const video   = document.querySelector(".sophia-hero__video");
+  const media   = img || video;
   const content = document.querySelector(".sophia-hero__content");
 
   if (!hero) return;
@@ -118,10 +124,10 @@ function initHeroEffects() {
     () => {
       const y = window.scrollY;
 
-      /* Slow scale-zoom on the product image */
-      if (img) {
+      /* Slow scale-zoom on hero image or video */
+      if (media) {
         const progress = Math.min(y / stageH, 1);      // 0 → 1 across first 100vh
-        img.style.transform = `scale(${1 + progress * 0.06})`;
+        media.style.transform = `scale(${1 + progress * 0.06})`;
       }
 
       /* Label + button: fade out + float up as hero nears its end */
@@ -154,6 +160,33 @@ function initScrollTop() {
   btn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+}
+
+/* ─── Wordmark Scroll Reveal (scale + fade, no clip) ─── */
+function initWordmarkStretch() {
+  const img = document.querySelector(".sc__wordmark-img");
+  if (!img) return;
+
+  function update() {
+    const rect     = img.getBoundingClientRect();
+    const vh       = window.innerHeight;
+
+    // 0 = just entered viewport bottom, 1 = fully visible
+    const progress = Math.min(1, Math.max(0,
+      (vh - rect.top) / (vh * 0.65)
+    ));
+
+    // scaleY: 1.18 → 1.0 (stretch eases away)
+    const scaleY  = 1.18 - (progress * 0.18);
+    // translateY: 8% → 0
+    const transY  = (1 - progress) * 8;
+
+    img.style.transform = `scaleY(${scaleY.toFixed(3)}) translateY(${transY.toFixed(1)}%)`;
+    img.style.opacity   = "1";
+  }
+
+  window.addEventListener("scroll", update, { passive: true });
+  update();
 }
 
 /* ─── Nav Drawer ─── */
@@ -209,5 +242,146 @@ function initTheme() {
     const next    = current === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     localStorage.setItem('sg-theme', next);
+  });
+}
+
+/* ─── Hero video: smooth scroll-scrub through the hero section ─── */
+function initHeroScrollVideo() {
+  const hero  = document.querySelector(".sophia-hero");
+  const video = document.querySelector(".sophia-hero__video");
+  if (!hero || !video) return;
+
+  const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let duration   = 0;
+  let ticking    = false;
+  let smoothP    = 0;
+  let lastTickMs = 0;
+  /** Ease time constant (seconds); higher = silkier, more settle lag */
+  const TAU_SEC  = motionOK ? 0.52 : 0;
+  /** Stop rAF when smoothed progress has settled on the scroll target */
+  const EPS_P    = 0.002;
+
+  function syncDuration() {
+    const d = video.duration;
+    duration = typeof d === "number" && isFinite(d) && d > 0 ? d : 0;
+  }
+
+  function rawHeroProgress() {
+    const vh   = window.innerHeight;
+    const top  = hero.offsetTop;
+    const span = hero.offsetHeight - vh;
+    return Math.min(1, Math.max(0, (window.scrollY - top) / Math.max(1, span)));
+  }
+
+  video.addEventListener("loadedmetadata", syncDuration);
+  video.addEventListener("durationchange", syncDuration);
+  if (video.readyState >= 1) syncDuration();
+
+  function applyInstantScrub() {
+    syncDuration();
+    if (!duration) return;
+    const p = rawHeroProgress();
+    smoothP = p;
+    video.pause();
+    try {
+      video.currentTime = p * duration;
+    } catch (_) {}
+  }
+
+  function tick() {
+    if (!duration || !motionOK) {
+      ticking = false;
+      return;
+    }
+
+    const targetP = rawHeroProgress();
+    const now = performance.now();
+    const dtSec = lastTickMs ? Math.min(0.055, (now - lastTickMs) / 1000) : 1 / 60;
+    lastTickMs = now;
+    const k = motionOK && TAU_SEC > 0 ? 1 - Math.exp(-dtSec / TAU_SEC) : 1;
+    smoothP += (targetP - smoothP) * k;
+
+    const t = smoothP * duration;
+    video.pause();
+
+    try {
+      if (Math.abs(video.currentTime - t) > 0.0025) video.currentTime = t;
+    } catch (_) {
+      ticking = false;
+      return;
+    }
+
+    if (Math.abs(targetP - smoothP) > EPS_P) {
+      requestAnimationFrame(tick);
+    } else {
+      ticking = false;
+    }
+  }
+
+  function kick() {
+    if (!motionOK) {
+      applyInstantScrub();
+      return;
+    }
+    syncDuration();
+    if (!duration) return;
+
+    /*
+      One rAF chain runs while smoothP eases toward scroll.
+      Finished chains restart on the next kick() (scroll / resize).
+    */
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(tick);
+    }
+  }
+
+  window.addEventListener("scroll", kick, { passive: true });
+  window.addEventListener("resize", kick, { passive: true });
+
+  video.pause();
+
+  function bootstrap() {
+    syncDuration();
+    if (!motionOK || !duration) {
+      applyInstantScrub();
+      return;
+    }
+    smoothP = rawHeroProgress();
+    try {
+      video.currentTime = smoothP * duration;
+    } catch (_) {}
+    kick();
+  }
+
+  syncDuration();
+  if (duration) bootstrap();
+  else video.addEventListener("loadedmetadata", bootstrap, { once: true });
+}
+
+function syncServiceVpBtn(btn, video) {
+  const paused = video.paused;
+  btn.classList.toggle("is-paused", paused);
+  btn.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+}
+
+/* ─── Services: play/pause control on each card video ─── */
+function initServiceVideoControls() {
+  document.querySelectorAll(".sophia-service-card__vp-btn").forEach((btn) => {
+    const media = btn.closest(".sophia-service-card__media");
+    const video = media?.querySelector(".sophia-service-card__video");
+    if (!video) return;
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.paused) void video.play();
+      else video.pause();
+      syncServiceVpBtn(btn, video);
+    });
+
+    video.addEventListener("play", () => syncServiceVpBtn(btn, video));
+    video.addEventListener("pause", () => syncServiceVpBtn(btn, video));
+    syncServiceVpBtn(btn, video);
   });
 }

@@ -1,7 +1,7 @@
 /* ─── Collections Component ─── */
 
 .sophia-section-label {
-  background: var(--champagne);
+  background: #ffffff;
   color: var(--black);
   text-align: center;
   padding: 48px 20px 30px;
@@ -25,9 +25,9 @@
 .sophia-collections {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  background: var(--champagne);
+  background: #ffffff;
   color: var(--champagne);
-  gap: 3px;
+  gap: 0;
 }
 
 /* ── Each card: tall enough to scroll through ── */
@@ -40,7 +40,6 @@
   justify-content: center;
   isolation: isolate;
   cursor: pointer;
-  transition: box-shadow 0.45s ease;
 }
 
 /* ── Background image wrapper — clips the image only ── */
@@ -60,32 +59,6 @@
 
 .sophia-collection:hover .sophia-collection__bg img {
   transform: scale(1.05);
-}
-
-/* Card 1 — cerise shadow */
-.sophia-collection:nth-child(1) {
-  box-shadow:
-    inset 0 -80px 80px -20px rgba(219, 46, 109, 0.30),
-    inset 0 0 0 1px rgba(219, 46, 109, 0.10);
-}
-
-/* Card 2 — orange shadow */
-.sophia-collection:nth-child(2) {
-  box-shadow:
-    inset 0 -80px 80px -20px rgba(255, 104, 8, 0.28),
-    inset 0 0 0 1px rgba(255, 104, 8, 0.10);
-}
-
-.sophia-collection:nth-child(1):hover {
-  box-shadow:
-    inset 0 -80px 100px -20px rgba(219, 46, 109, 0.45),
-    inset 0 0 0 1px rgba(219, 46, 109, 0.28);
-}
-
-.sophia-collection:nth-child(2):hover {
-  box-shadow:
-    inset 0 -80px 100px -20px rgba(255, 104, 8, 0.42),
-    inset 0 0 0 1px rgba(255, 104, 8, 0.28);
 }
 
 /* ── Gradient overlay — shared dark base ── */
@@ -111,18 +84,6 @@
   background:
     linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0.55) 100%),
     linear-gradient(160deg, rgba(255,104,8,0.32) 0%, rgba(219,46,109,0.20) 60%, transparent 100%);
-}
-
-/* ── Pattern overlay ── */
-.sophia-collection::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../../assets/images/pattern.png");
-  background-size: 360px;
-  opacity: 0.09;
-  z-index: -1;
-  pointer-events: none;
 }
 
 /* ── Sticky content block ── */

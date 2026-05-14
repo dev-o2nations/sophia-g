@@ -60,10 +60,6 @@
   color: var(--orange);
 }
 
-/* orange top border accent on the whole section */
-.sophia-subscribe {
-  border-top: 2px solid var(--orange) !important;
-}
 
 @media (max-width: 768px) {
   .sophia-subscribe {

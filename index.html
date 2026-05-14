@@ -16,20 +16,31 @@
     rel="stylesheet"
   >
 
-  <!-- Global styles -->
-  <link rel="stylesheet" href="css/variables.css?v=20260513z">
-  <link rel="stylesheet" href="css/animations.css?v=20260513z">
-
-  <!-- Component styles -->
-  <link rel="stylesheet" href="components/header/header.css?v=20260513z9">
-  <link rel="stylesheet" href="components/hero/hero.css?v=20260513z7">
-  <link rel="stylesheet" href="components/categories/categories.css?v=20260513z6">
-  <link rel="stylesheet" href="components/collections/collections.css?v=20260513z7">
-  <link rel="stylesheet" href="components/services/services.css?v=20260513z">
-  <link rel="stylesheet" href="components/subscribe/subscribe.css?v=20260513z">
-  <link rel="stylesheet" href="components/footer/footer.css?v=20260513z8">
-  <link rel="stylesheet" href="components/closing/closing.css?v=20260513z">
-  <link rel="stylesheet" href="components/scroll-top/scroll-top.css?v=20260513z">
+  <!-- Dynamic CSS loader — bypasses every layer of caching -->
+  <script>
+    (function () {
+      var t = Date.now();
+      var sheets = [
+        "css/variables.css",
+        "css/animations.css",
+        "components/header/header.css",
+        "components/hero/hero.css",
+        "components/categories/categories.css",
+        "components/collections/collections.css",
+        "components/services/services.css",
+        "components/subscribe/subscribe.css",
+        "components/footer/footer.css",
+        "components/closing/closing.css",
+        "components/scroll-top/scroll-top.css"
+      ];
+      sheets.forEach(function (href) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = href + "?v=" + t;
+        document.head.appendChild(link);
+      });
+    })();
+  </script>
 </head>
 
 <body>
@@ -53,9 +64,21 @@
   <div data-component="closing"></div>
   <div data-component="scroll-top"></div>
 
-  <!-- main.js must be parsed before loader.js so __sophiaInit is defined when loader calls it -->
-  <script src="js/main.js?v=20260513z7" defer></script>
-  <script src="js/loader.js?v=20260513z" defer></script>
+  <!-- Dynamic JS loader — cache-busted on every page load, order preserved -->
+  <script>
+    (function () {
+      var t = Date.now();
+      /* main.js MUST finish before loader.js runs — load sequentially */
+      var s1 = document.createElement("script");
+      s1.src = "js/main.js?v=" + t;
+      s1.onload = function () {
+        var s2 = document.createElement("script");
+        s2.src = "js/loader.js?v=" + t;
+        document.body.appendChild(s2);
+      };
+      document.body.appendChild(s1);
+    })();
+  </script>
 
 </body>
 </html>
