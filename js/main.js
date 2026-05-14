@@ -251,6 +251,57 @@ function initHeroScrollVideo() {
   const video = document.querySelector(".sophia-hero__video");
   if (!hero || !video) return;
 
+  const mqMobile =
+    typeof window.matchMedia === "function"
+      ? window.matchMedia("(max-width: 768px)")
+      : null;
+
+  /** Narrow viewports: scroll-scrub while paused often stays black on iOS; loop muted playback instead. */
+  function heroUseSimpleMobilePlayback() {
+    return mqMobile ? mqMobile.matches : window.innerWidth <= 768;
+  }
+
+  /**
+   * WebKit / iOS commonly refuses to decode or paint frames when seeking on a video that has
+   * never entered playback; a silent play→pause primes the decoder before touching currentTime.
+   */
+  let decodePrimed = false;
+  async function primeDecodePipeline() {
+    if (decodePrimed) return;
+    decodePrimed = true;
+    try {
+      await video.play();
+      video.pause();
+    } catch (_) {
+      decodePrimed = false;
+    }
+  }
+
+  if (heroUseSimpleMobilePlayback()) {
+    video.loop = true;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    let mobilePlaybackStarted = false;
+
+    async function startMobileHeroVideo() {
+      if (mobilePlaybackStarted) return;
+      mobilePlaybackStarted = true;
+      await primeDecodePipeline();
+      try {
+        await video.play();
+      } catch (_) {}
+    }
+
+    video.addEventListener("loadedmetadata", () => void startMobileHeroVideo(), { once: true });
+    video.addEventListener("canplay", () => void startMobileHeroVideo(), { once: true });
+    if (video.readyState >= 2) void startMobileHeroVideo();
+    return;
+  }
+
   const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let duration   = 0;
@@ -281,12 +332,16 @@ function initHeroScrollVideo() {
   function applyInstantScrub() {
     syncDuration();
     if (!duration) return;
-    const p = rawHeroProgress();
-    smoothP = p;
-    video.pause();
-    try {
-      video.currentTime = p * duration;
-    } catch (_) {}
+    void primeDecodePipeline().then(() => {
+      syncDuration();
+      if (!duration) return;
+      const p = rawHeroProgress();
+      smoothP = p;
+      video.pause();
+      try {
+        video.currentTime = p * duration;
+      } catch (_) {}
+    });
   }
 
   function tick() {
@@ -327,14 +382,14 @@ function initHeroScrollVideo() {
     syncDuration();
     if (!duration) return;
 
-    /*
-      One rAF chain runs while smoothP eases toward scroll.
-      Finished chains restart on the next kick() (scroll / resize).
-    */
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(tick);
-    }
+    void primeDecodePipeline()
+      .catch(() => {})
+      .then(() => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(tick);
+        }
+      });
   }
 
   window.addEventListener("scroll", kick, { passive: true });
@@ -342,7 +397,8 @@ function initHeroScrollVideo() {
 
   video.pause();
 
-  function bootstrap() {
+  async function bootstrap() {
+    await primeDecodePipeline().catch(() => {});
     syncDuration();
     if (!motionOK || !duration) {
       applyInstantScrub();
@@ -356,8 +412,8 @@ function initHeroScrollVideo() {
   }
 
   syncDuration();
-  if (duration) bootstrap();
-  else video.addEventListener("loadedmetadata", bootstrap, { once: true });
+  if (duration) void bootstrap();
+  else video.addEventListener("loadedmetadata", () => void bootstrap(), { once: true });
 }
 
 function syncServiceVpBtn(btn, video) {
