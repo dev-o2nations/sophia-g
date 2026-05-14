@@ -11,30 +11,6 @@
   border-top: 3px solid var(--cerise);
 }
 
-/* Compass emblem — scoped to left quarter only, centered inside that strip */
-.sf::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 25%;
-  max-width: 480px;
-  box-sizing: border-box;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("../../assets/images/pattern.png");
-  background-repeat: no-repeat;
-  background-position: center 42%;
-  background-size: contain;
-  opacity: 0.38;
-}
-
-.sf > * {
-  position: relative;
-  z-index: 1;
-}
-
 /* ── Top: flex row of 3 columns ── */
 .sf__top {
   display: flex;
@@ -457,13 +433,6 @@
 /* ── Responsive ── */
 /* Tablet */
 @media (max-width: 900px) {
-  .sf::before {
-    width: clamp(152px, 32vw, 280px);
-    max-width: none;
-    background-position: center 40%;
-    opacity: 0.34;
-  }
-
   .sf__top {
     flex-wrap: wrap;
     gap: 0;
