@@ -11,12 +11,11 @@
 const COMPONENTS = [
   { slot: "header",      path: "components/header/header.html" },
   { slot: "hero",        path: "components/hero/hero.html" },
-  { slot: "categories",  path: "components/categories/categories.html" },
+  { slot: "welcome",     path: "components/welcome/welcome.html" },
   { slot: "collections", path: "components/collections/collections.html" },
   { slot: "services",    path: "components/services/services.html" },
   { slot: "subscribe",   path: "components/subscribe/subscribe.html" },
   { slot: "footer",      path: "components/footer/footer.html" },
-  { slot: "closing",     path: "components/closing/closing.html" },
   { slot: "scroll-top",  path: "components/scroll-top/scroll-top.html" },
 ];
 

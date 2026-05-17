@@ -11,6 +11,33 @@
   transform: translateY(0);
 }
 
+/* Services — staggered card entrance */
+.sophia-services .sophia-service-card.sophia-reveal {
+  transform: translateY(52px) scale(0.97);
+  transition:
+    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sophia-services .sophia-service-card.sophia-reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+
+.sophia-services__grid .sophia-service-card:nth-child(1).sophia-reveal { transition-delay: 0.05s; }
+.sophia-services__grid .sophia-service-card:nth-child(2).sophia-reveal { transition-delay: 0.18s; }
+.sophia-services__grid .sophia-service-card:nth-child(3).sophia-reveal { transition-delay: 0.31s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sophia-services .sophia-service-card.sophia-reveal {
+    transform: translateY(16px);
+    transition-duration: 0.2s;
+  }
+
+  .sophia-services__grid .sophia-service-card.sophia-reveal {
+    transition-delay: 0s !important;
+  }
+}
+
 /* ── Light → Dark section bridge (reusable) ── */
 .sophia-fade-to-dark {
   width: 100%;

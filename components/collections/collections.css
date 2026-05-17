@@ -1,198 +1,341 @@
-/* ─── Collections Component ─── */
+/* ─── Chapters — sticky scroll (title → launched chapter) ─── */
 
-.sophia-section-label {
-  background: #ffffff;
+.sophia-chapters {
+  position: relative;
+  background: #f4f2ef;
   color: var(--black);
-  text-align: center;
-  padding: 48px 20px 30px;
-  font-size: 10px;
-  letter-spacing: 2.8px;
-  text-transform: uppercase;
-  font-weight: 700;
+}
+
+/* Scroll runway — drives sticky behaviour */
+.sophia-chapters__scroll {
+  height: 220vh;
+  height: 220dvh;
   position: relative;
 }
 
-.sophia-section-label::after {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--orange);
-  margin: 14px auto 0;
-  opacity: 0.7;
-}
-
-.sophia-collections {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  background: #ffffff;
-  color: var(--champagne);
-  gap: 0;
-}
-
-/* ── Each card: tall enough to scroll through ── */
-.sophia-collection {
-  min-height: 860px;
-  position: relative;
-  /* NO overflow:hidden here — moved to __bg so sticky works */
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  isolation: isolate;
-  cursor: pointer;
-}
-
-/* ── Background image wrapper — clips the image only ── */
-.sophia-collection__bg {
-  position: absolute;
-  inset: 0;
+.sophia-chapters__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
-  z-index: -3;
+  isolation: isolate;
 }
 
-.sophia-collection__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.1s ease;
-}
-
-.sophia-collection:hover .sophia-collection__bg img {
-  transform: scale(1.05);
-}
-
-/* ── Gradient overlay — shared dark base ── */
-.sophia-collection::before {
-  content: "";
+/* Stacked full-viewport layers */
+.sophia-chapters__layer {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(77,61,88,0.68) 0%, rgba(77,61,88,0.16) 50%, rgba(77,61,88,0.52) 100%);
-  z-index: -2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 5vw, 48px);
+  box-sizing: border-box;
+  --layer-o: 0;
+  --layer-y: 28px;
+  --layer-s: 0.985;
+  opacity: var(--layer-o);
+  visibility: hidden;
+  transform: translateY(var(--layer-y)) scale(var(--layer-s));
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.55s;
+  will-change: opacity, transform;
+}
+
+.sophia-chapters__layer.is-active {
+  visibility: visible;
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+.sophia-chapters__layer.is-past {
+  z-index: 1;
   pointer-events: none;
 }
 
-/* Card 1 — cerise warm tint */
-.sophia-collection:nth-child(1)::before {
-  background:
-    linear-gradient(to bottom, rgba(77,61,88,0.68) 0%, rgba(77,61,88,0.16) 50%, rgba(77,61,88,0.52) 100%),
-    linear-gradient(160deg, rgba(219,46,109,0.38) 0%, rgba(255,104,8,0.22) 60%, transparent 100%);
+.sophia-chapters__layer--title {
+  z-index: 1;
+  background: #f4f2ef;
 }
 
-/* Card 2 — orange warm tint */
-.sophia-collection:nth-child(2)::before {
-  background:
-    linear-gradient(to bottom, rgba(77,61,88,0.68) 0%, rgba(77,61,88,0.16) 50%, rgba(77,61,88,0.52) 100%),
-    linear-gradient(160deg, rgba(255,104,8,0.32) 0%, rgba(219,46,109,0.20) 60%, transparent 100%);
+.sophia-chapters__layer--title.is-past {
+  z-index: 1;
 }
 
-/* ── Sticky content block ── */
-.sophia-collection__content {
-  position: sticky;
-  top: 88px;
-  padding: 44px 32px;
-  text-align: center;
-  max-width: 420px;
+.sophia-chapters__layer--chapter {
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  color: var(--champagne);
+  background: #1a1218;
 }
 
-/* Small label above the title */
-.sophia-collection__eyebrow {
+.sophia-chapters__layer--chapter.is-active {
+  z-index: 3;
+}
+
+/* ── Title layer ── */
+.sophia-chapters__title-inner {
+  text-align: center;
+  max-width: 20ch;
+}
+
+.sophia-chapters__eyebrow {
+  display: block;
   font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 3.5px;
+  font-size: 10px;
+  letter-spacing: 0.36em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--orange);
-  display: block;
+  margin-bottom: clamp(20px, 3vw, 28px);
 }
 
-.sophia-collection h2 {
-  font-family: var(--font-serif);
-  font-size: clamp(34px, 4.5vw, 62px);
-  font-weight: 500;
-  line-height: 1.06;
+.sophia-chapters__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin: 0 0 clamp(20px, 3vw, 28px);
+}
+
+.sophia-chapters__heading em {
+  font-style: italic;
+  color: var(--cerise);
+}
+
+.sophia-chapters__tagline {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(77, 61, 88, 0.45);
   margin: 0;
 }
 
-.sophia-outline-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 38px;
-  min-width: 120px;
-  padding: 0 22px;
-  border: 1px solid rgba(252, 233, 210, 0.45);
-  color: var(--champagne);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.8px;
-  font-weight: 600;
-  /* glassmorphism */
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  transition: background 0.32s ease, color 0.32s ease,
-              border-color 0.32s ease, box-shadow 0.32s ease,
-              transform 0.25s ease;
+/* ── Launched chapter layer ── */
+.sophia-chapter-live {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  max-height: min(88vh, 720px);
+  align-items: stretch;
+  gap: 0;
 }
 
-.sophia-outline-btn:hover {
+.sophia-chapter-live__visual {
+  position: relative;
+  overflow: hidden;
+  background: #3d1828;
+}
+
+.sophia-chapter-live__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+  transform: scale(1.05);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sophia-chapters__layer--chapter.is-active .sophia-chapter-live__img {
+  transform: scale(1);
+}
+
+.sophia-chapter-live__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(26, 18, 8, 0.15) 50%,
+    rgba(26, 18, 8, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.sophia-chapter-live__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 5vw, 56px) clamp(28px, 4vw, 48px);
+  background: #1a1218;
+  color: var(--champagne);
+}
+
+.sophia-chapter-live__badge {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--orange);
+  margin-bottom: clamp(16px, 2.5vw, 22px);
+}
+
+.sophia-chapter-live__name {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.08;
+  color: var(--champagne);
+  margin: 0 0 clamp(16px, 2vw, 20px);
+}
+
+.sophia-chapter-live__name em {
+  font-style: italic;
+  color: #f4a4c4;
+}
+
+.sophia-chapter-live__lead {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.68;
+  color: rgba(252, 233, 210, 0.78);
+  margin: 0 0 clamp(28px, 3.5vw, 36px);
+  max-width: 34ch;
+}
+
+.sophia-chapter-live__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sophia-chapter-live__nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 18px;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--champagne);
+  border: 1px solid rgba(252, 233, 210, 0.28);
+  background: rgba(252, 233, 210, 0.06);
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.sophia-chapter-live__nav a:hover {
   background: var(--orange);
   border-color: var(--orange);
   color: #fff;
-  box-shadow: 0 6px 28px rgba(255, 104, 8, 0.45);
-  transform: translateY(-2px);
 }
 
-/* ── Responsive ── */
-@media (max-width: 1024px) {
-  .sophia-collections {
+.sophia-chapter-live__nav a:first-child {
+  background: var(--champagne);
+  border-color: var(--champagne);
+  color: var(--black);
+}
+
+.sophia-chapter-live__nav a:first-child:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+/* ── Reduced motion / mobile: no sticky trap ── */
+@media (max-width: 900px) {
+  .sophia-chapters__scroll {
+    height: auto;
+  }
+
+  .sophia-chapters__sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .sophia-chapters__layer {
+    position: relative;
+    inset: auto;
+    min-height: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .sophia-chapters__layer--title {
+    min-height: 50vh;
+    min-height: 50dvh;
+    padding: clamp(64px, 12vw, 96px) 24px;
+  }
+
+  .sophia-chapters__layer--chapter {
+    min-height: auto;
+    padding: 0;
+  }
+
+  .sophia-chapter-live {
     grid-template-columns: 1fr;
+    max-height: none;
   }
 
-  .sophia-collection {
-    min-height: 700px;
+  .sophia-chapter-live__visual {
+    aspect-ratio: 16 / 10;
+    min-height: 280px;
   }
 
-  .sophia-collection__content {
-    max-width: 100%;
-    padding: 0 28px;
+  .sophia-chapter-live__shade {
+    background: linear-gradient(
+      180deg,
+      transparent 30%,
+      rgba(26, 18, 8, 0.5) 100%
+    );
+  }
+
+  .sophia-chapter-live__copy {
+    padding: 32px 24px 48px;
+  }
+
+  .sophia-chapter-live__nav {
+    flex-direction: column;
+  }
+
+  .sophia-chapter-live__nav a {
+    width: 100%;
+    justify-content: center;
   }
 }
 
-@media (max-width: 768px) {
-  .sophia-collection {
-    min-height: 580px;
+@media (prefers-reduced-motion: reduce) {
+  .sophia-chapters__scroll {
+    height: auto;
   }
 
-  .sophia-collection__content {
-    padding: 72px 22px 28px; /* top padding clears the header */
-    top: 58px;
-    max-width: 100%;
+  .sophia-chapters__sticky {
+    position: relative;
+    height: auto;
   }
 
-  .sophia-collection h2 {
-    font-size: clamp(28px, 8vw, 44px);
-  }
-}
-
-@media (max-width: 480px) {
-  .sophia-collection {
-    min-height: 520px;
-  }
-
-  .sophia-collection__content {
-    padding: 64px 18px 24px;
-    gap: 14px;
+  .sophia-chapters__layer {
+    position: relative;
+    --layer-o: 1;
+    --layer-y: 0px;
+    --layer-s: 1;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
   }
 
-  .sophia-collection h2 {
-    font-size: clamp(26px, 9vw, 38px);
+  .sophia-chapter-live__img {
+    transform: none;
+    transition: none;
   }
 }

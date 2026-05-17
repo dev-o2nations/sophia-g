@@ -23,6 +23,17 @@
 
   --font-serif: "Cormorant Garamond", serif;
   --font-sans:  "Jost", sans-serif;
+  --font-heading: var(--font-serif);
+}
+
+/* Display headings — brand guide: Cormorant Garamond italic */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
 }
 
 /* ── DARK theme (default) ── */

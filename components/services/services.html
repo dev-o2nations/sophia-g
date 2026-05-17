@@ -1,98 +1,134 @@
 <section class="sophia-services" id="services">
+  <div class="sophia-services__ambient" aria-hidden="true"></div>
+  <div class="sophia-services__rule" aria-hidden="true"></div>
 
+  <header class="sophia-services__header sophia-reveal">
+    <div class="sophia-services__header-grid">
+      <aside class="sophia-services__header-aside" aria-hidden="true">
+        <span class="sophia-services__eyebrow">Our Services</span>
+      </aside>
+      <div class="sophia-services__header-main">
+        <h2 class="sophia-services__title">Three Worlds,<br><em>One House</em></h2>
+        <p class="sophia-services__intro">
+          House, Life, and Atelier — three distinct rhythms within a single vision. Enter the line that calls to you.
+        </p>
+        <div class="sophia-services__header-rule" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
 
-  <!-- Section eyebrow -->
-  <div class="sophia-services__header sophia-reveal">
-    <span class="sophia-services__eyebrow">Our Services</span>
-  </div>
-
-  <!-- 3-column boxed grid -->
   <div class="sophia-services__grid">
 
-    <!-- Card 1 — The House (Luxury Line) -->
-    <article class="sophia-service-card sophia-reveal">
-      <div class="sophia-service-card__media">
-        <video
-          class="sophia-service-card__video"
-          src="assets/videos/Video-1.mp4"
-          autoplay muted loop playsinline
-          poster="assets/images/img4.jpg"
-        ></video>
-        <button type="button" class="sophia-service-card__vp-btn" aria-label="Pause video">
-          <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--pause" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <rect x="7" y="5" width="2.5" height="14"/>
-            <rect x="14.5" y="5" width="2.5" height="14"/>
-          </svg>
-          <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--play" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <polygon points="8,5 19,12 8,19"/>
-          </svg>
-        </button>
-      </div>
-      <div class="sophia-service-card__body">
-        <div class="sophia-service-card__badge">
-          <img src="assets/images/logo-long.webp" alt="SOPHIA-G" class="sophia-service-card__badge-logo">
-          <em class="sophia-service-card__badge-name">House</em>
+    <article class="sophia-service-card sophia-reveal" data-service="house">
+      <a href="#" class="sophia-service-card__link">
+        <div class="sophia-service-card__media">
+          <div class="sophia-service-card__media-shade" aria-hidden="true"></div>
+          <video
+            class="sophia-service-card__video"
+            src="assets/videos/vid-2.mp4"
+            autoplay muted loop playsinline
+            poster="assets/images/img4.jpg"
+          ></video>
+          <button type="button" class="sophia-service-card__vp-btn" aria-label="Pause video">
+            <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--pause" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <rect x="7" y="5" width="2.5" height="14"/>
+              <rect x="14.5" y="5" width="2.5" height="14"/>
+            </svg>
+            <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--play" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="8,5 19,12 8,19"/>
+            </svg>
+          </button>
+          <div class="sophia-service-card__overlay">
+            <span class="sophia-service-card__tag">The Luxury Line</span>
+            <em class="sophia-service-card__name">House</em>
+            <span class="sophia-service-card__enter">Enter</span>
+          </div>
         </div>
-        <a href="#" class="sophia-service-card__cta">Book an appointment</a>
-      </div>
+        <div class="sophia-service-card__body">
+          <p class="sophia-service-card__desc">
+            Chapter-led ready-to-wear, jewelry, and hero objects — couture discipline with pop-luxury nerve.
+          </p>
+          <span class="sophia-service-card__cta">
+            <span>Discover the House</span>
+            <svg class="sophia-service-card__cta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
     </article>
 
-    <!-- Card 2 — The Life (Lifestyle Line) -->
-    <article class="sophia-service-card sophia-reveal">
-      <div class="sophia-service-card__media">
-        <video
-          class="sophia-service-card__video"
-          src="assets/videos/vid-3.mp4"
-          autoplay muted loop playsinline
-          poster="assets/images/s2.png"
-        ></video>
-        <button type="button" class="sophia-service-card__vp-btn" aria-label="Pause video">
-          <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--pause" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <rect x="7" y="5" width="2.5" height="14"/>
-            <rect x="14.5" y="5" width="2.5" height="14"/>
-          </svg>
-          <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--play" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <polygon points="8,5 19,12 8,19"/>
-          </svg>
-        </button>
-      </div>
-      <div class="sophia-service-card__body">
-        <div class="sophia-service-card__badge">
-          <img src="assets/images/logo-long.webp" alt="SOPHIA-G" class="sophia-service-card__badge-logo">
-          <em class="sophia-service-card__badge-name">Life</em>
+    <article class="sophia-service-card sophia-reveal" data-service="life">
+      <a href="#" class="sophia-service-card__link">
+        <div class="sophia-service-card__media">
+          <div class="sophia-service-card__media-shade" aria-hidden="true"></div>
+          <video
+            class="sophia-service-card__video"
+            src="assets/videos/vid-3.mp4"
+            autoplay muted loop playsinline
+            poster="assets/images/s2.png"
+          ></video>
+          <button type="button" class="sophia-service-card__vp-btn" aria-label="Pause video">
+            <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--pause" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <rect x="7" y="5" width="2.5" height="14"/>
+              <rect x="14.5" y="5" width="2.5" height="14"/>
+            </svg>
+            <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--play" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="8,5 19,12 8,19"/>
+            </svg>
+          </button>
+          <div class="sophia-service-card__overlay">
+            <span class="sophia-service-card__tag">The Lifestyle Line</span>
+            <em class="sophia-service-card__name">Life</em>
+            <span class="sophia-service-card__enter">Enter</span>
+          </div>
         </div>
-        <a href="#" class="sophia-service-card__cta">Discover the lifestyle edit</a>
-      </div>
+        <div class="sophia-service-card__body">
+          <p class="sophia-service-card__desc">
+            Fragrance, accessories, and the everyday edit — vivid ritual for how you move through the world.
+          </p>
+          <span class="sophia-service-card__cta">
+            <span>Explore Life</span>
+            <svg class="sophia-service-card__cta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
     </article>
 
-    <!-- Card 3 — The Atelier (Bespoke) -->
-    <article class="sophia-service-card sophia-reveal">
-      <div class="sophia-service-card__media">
-        <video
-          class="sophia-service-card__video"
-          src="assets/videos/vid-2.mp4"
-          autoplay muted loop playsinline
-          poster="assets/images/img3.jpg"
-        ></video>
-        <button type="button" class="sophia-service-card__vp-btn" aria-label="Pause video">
-          <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--pause" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <rect x="7" y="5" width="2.5" height="14"/>
-            <rect x="14.5" y="5" width="2.5" height="14"/>
-          </svg>
-          <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--play" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <polygon points="8,5 19,12 8,19"/>
-          </svg>
-        </button>
-      </div>
-      <div class="sophia-service-card__body">
-        <div class="sophia-service-card__badge">
-          <img src="assets/images/logo-long.webp" alt="SOPHIA-G" class="sophia-service-card__badge-logo">
-          <em class="sophia-service-card__badge-name">Atelier</em>
+    <article class="sophia-service-card sophia-service-card--atelier sophia-reveal" data-service="atelier">
+      <a href="#" class="sophia-service-card__link">
+        <div class="sophia-service-card__media">
+          <div class="sophia-service-card__media-shade" aria-hidden="true"></div>
+          <video
+            class="sophia-service-card__video"
+            src="assets/videos/vid-2.mp4"
+            autoplay muted loop playsinline
+            poster="assets/images/img3.jpg"
+          ></video>
+          <button type="button" class="sophia-service-card__vp-btn" aria-label="Pause video">
+            <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--pause" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <rect x="7" y="5" width="2.5" height="14"/>
+              <rect x="14.5" y="5" width="2.5" height="14"/>
+            </svg>
+            <svg class="sophia-service-card__vp-icon sophia-service-card__vp-icon--play" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="8,5 19,12 8,19"/>
+            </svg>
+          </button>
+          <div class="sophia-service-card__overlay">
+            <span class="sophia-service-card__tag">Bespoke Services</span>
+            <em class="sophia-service-card__name">Atelier</em>
+            <span class="sophia-service-card__enter">Enter</span>
+          </div>
         </div>
-        <a href="#" class="sophia-service-card__cta">Bespoke &amp; gifting orders</a>
-      </div>
+        <div class="sophia-service-card__body">
+          <p class="sophia-service-card__desc">
+            Not customization — a conversation. Commissions, gifting, and the Hannah party experience, enquiry-led.
+          </p>
+          <span class="sophia-service-card__cta sophia-service-card__cta--primary">
+            <span>Book an appointment</span>
+            <svg class="sophia-service-card__cta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
     </article>
 
   </div>
-
 </section>

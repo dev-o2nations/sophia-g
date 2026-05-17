@@ -1,69 +1,193 @@
-/* ─── Services Section — white sectioning, brand accents ─── */
+/* ─── Services — luxury editorial ─── */
 
 .sophia-services {
-  background: #ffffff;
-  padding: 80px 7vw 96px;
   position: relative;
+  background: #ffffff;
+  color: var(--black);
+  padding: clamp(80px, 11vw, 128px) clamp(24px, 7vw, 80px) clamp(96px, 12vw, 140px);
+  overflow: hidden;
 }
 
-/* ── Eyebrow ── */
+.sophia-services__ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 40% at 100% 0%, rgba(255, 104, 8, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 35% at 0% 100%, rgba(219, 46, 109, 0.03) 0%, transparent 50%);
+}
+
+.sophia-services__rule {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: clamp(48px, 7vw, 72px);
+  background: linear-gradient(to bottom, transparent, rgba(255, 104, 8, 0.4));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sophia-services__header,
+.sophia-services__grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header — editorial grid ── */
 .sophia-services__header {
-  text-align: center;
-  margin-bottom: 52px;
+  margin-bottom: clamp(52px, 7vw, 72px);
+}
+
+.sophia-services__header-grid {
+  display: grid;
+  grid-template-columns: minmax(72px, 120px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  max-width: 980px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.sophia-services__header-aside {
+  padding-top: 10px;
 }
 
 .sophia-services__eyebrow {
   font-family: var(--font-sans);
   font-size: 9px;
-  letter-spacing: 4px;
+  letter-spacing: 0.38em;
   text-transform: uppercase;
-  font-weight: 600;
-  color: var(--orange);
-  opacity: 0.72;
+  font-weight: 500;
+  color: rgba(77, 61, 88, 0.45);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transform-origin: center;
+  white-space: nowrap;
 }
 
-.sophia-services__eyebrow::after {
-  content: "";
-  display: block;
-  width: 24px;
+.sophia-services__title {
+  font-family: var(--font-heading);
+  font-size: clamp(38px, 5.8vw, 68px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin: 0 0 clamp(20px, 3vw, 28px);
+}
+
+.sophia-services__title em {
+  font-style: italic;
+  color: var(--cerise);
+}
+
+.sophia-services__intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 1.75vw, 19px);
+  font-weight: 400;
+  line-height: 1.68;
+  color: rgba(77, 61, 88, 0.62);
+  max-width: 42ch;
+  margin: 0 0 clamp(28px, 4vw, 36px);
+}
+
+.sophia-services__header-rule {
+  width: min(120px, 28%);
   height: 1px;
-  background: var(--orange);
-  margin: 10px auto 0;
+  background: linear-gradient(
+    to right,
+    var(--orange),
+    rgba(255, 104, 8, 0.15)
+  );
 }
 
-/* ── Boxed 3-column grid ── */
+/* ── Grid ── */
 .sophia-services__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1200px;
+  gap: clamp(22px, 2.8vw, 36px);
+  max-width: 1320px;
   margin: 0 auto;
 }
 
-/* ── Card — white box, brand border ── */
+/* ── Card ── */
 .sophia-service-card {
+  position: relative;
+}
+
+.sophia-service-card__link {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  background: var(--black);
   overflow: hidden;
-  border: 1px solid rgba(26, 18, 8, 0.08);
-  background: #ffffff;
-  box-shadow: 0 4px 24px rgba(77, 61, 88, 0.08);
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  box-shadow:
+    0 0 0 1px rgba(77, 61, 88, 0.12),
+    0 20px 50px rgba(77, 61, 88, 0.14);
+  transition:
+    box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-service-card:hover {
-  border-color: rgba(255, 104, 8, 0.45);
-  box-shadow: 0 12px 40px rgba(219, 46, 109, 0.08), 0 4px 20px rgba(255, 104, 8, 0.1);
-  transform: translateY(-4px);
+.sophia-service-card__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(252, 233, 210, 0.08);
+  transition: box-shadow 0.5s ease;
 }
 
-/* Media — 4:5 portrait */
+.sophia-service-card__link:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 0 0 1px rgba(255, 104, 8, 0.25),
+    0 32px 64px rgba(77, 61, 88, 0.2),
+    0 12px 32px rgba(255, 104, 8, 0.1);
+}
+
+.sophia-service-card__link:hover::before {
+  box-shadow: inset 0 0 0 1px rgba(252, 233, 210, 0.22);
+}
+
+.sophia-service-card--atelier .sophia-service-card__link:hover {
+  box-shadow:
+    0 0 0 1px rgba(219, 46, 109, 0.35),
+    0 32px 64px rgba(219, 46, 109, 0.16),
+    0 12px 32px rgba(254, 201, 252, 0.15);
+}
+
+/* Media */
 .sophia-service-card__media {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: #ece6de;
+  background: #2a2030;
+}
+
+.sophia-service-card__media-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 18, 8, 0.15) 0%,
+    rgba(26, 18, 8, 0) 38%,
+    rgba(26, 18, 8, 0.72) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.sophia-service-card__link:hover .sophia-service-card__media-shade {
+  opacity: 0.95;
 }
 
 .sophia-service-card__video {
@@ -71,65 +195,102 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(35%) brightness(0.98);
-  transition: filter 0.65s ease, transform 0.7s ease;
+  filter: grayscale(15%) brightness(0.94) contrast(1.03);
+  transform: scale(1.03);
+  transition:
+    filter 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-service-card:hover .sophia-service-card__video {
-  filter: grayscale(0%) brightness(1);
-  transform: scale(1.04);
+.sophia-service-card__link:hover .sophia-service-card__video {
+  filter: grayscale(0%) brightness(1.04) contrast(1.05);
+  transform: scale(1.08);
+}
+
+.sophia-service-card__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: clamp(24px, 3.5vw, 32px) clamp(22px, 2.8vw, 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.sophia-service-card__tag {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(252, 233, 210, 0.7);
+}
+
+.sophia-service-card__name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--champagne);
+  letter-spacing: 0.01em;
+}
+
+.sophia-service-card__enter {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--orange);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sophia-service-card__link:hover .sophia-service-card__enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sophia-service-card--atelier .sophia-service-card__enter {
+  color: var(--lavender);
 }
 
 .sophia-service-card__vp-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 2;
-  width: 26px;
-  height: 26px;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  width: 30px;
+  height: 30px;
   padding: 0;
-  margin: 0;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.42);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(252, 233, 210, 0.2);
+  background: rgba(77, 61, 88, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--champagne);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  line-height: 0;
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: border-box;
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    opacity 0.2s ease;
+  opacity: 0;
+  transition: opacity 0.35s ease, background 0.25s ease;
 }
 
-.sophia-service-card__vp-btn:hover,
+.sophia-service-card:hover .sophia-service-card__vp-btn,
 .sophia-service-card__vp-btn:focus-visible {
-  color: #fff;
-  background: rgba(0, 0, 0, 0.52);
-  border-color: rgba(255, 255, 255, 0.35);
   opacity: 1;
 }
 
-.sophia-service-card__vp-btn:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.55);
-  outline-offset: 2px;
-}
-
-.sophia-service-card:hover .sophia-service-card__vp-btn {
-  color: #fff;
-}
-
-/* Child selector beats .vp-btn svg so only one icon shows at a time */
-.sophia-service-card__vp-btn .sophia-service-card__vp-icon {
-  display: block;
+.sophia-service-card__vp-btn:hover {
+  background: rgba(77, 61, 88, 0.65);
 }
 
 .sophia-service-card__vp-btn .sophia-service-card__vp-icon--play {
@@ -148,90 +309,172 @@
   display: block;
 }
 
-.sophia-service-card__media--img .sophia-service-card__vp-btn {
-  display: none;
-}
-
-/* Card body */
+/* Body — plum panel */
 .sophia-service-card__body {
-  padding: 22px 24px 26px;
+  padding: clamp(24px, 3vw, 32px) clamp(22px, 2.8vw, 28px) clamp(28px, 3.5vw, 36px);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  border-top: 2px solid var(--orange);
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
+  flex: 1;
+  gap: clamp(18px, 2.5vw, 24px);
+  background: var(--black);
+  border-top: 1px solid rgba(252, 233, 210, 0.08);
 }
 
-.sophia-service-card__badge {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: nowrap;
+.sophia-service-card--atelier .sophia-service-card__body {
+  background: linear-gradient(165deg, #523a58 0%, var(--black) 55%);
+  border-top-color: rgba(219, 46, 109, 0.25);
 }
 
-.sophia-service-card__badge-logo {
-  height: 16px;
-  width: auto;
-  flex-shrink: 0;
-  filter: brightness(0);
-  opacity: 0.82;
-  display: block;
-}
-
-.sophia-service-card__badge-name {
+.sophia-service-card__desc {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 28px;
+  font-size: clamp(14px, 1.45vw, 16px);
   font-weight: 400;
-  color: var(--cerise);
-  line-height: 1;
-  letter-spacing: 0.3px;
-  white-space: nowrap;
+  line-height: 1.7;
+  color: rgba(252, 233, 210, 0.72);
+  margin: 0;
+  transition: color 0.4s ease;
 }
 
-.sophia-service-card__badge::before {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 20px;
-  background: rgba(26, 18, 8, 0.12);
-  flex-shrink: 0;
-  order: 1;
+.sophia-service-card__link:hover .sophia-service-card__desc {
+  color: rgba(252, 233, 210, 0.9);
 }
-
-.sophia-service-card__badge-logo { order: 0; }
-.sophia-service-card__badge-name { order: 2; }
 
 .sophia-service-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  align-self: flex-start;
+  min-height: 42px;
+  padding: 0 22px;
+  margin-top: auto;
+  border: 1px solid rgba(252, 233, 210, 0.28);
   font-family: var(--font-sans);
-  font-size: 10px;
-  letter-spacing: 1.8px;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-weight: 500;
-  color: rgba(26, 18, 8, 0.52);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: rgba(26, 18, 8, 0.2);
-  transition: color 0.25s ease, text-decoration-color 0.25s ease;
-  display: inline-block;
+  font-weight: 600;
+  color: var(--champagne);
+  background: rgba(252, 233, 210, 0.06);
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    gap 0.35s ease;
 }
 
-.sophia-service-card__cta:hover {
-  color: var(--orange);
-  text-decoration-color: var(--orange);
+.sophia-service-card__cta-icon {
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.sophia-service-card__link:hover .sophia-service-card__cta {
+  color: #fff;
+  background: var(--orange);
+  border-color: var(--orange);
+  box-shadow: 0 8px 28px rgba(255, 104, 8, 0.4);
+  gap: 16px;
+}
+
+.sophia-service-card__link:hover .sophia-service-card__cta-icon {
+  transform: translateX(4px);
+}
+
+.sophia-service-card__cta--primary {
+  border-color: rgba(219, 46, 109, 0.45);
+  color: rgba(254, 201, 252, 0.95);
+  background: rgba(219, 46, 109, 0.12);
+}
+
+.sophia-service-card__link:hover .sophia-service-card__cta--primary {
+  background: var(--cerise);
+  border-color: var(--cerise);
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(219, 46, 109, 0.45);
+}
+
+.sophia-service-card.is-inview .sophia-service-card__video {
+  animation: service-video-in 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes service-video-in {
+  from {
+    filter: grayscale(35%) brightness(0.9);
+    transform: scale(1.1);
+  }
+  to {
+    filter: grayscale(15%) brightness(0.94);
+    transform: scale(1.03);
+  }
+}
+
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-  .sophia-services__grid { gap: 16px; }
-  .sophia-service-card__badge-name { font-size: 24px; }
-  .sophia-service-card__body { padding: 18px 18px 22px; }
+  .sophia-services__grid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .sophia-services__header-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .sophia-services__header-aside {
+    padding-top: 0;
+    border-bottom: 1px solid rgba(77, 61, 88, 0.08);
+    padding-bottom: 16px;
+  }
+
+  .sophia-services__eyebrow {
+    writing-mode: horizontal-tb;
+    transform: none;
+    letter-spacing: 0.28em;
+  }
 }
 
 @media (max-width: 768px) {
-  .sophia-services { padding: 56px 5vw 64px; }
-  .sophia-services__grid { grid-template-columns: 1fr; gap: 14px; }
-  .sophia-service-card__media { aspect-ratio: 16 / 9; }
-  .sophia-service-card__body { padding: 16px 18px 20px; }
+  .sophia-services {
+    padding: 64px 5vw 72px;
+  }
+
+  .sophia-services__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .sophia-service-card__media {
+    aspect-ratio: 5 / 6;
+  }
+
+  .sophia-service-card__vp-btn {
+    opacity: 1;
+  }
+
+  .sophia-service-card__enter {
+    opacity: 1;
+    transform: none;
+  }
+
+  .sophia-service-card__cta {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sophia-service-card__link,
+  .sophia-service-card__video,
+  .sophia-service-card__enter,
+  .sophia-service-card__cta,
+  .sophia-service-card__cta-icon {
+    transition-duration: 0.15s;
+  }
+
+  .sophia-service-card.is-inview .sophia-service-card__video {
+    animation: none;
+  }
 }

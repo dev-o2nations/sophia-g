@@ -4,14 +4,42 @@
   position: relative;
   display: block;
   width: 100%;
-  background: var(--footer-surface);
+  background-color: var(--orange);
   color: var(--sf-text);
   font-family: var(--font-sans);
   overflow: hidden;
 }
 
+/* Brand guide cover — radial glow + emblem watermark */
+.sf::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 85%, rgba(219, 46, 109, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 15%, rgba(254, 201, 252, 0.18) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sf::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(65%, 680px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: url("../../assets/images/cover-emblem.png") center / contain no-repeat;
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ── Top: flex row of 3 columns ── */
 .sf__top {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -51,12 +79,23 @@
 }
 
 .sf__col .sf__heading:first-child,
-.sf__col--right .sf__heading:first-child {
+.sf__col--right .sf__heading:first-child,
+.sf__nav-block .sf__heading:first-child {
   margin-top: 0;
+}
+
+.sf__nav-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.sf__nav-block--world {
+  margin-top: clamp(40px, 5vw, 56px);
 }
 
 /* Links: hover → resting line fades out first, then accent sweeps L → R */
 .sf__col > a:not(.sf__field-row),
+.sf__nav-block > a,
 .sf__desc a,
 .sf__copyright a,
 .sf__services a {
@@ -66,6 +105,7 @@
 }
 
 .sf__col > a:not(.sf__field-row)::before,
+.sf__nav-block > a::before,
 .sf__desc a::before,
 .sf__copyright a::before,
 .sf__services a::before {
@@ -83,6 +123,7 @@
 }
 
 .sf__col > a:not(.sf__field-row):hover::before,
+.sf__nav-block > a:hover::before,
 .sf__desc a:hover::before,
 .sf__copyright a:hover::before,
 .sf__services a:hover::before {
@@ -91,6 +132,7 @@
 }
 
 .sf__col > a:not(.sf__field-row)::after,
+.sf__nav-block > a::after,
 .sf__desc a::after,
 .sf__copyright a::after,
 .sf__services a::after {
@@ -109,6 +151,7 @@
 }
 
 .sf__col > a:not(.sf__field-row):hover::after,
+.sf__nav-block > a:hover::after,
 .sf__desc a:hover::after,
 .sf__copyright a:hover::after,
 .sf__services a:hover::after {
@@ -116,7 +159,8 @@
   transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
 }
 
-.sf__col > a:not(.sf__field-row) {
+.sf__col > a:not(.sf__field-row),
+.sf__nav-block > a {
   font-size: 13px;
   line-height: 1.55;
   color: var(--sf-text-mid);
@@ -127,11 +171,13 @@
   margin-bottom: 14px;
 }
 
-.sf__col > a:not(.sf__field-row):last-child {
+.sf__col > a:not(.sf__field-row):last-child,
+.sf__nav-block > a:last-child {
   margin-bottom: 0;
 }
 
-.sf__col > a:not(.sf__field-row):hover {
+.sf__col > a:not(.sf__field-row):hover,
+.sf__nav-block > a:hover {
   color: var(--champagne);
 }
 
@@ -312,49 +358,93 @@
   color: var(--champagne);
 }
 
-/* ── Services strip ── */
+/* ── Services strip (horizontal) ── */
 .sf__services {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 40px 7vw 44px;
+  position: relative;
+  z-index: 1;
   width: 100%;
+  padding: 0 7vw;
+  border-top: 1px solid var(--sf-border-soft);
   box-sizing: border-box;
 }
 
-.sf__services .sf__heading {
-  margin-top: 0;
-  margin-bottom: 16px;
+.sf__services-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  min-height: 64px;
 }
 
-.sf__services a {
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--sf-text-dim);
-  align-self: flex-start;
-  width: fit-content;
-  max-width: 100%;
-  padding-bottom: 5px;
-  margin-bottom: 14px;
+.sf__service-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 24px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(252, 233, 210, 0.88);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
-.sf__services a:last-child {
-  margin-bottom: 0;
+.sf__service-link::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 10px;
+  height: 1px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
 }
 
-.sf__services a:hover {
+.sf__service-link:hover::after {
+  transform: scaleX(1);
+}
+
+.sf__service-link svg {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.sf__service-link:hover {
   color: var(--champagne);
+}
+
+.sf__service-link:hover svg {
+  opacity: 1;
+}
+
+.sf__dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--cerise);
+  flex-shrink: 0;
 }
 
 /* ── Brand marks ── */
 .sf__brands {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 48px;
-  padding: 28px 7vw;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 7vw 36px;
   width: 100%;
   box-sizing: border-box;
+  border-top: 1px solid var(--sf-border-soft);
 }
 
 .sf__brand {
@@ -406,23 +496,38 @@
 }
 
 .sf__brand--logo {
-  padding-left: 48px;
+  padding: 0;
   gap: 0;
 }
 
 .sf__logo-long {
-  height: 22px;
+  height: clamp(26px, 3.5vw, 36px);
   width: auto;
   display: block;
   filter: brightness(0) invert(1);
-  opacity: 1;
+  opacity: 0.96;
   transition: opacity 0.25s;
 }
 
-.sf__brand--logo:hover .sf__logo-long { opacity: 1; }
+.sf__brand--logo:hover .sf__logo-long {
+  opacity: 1;
+}
+
+.sf__brand-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 400;
+  color: var(--sf-text-mid);
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
 
 /* ── Copyright ── */
 .sf__copyright {
+  position: relative;
+  z-index: 1;
   padding: 16px 7vw 18px;
 }
 
@@ -446,25 +551,37 @@
 
 /* ── Closing wordmark ── */
 .sf__wordmark {
+  position: relative;
+  z-index: 1;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  overflow: hidden;
-  padding-top: 36px;
-  min-height: clamp(120px, 18vw, 280px);
   width: 100%;
+  padding: clamp(32px, 5vw, 48px) 7vw clamp(36px, 6vw, 56px);
+  border-top: 1px solid var(--sf-border-soft);
+  overflow: hidden;
   box-sizing: border-box;
 }
 
-.sf__wordmark-img {
-  width: 100%;
-  height: auto;
-  max-height: min(20vw, 220px);
+.sf__wordmark-link {
   display: block;
-  filter: brightness(0) invert(1);
-  opacity: 0.72;
+  line-height: 0;
+}
+
+.sf__wordmark-img {
+  width: min(78vw, 720px);
+  height: auto;
+  max-height: min(14vw, 150px);
+  display: block;
+  opacity: 0.92;
   object-fit: contain;
-  object-position: center bottom;
+  object-position: center center;
+  filter: brightness(0) invert(1);
+  transform: scale(0.94) translateY(12px);
+  transform-origin: center center;
+  transition: none;
+  will-change: transform, opacity;
 }
 
 /* ── Responsive ── */
@@ -507,6 +624,11 @@
 
 /* Mobile */
 @media (max-width: 600px) {
+  .sf::after {
+    width: min(78%, 420px);
+    opacity: 0.12;
+  }
+
   .sf__top {
     flex-direction: column;
     padding: 40px 22px 32px;
@@ -532,16 +654,9 @@
     height: 44px;
   }
 
-  .sf__services { padding: 28px 22px 36px; }
-
   .sf__brands {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    padding: 24px 22px;
-    width: 100%;
-    box-sizing: border-box;
+    align-items: center;
+    padding: 32px 22px 28px;
   }
 
   .sf__brand--logo {
@@ -574,13 +689,13 @@
   }
 
   .sf__wordmark {
-    min-height: clamp(80px, 22vw, 140px);
-    padding-top: 24px;
+    padding: 24px 22px 32px;
   }
 
   .sf__wordmark-img {
-    max-height: min(28vw, 100px);
-    opacity: 0.55;
+    width: min(88vw, 520px);
+    max-height: min(18vw, 110px);
+    opacity: 0.9;
   }
 
   .sf__social { gap: 14px; }
@@ -588,6 +703,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sf__col > a:not(.sf__field-row)::before,
+  .sf__nav-block > a::before,
   .sf__desc a::before,
   .sf__copyright a::before,
   .sf__services a::before {
@@ -595,6 +711,7 @@
   }
 
   .sf__col > a:not(.sf__field-row):hover::before,
+  .sf__nav-block > a:hover::before,
   .sf__desc a:hover::before,
   .sf__copyright a:hover::before,
   .sf__services a:hover::before {
@@ -602,6 +719,7 @@
   }
 
   .sf__col > a:not(.sf__field-row)::after,
+  .sf__nav-block > a::after,
   .sf__desc a::after,
   .sf__copyright a::after,
   .sf__services a::after {
@@ -609,6 +727,7 @@
   }
 
   .sf__col > a:not(.sf__field-row):hover::after,
+  .sf__nav-block > a:hover::after,
   .sf__desc a:hover::after,
   .sf__copyright a:hover::after,
   .sf__services a:hover::after {
@@ -616,6 +735,7 @@
   }
 
   .sf__col > a:not(.sf__field-row),
+  .sf__nav-block > a,
   .sf__desc a,
   .sf__copyright a,
   .sf__services a {

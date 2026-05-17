@@ -1,0 +1,195 @@
+/* ─── Welcome — minimal editorial (Gucci-adjacent) ─── */
+
+.sophia-welcome {
+  position: relative;
+  background: #ffffff;
+  padding: clamp(88px, 12vw, 140px) clamp(24px, 7vw, 80px) clamp(96px, 14vw, 160px);
+  overflow: hidden;
+}
+
+/* Top hairline — enters from hero */
+.sophia-welcome__rule {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 1px);
+  height: clamp(48px, 8vw, 72px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(77, 61, 88, 0.14) 40%,
+    rgba(255, 104, 8, 0.35) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Two-column editorial grid ── */
+.sophia-welcome__grid {
+  display: grid;
+  grid-template-columns: minmax(72px, 120px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  max-width: 980px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Left rail — label */
+.sophia-welcome__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.sophia-welcome__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(77, 61, 88, 0.48);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+/* ── Main column ── */
+.sophia-welcome__main {
+  max-width: 560px;
+}
+
+.sophia-welcome__title {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 6.2vw, 72px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin: 0 0 clamp(48px, 7vw, 72px);
+}
+
+.sophia-welcome__title em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Body copy */
+.sophia-welcome__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sophia-welcome__line {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 1.85vw, 21px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.75;
+  color: rgba(77, 61, 88, 0.78);
+  margin: 0 0 clamp(28px, 4vw, 40px);
+  max-width: 48ch;
+}
+
+/* Pull lines — spaced, ruled */
+.sophia-welcome__pull {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--black);
+  margin: 0 0 clamp(36px, 5vw, 52px);
+  padding: clamp(28px, 4vw, 40px) 0;
+  max-width: 42ch;
+}
+
+.sophia-welcome__pull::before,
+.sophia-welcome__pull::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 32px;
+  height: 1px;
+  background: var(--black);
+  opacity: 0.22;
+}
+
+.sophia-welcome__pull::before { top: 0; }
+.sophia-welcome__pull::after  { bottom: 0; }
+
+.sophia-welcome__pull--final {
+  margin-bottom: 0;
+}
+
+.sophia-welcome__pull--final::after {
+  display: none;
+}
+
+/* Sans interlude — Gucci-style micro statement */
+.sophia-welcome__interlude {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--orange);
+  margin: 0 0 clamp(32px, 4.5vw, 48px);
+  padding-left: 2px;
+}
+
+/* Staggered reveal within welcome */
+.sophia-welcome .sophia-reveal:nth-child(1) { transition-delay: 0s; }
+.sophia-welcome__main .sophia-reveal:nth-of-type(1) { transition-delay: 0.05s; }
+.sophia-welcome__copy .sophia-reveal:nth-child(1) { transition-delay: 0.12s; }
+.sophia-welcome__copy .sophia-reveal:nth-child(2) { transition-delay: 0.2s; }
+.sophia-welcome__copy .sophia-reveal:nth-child(3) { transition-delay: 0.28s; }
+.sophia-welcome__copy .sophia-reveal:nth-child(4) { transition-delay: 0.36s; }
+.sophia-welcome__copy .sophia-reveal:nth-child(5) { transition-delay: 0.44s; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sophia-welcome {
+    padding-top: 72px;
+    padding-bottom: 88px;
+  }
+
+  .sophia-welcome__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .sophia-welcome__aside {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(77, 61, 88, 0.08);
+  }
+
+  .sophia-welcome__eyebrow {
+    writing-mode: horizontal-tb;
+    transform: none;
+    letter-spacing: 0.28em;
+  }
+
+  .sophia-welcome__main {
+    max-width: 100%;
+  }
+
+  .sophia-welcome__line,
+  .sophia-welcome__pull {
+    max-width: 100%;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sophia-welcome .sophia-reveal {
+    transition-delay: 0s !important;
+  }
+}

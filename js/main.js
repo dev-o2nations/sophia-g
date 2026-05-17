@@ -2,7 +2,7 @@
  * SOPHIA-G Main Script
  * — Scroll-reveal (IntersectionObserver)
  * — Hero media (image or video): slow zoom on scroll
- * — Hero video: smooth scroll‑scrubs timeline (eased scrub)
+ * — Hero video: autoplay on load (muted loop)
  * — Hero content fade-up as hero section exits
  */
 
@@ -17,6 +17,8 @@ window.__sophiaInit = function () {
   initWordmarkStretch();
   initHeroScrollVideo();
   initServiceVideoControls();
+  initServiceCardsInView();
+  initChapterReveal();
 };
 
 /* ─── Header scroll state ─── */
@@ -164,7 +166,7 @@ function initScrollTop() {
 
 /* ─── Wordmark Scroll Reveal (scale + fade, no clip) ─── */
 function initWordmarkStretch() {
-  const img = document.querySelector(".sc__wordmark-img");
+  const img = document.querySelector(".sf__wordmark-img");
   if (!img) return;
 
   function update() {
@@ -176,13 +178,11 @@ function initWordmarkStretch() {
       (vh - rect.top) / (vh * 0.65)
     ));
 
-    // scaleY: 1.18 → 1.0 (stretch eases away)
-    const scaleY  = 1.18 - (progress * 0.18);
-    // translateY: 8% → 0
-    const transY  = (1 - progress) * 8;
+    const scale  = 0.94 + (progress * 0.06);
+    const transY = (1 - progress) * 12;
 
-    img.style.transform = `scaleY(${scaleY.toFixed(3)}) translateY(${transY.toFixed(1)}%)`;
-    img.style.opacity   = "1";
+    img.style.transform = `scale(${scale.toFixed(3)}) translateY(${transY.toFixed(1)}px)`;
+    img.style.opacity   = String(0.88 + progress * 0.12);
   }
 
   window.addEventListener("scroll", update, { passive: true });
@@ -245,181 +245,123 @@ function initTheme() {
   });
 }
 
-/* ─── Hero video: smooth scroll-scrub through the hero section ─── */
+/* ─── Hero video: autoplay on load (all viewports) ─── */
 function initHeroScrollVideo() {
-  const hero  = document.querySelector(".sophia-hero");
   const video = document.querySelector(".sophia-hero__video");
-  if (!hero || !video) return;
+  if (!video) return;
 
-  const mqMobile =
-    typeof window.matchMedia === "function"
-      ? window.matchMedia("(max-width: 768px)")
-      : null;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) return;
 
-  /** Narrow viewports: scroll-scrub while paused often stays black on iOS; loop muted playback instead. */
-  function heroUseSimpleMobilePlayback() {
-    return mqMobile ? mqMobile.matches : window.innerWidth <= 768;
-  }
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.setAttribute("playsinline", "");
+  video.setAttribute("webkit-playsinline", "");
 
-  /**
-   * WebKit / iOS commonly refuses to decode or paint frames when seeking on a video that has
-   * never entered playback; a silent play→pause primes the decoder before touching currentTime.
-   */
-  let decodePrimed = false;
-  async function primeDecodePipeline() {
-    if (decodePrimed) return;
-    decodePrimed = true;
+  let started = false;
+
+  async function startHeroVideo() {
+    if (started) return;
+    started = true;
     try {
       await video.play();
-      video.pause();
     } catch (_) {
-      decodePrimed = false;
+      started = false;
     }
   }
 
-  if (heroUseSimpleMobilePlayback()) {
-    video.loop = true;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-
-    let mobilePlaybackStarted = false;
-
-    async function startMobileHeroVideo() {
-      if (mobilePlaybackStarted) return;
-      mobilePlaybackStarted = true;
-      await primeDecodePipeline();
-      try {
-        await video.play();
-      } catch (_) {}
-    }
-
-    video.addEventListener("loadedmetadata", () => void startMobileHeroVideo(), { once: true });
-    video.addEventListener("canplay", () => void startMobileHeroVideo(), { once: true });
-    if (video.readyState >= 2) void startMobileHeroVideo();
-    return;
-  }
-
-  const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  let duration   = 0;
-  let ticking    = false;
-  let smoothP    = 0;
-  let lastTickMs = 0;
-  /** Ease time constant (seconds); higher = silkier, more settle lag */
-  const TAU_SEC  = motionOK ? 0.52 : 0;
-  /** Stop rAF when smoothed progress has settled on the scroll target */
-  const EPS_P    = 0.002;
-
-  function syncDuration() {
-    const d = video.duration;
-    duration = typeof d === "number" && isFinite(d) && d > 0 ? d : 0;
-  }
-
-  function rawHeroProgress() {
-    const vh   = window.innerHeight;
-    const top  = hero.offsetTop;
-    const span = hero.offsetHeight - vh;
-    return Math.min(1, Math.max(0, (window.scrollY - top) / Math.max(1, span)));
-  }
-
-  video.addEventListener("loadedmetadata", syncDuration);
-  video.addEventListener("durationchange", syncDuration);
-  if (video.readyState >= 1) syncDuration();
-
-  function applyInstantScrub() {
-    syncDuration();
-    if (!duration) return;
-    void primeDecodePipeline().then(() => {
-      syncDuration();
-      if (!duration) return;
-      const p = rawHeroProgress();
-      smoothP = p;
-      video.pause();
-      try {
-        video.currentTime = p * duration;
-      } catch (_) {}
-    });
-  }
-
-  function tick() {
-    if (!duration || !motionOK) {
-      ticking = false;
-      return;
-    }
-
-    const targetP = rawHeroProgress();
-    const now = performance.now();
-    const dtSec = lastTickMs ? Math.min(0.055, (now - lastTickMs) / 1000) : 1 / 60;
-    lastTickMs = now;
-    const k = motionOK && TAU_SEC > 0 ? 1 - Math.exp(-dtSec / TAU_SEC) : 1;
-    smoothP += (targetP - smoothP) * k;
-
-    const t = smoothP * duration;
-    video.pause();
-
-    try {
-      if (Math.abs(video.currentTime - t) > 0.0025) video.currentTime = t;
-    } catch (_) {
-      ticking = false;
-      return;
-    }
-
-    if (Math.abs(targetP - smoothP) > EPS_P) {
-      requestAnimationFrame(tick);
-    } else {
-      ticking = false;
-    }
-  }
-
-  function kick() {
-    if (!motionOK) {
-      applyInstantScrub();
-      return;
-    }
-    syncDuration();
-    if (!duration) return;
-
-    void primeDecodePipeline()
-      .catch(() => {})
-      .then(() => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(tick);
-        }
-      });
-  }
-
-  window.addEventListener("scroll", kick, { passive: true });
-  window.addEventListener("resize", kick, { passive: true });
-
-  video.pause();
-
-  async function bootstrap() {
-    await primeDecodePipeline().catch(() => {});
-    syncDuration();
-    if (!motionOK || !duration) {
-      applyInstantScrub();
-      return;
-    }
-    smoothP = rawHeroProgress();
-    try {
-      video.currentTime = smoothP * duration;
-    } catch (_) {}
-    kick();
-  }
-
-  syncDuration();
-  if (duration) void bootstrap();
-  else video.addEventListener("loadedmetadata", () => void bootstrap(), { once: true });
+  video.addEventListener("loadeddata", () => void startHeroVideo(), { once: true });
+  video.addEventListener("canplay", () => void startHeroVideo(), { once: true });
+  if (video.readyState >= 2) void startHeroVideo();
 }
 
 function syncServiceVpBtn(btn, video) {
   const paused = video.paused;
   btn.classList.toggle("is-paused", paused);
   btn.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+}
+
+/* ─── Chapters: sticky title → chapter crossfade on scroll ─── */
+function initChapterReveal() {
+  const section = document.querySelector(".sophia-chapters");
+  const scroll = section?.querySelector(".sophia-chapters__scroll");
+  const titleLayer = section?.querySelector('[data-chapter-layer="title"]');
+  const chapterLayer = section?.querySelector('[data-chapter-layer="chapter"]');
+  if (!section || !scroll || !titleLayer || !chapterLayer) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const narrow = window.matchMedia("(max-width: 900px)").matches;
+
+  if (reducedMotion || narrow) {
+    titleLayer.style.setProperty("--layer-o", "1");
+    titleLayer.style.setProperty("--layer-y", "0px");
+    titleLayer.style.setProperty("--layer-s", "1");
+    chapterLayer.style.setProperty("--layer-o", "1");
+    chapterLayer.style.setProperty("--layer-y", "0px");
+    chapterLayer.style.setProperty("--layer-s", "1");
+    titleLayer.classList.add("is-active");
+    chapterLayer.classList.add("is-active");
+    return;
+  }
+
+  const setPhase = (progress) => {
+    const p = Math.min(1, Math.max(0, progress));
+    const fadeStart = 0.2;
+    const fadeEnd = 0.55;
+    const t = Math.min(1, Math.max(0, (p - fadeStart) / (fadeEnd - fadeStart)));
+
+    const titleO = 1 - t;
+    const chapterO = t;
+
+    titleLayer.style.setProperty("--layer-o", String(titleO));
+    titleLayer.style.setProperty("--layer-y", `${titleO * 12}px`);
+    titleLayer.style.setProperty("--layer-s", String(0.99 + titleO * 0.01));
+
+    chapterLayer.style.setProperty("--layer-o", String(chapterO));
+    chapterLayer.style.setProperty("--layer-y", `${(1 - chapterO) * 20}px`);
+    chapterLayer.style.setProperty("--layer-s", String(0.985 + chapterO * 0.015));
+
+    titleLayer.classList.toggle("is-active", titleO > 0.02);
+    titleLayer.classList.toggle("is-past", t > 0.35);
+    chapterLayer.classList.toggle("is-active", chapterO > 0.02);
+  };
+
+  const update = () => {
+    const rect = scroll.getBoundingClientRect();
+    const scrollable = scroll.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) {
+      setPhase(0);
+      return;
+    }
+    const travelled = -rect.top;
+    setPhase(travelled / scrollable);
+  };
+
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  update();
+}
+
+/* ─── Services: in-view class for media entrance ─── */
+function initServiceCardsInView() {
+  const cards = document.querySelectorAll(".sophia-service-card");
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-inview");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.25, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  cards.forEach((card) => observer.observe(card));
 }
 
 /* ─── Services: play/pause control on each card video ─── */
