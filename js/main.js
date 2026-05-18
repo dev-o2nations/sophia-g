@@ -9,7 +9,8 @@
 window.__sophiaInit = function () {
   initTheme();
   initReveal();
-  initSectionReveal(".sophia-welcome, .sophia-subscribe");
+  initWelcomeReveal();
+  initSectionReveal(".sophia-subscribe");
   initWelcomeParallax();
   initHeroEffects();
   initChapterEffects();
@@ -83,6 +84,38 @@ function initSectionReveal(selector) {
   sections.forEach((el) => observer.observe(el));
 }
 
+/* ─── Welcome: replay entrance on every scroll in/out ─── */
+function initWelcomeReveal() {
+  const section = document.querySelector(".sophia-welcome");
+  if (!section) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    section.classList.add("is-inview");
+    return;
+  }
+
+  const SHOW_RATIO = 0.1;
+  const HIDE_RATIO = 0.04;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const ratio = entry.intersectionRatio;
+
+        if (entry.isIntersecting && ratio >= SHOW_RATIO) {
+          section.classList.add("is-inview");
+        } else if (!entry.isIntersecting || ratio <= HIDE_RATIO) {
+          section.classList.remove("is-inview");
+        }
+      });
+    },
+    { threshold: [0, 0.04, 0.1, 0.18, 0.3], rootMargin: "0px 0px -6% 0px" }
+  );
+
+  observer.observe(section);
+}
+
 /* ─── Welcome: subtle parallax while scrolling through copy ─── */
 function initWelcomeParallax() {
   const section = document.querySelector(".sophia-welcome");
@@ -93,6 +126,11 @@ function initWelcomeParallax() {
   if (reducedMotion) return;
 
   const onScroll = () => {
+    if (!section.classList.contains("is-inview")) {
+      main.style.transform = "";
+      return;
+    }
+
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
     if (rect.bottom < 0 || rect.top > vh) return;
