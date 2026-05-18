@@ -1,18 +1,64 @@
 /* ─── Subscribe Section ─── */
 
 .sophia-subscribe {
+  position: relative;
   background: #ffffff;
   padding: 92px 20px 100px;
   border-bottom: 1px solid rgba(26, 18, 8, 0.07);
+  overflow: hidden;
+}
+
+.sophia-subscribe__ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255, 104, 8, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(254, 201, 252, 0.08) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 1.2s ease 0.1s;
+}
+
+.sophia-subscribe.is-inview .sophia-subscribe__ambient {
+  opacity: 1;
 }
 
 .sophia-subscribe__inner {
+  position: relative;
+  z-index: 1;
   max-width: 560px;
   margin: 0 auto;
   text-align: center;
 }
 
-/* Small centered label */
+.sophia-subscribe__label,
+.sophia-subscribe__body,
+.sophia-subscribe__link {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sophia-subscribe.is-inview .sophia-subscribe__label {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.08s;
+}
+
+.sophia-subscribe.is-inview .sophia-subscribe__body {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.22s;
+}
+
+.sophia-subscribe.is-inview .sophia-subscribe__link {
+  opacity: 0.88;
+  transform: translateY(0);
+  transition-delay: 0.36s;
+}
+
 .sophia-subscribe__label {
   font-size: 10px;
   letter-spacing: 3px;
@@ -25,14 +71,18 @@
 .sophia-subscribe__label::after {
   content: "";
   display: block;
-  width: 24px;
+  width: 0;
   height: 1px;
   background: var(--orange);
   margin: 10px auto 0;
-  opacity: 0.6;
+  opacity: 0.7;
+  transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.28s;
 }
 
-/* Large body copy */
+.sophia-subscribe.is-inview .sophia-subscribe__label::after {
+  width: 32px;
+}
+
 .sophia-subscribe__body {
   font-size: clamp(16px, 2.2vw, 22px);
   line-height: 1.75;
@@ -42,23 +92,25 @@
   letter-spacing: 0.2px;
 }
 
-/* "+ Subscribe" link */
 .sophia-subscribe__link {
+  display: inline-block;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--orange);
   text-decoration: none;
-  transition: color 0.25s ease, opacity 0.25s ease;
-  opacity: 0.78;
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sophia-subscribe__link:hover {
   opacity: 1;
   color: var(--orange);
+  transform: translateY(-2px);
 }
-
 
 @media (max-width: 768px) {
   .sophia-subscribe {
@@ -73,5 +125,29 @@
 
   .sophia-subscribe__inner {
     max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sophia-subscribe__ambient {
+    opacity: 1;
+    transition: none;
+  }
+
+  .sophia-subscribe__label,
+  .sophia-subscribe__body,
+  .sophia-subscribe__link {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .sophia-subscribe__label::after {
+    width: 32px;
+    transition: none;
+  }
+
+  .sophia-subscribe.is-inview .sophia-subscribe__link {
+    opacity: 0.88;
   }
 }

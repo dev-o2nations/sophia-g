@@ -1,341 +1,305 @@
-/* ─── Chapters — sticky scroll (title → launched chapter) ─── */
+/* ─── Chapters — sticky full-bleed + layered black overlay + scroll cinema ─── */
 
 .sophia-chapters {
   position: relative;
-  background: #f4f2ef;
-  color: var(--black);
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: #000;
+  color: var(--champagne);
+  --chapter-enter: 0;
+  --chapter-exit: 0;
+  --chapter-approach: 0;
+  --chapter-overlay: 0.55;
 }
 
-/* Scroll runway — drives sticky behaviour */
 .sophia-chapters__scroll {
   height: 220vh;
-  height: 220dvh;
   position: relative;
 }
 
-.sophia-chapters__sticky {
+.sophia-chapters__stage {
   position: sticky;
   top: 0;
   height: 100vh;
   height: 100dvh;
+  width: 100%;
   overflow: hidden;
-  isolation: isolate;
+  background: #000;
 }
 
-/* Stacked full-viewport layers */
-.sophia-chapters__layer {
+.sophia-chapters__video {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  will-change: transform, filter;
+  transform-origin: center center;
+  transform: scale(1.18);
+  filter: brightness(0.9) blur(6px);
+  pointer-events: none;
+  transition: filter 0.15s linear;
+}
+
+.sophia-chapters.is-entering .sophia-chapters__video {
+  transition: filter 0.35s ease;
+}
+
+/* Layered black overlays */
+.sophia-chapters__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.sophia-chapters__overlay--base {
+  background: #000;
+  opacity: var(--chapter-overlay);
+}
+
+.sophia-chapters__overlay--vignette {
+  background:
+    radial-gradient(ellipse 90% 80% at 50% 50%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.28) 70%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.28) 0%, transparent 30%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.32) 0%, transparent 34%);
+  opacity: calc(0.45 - var(--chapter-enter) * 0.15);
+}
+
+/* Pre-enter glow as section approaches viewport */
+.sophia-chapters__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 50%,
+    rgba(255, 104, 8, 0.12) 0%,
+    transparent 65%
+  );
+  opacity: calc(var(--chapter-approach) * (1 - var(--chapter-enter) * 0.6));
+  transition: opacity 0.2s ease;
+}
+
+.sophia-chapters__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Content locked to sticky stage */
+.sophia-chapters__content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: clamp(24px, 5vw, 48px);
-  box-sizing: border-box;
-  --layer-o: 0;
-  --layer-y: 28px;
-  --layer-s: 0.985;
-  opacity: var(--layer-o);
-  visibility: hidden;
-  transform: translateY(var(--layer-y)) scale(var(--layer-s));
-  transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 0.55s;
-  will-change: opacity, transform;
-}
-
-.sophia-chapters__layer.is-active {
-  visibility: visible;
-  transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s;
-}
-
-.sophia-chapters__layer.is-past {
-  z-index: 1;
   pointer-events: none;
 }
 
-.sophia-chapters__layer--title {
-  z-index: 1;
-  background: #f4f2ef;
-}
-
-.sophia-chapters__layer--title.is-past {
-  z-index: 1;
-}
-
-.sophia-chapters__layer--chapter {
-  z-index: 2;
-  background: #1a1218;
-}
-
-.sophia-chapters__layer--chapter.is-active {
-  z-index: 3;
-}
-
-/* ── Title layer ── */
-.sophia-chapters__title-inner {
+.sophia-chapters__content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  max-width: 20ch;
+  gap: clamp(14px, 2.2vw, 20px);
+  pointer-events: auto;
 }
 
-.sophia-chapters__eyebrow {
-  display: block;
+.sophia-chapters__badge {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.36em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--orange);
-  margin-bottom: clamp(20px, 3vw, 28px);
+  text-shadow: 0 0 28px rgba(255, 104, 8, 0.45);
 }
 
-.sophia-chapters__heading {
-  font-family: var(--font-heading);
-  font-size: clamp(40px, 7vw, 72px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.04;
-  letter-spacing: -0.02em;
-  color: var(--black);
-  margin: 0 0 clamp(20px, 3vw, 28px);
+.sophia-chapters.is-entering .sophia-chapters__badge {
+  animation: sophia-chapter-badge-pulse 2.4s ease-in-out infinite;
 }
 
-.sophia-chapters__heading em {
-  font-style: italic;
-  color: var(--cerise);
+@keyframes sophia-chapter-badge-pulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(255, 104, 8, 0.35); }
+  50%      { text-shadow: 0 0 36px rgba(255, 104, 8, 0.65); }
 }
 
-.sophia-chapters__tagline {
+.sophia-chapters__rule {
+  display: block;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(252, 233, 210, 0.5) 20%,
+    var(--orange) 50%,
+    rgba(252, 233, 210, 0.5) 80%,
+    transparent
+  );
+  transform-origin: center;
+}
+
+.sophia-chapters__title {
   font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(77, 61, 88, 0.45);
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
+  color: var(--champagne);
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
 }
 
-/* ── Launched chapter layer ── */
-.sophia-chapter-live {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  width: 100%;
-  max-width: 1200px;
-  height: 100%;
-  max-height: min(88vh, 720px);
-  align-items: stretch;
-  gap: 0;
+.sophia-chapters__title-line {
+  display: block;
+  overflow: hidden;
 }
 
-.sophia-chapter-live__visual {
+.sophia-chapters__title em {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.15em;
+  letter-spacing: 0.02em;
+  color: #f4d4e8;
+}
+
+.sophia-chapters__cta {
   position: relative;
   overflow: hidden;
-  background: #3d1828;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 48px;
+  margin-top: clamp(6px, 1vw, 10px);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  backdrop-filter: blur(22px) saturate(1.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 4px 18px rgba(0, 0, 0, 0.12);
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    -webkit-backdrop-filter 0.35s ease,
+    backdrop-filter 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-chapter-live__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-  display: block;
-  transform: scale(1.05);
-  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sophia-chapters__layer--chapter.is-active .sophia-chapter-live__img {
-  transform: scale(1);
-}
-
-.sophia-chapter-live__shade {
+.sophia-chapters__cta::before {
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(26, 18, 8, 0.15) 50%,
-    rgba(26, 18, 8, 0.55) 100%
+    135deg,
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(255, 255, 255, 0.12) 32%,
+    transparent 58%
   );
   pointer-events: none;
 }
 
-.sophia-chapter-live__copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(32px, 5vw, 56px) clamp(28px, 4vw, 48px);
-  background: #1a1218;
-  color: var(--champagne);
-}
-
-.sophia-chapter-live__badge {
-  font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--orange);
-  margin-bottom: clamp(16px, 2.5vw, 22px);
-}
-
-.sophia-chapter-live__name {
-  font-family: var(--font-heading);
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.08;
-  color: var(--champagne);
-  margin: 0 0 clamp(16px, 2vw, 20px);
-}
-
-.sophia-chapter-live__name em {
-  font-style: italic;
-  color: #f4a4c4;
-}
-
-.sophia-chapter-live__lead {
-  font-family: var(--font-serif);
-  font-size: clamp(15px, 1.5vw, 17px);
-  line-height: 1.68;
-  color: rgba(252, 233, 210, 0.78);
-  margin: 0 0 clamp(28px, 3.5vw, 36px);
-  max-width: 34ch;
-}
-
-.sophia-chapter-live__nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.sophia-chapter-live__nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 18px;
-  font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--champagne);
-  border: 1px solid rgba(252, 233, 210, 0.28);
-  background: rgba(252, 233, 210, 0.06);
-  transition:
-    color 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.sophia-chapter-live__nav a:hover {
-  background: var(--orange);
-  border-color: var(--orange);
+.sophia-chapters__cta:hover {
+  background: rgba(255, 255, 255, 0.18);
   color: #fff;
+  border-color: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(28px) saturate(1.45);
+  backdrop-filter: blur(28px) saturate(1.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    0 6px 24px rgba(0, 0, 0, 0.14);
+  transform: translateY(-2px);
 }
 
-.sophia-chapter-live__nav a:first-child {
-  background: var(--champagne);
-  border-color: var(--champagne);
-  color: var(--black);
-}
-
-.sophia-chapter-live__nav a:first-child:hover {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: #fff;
-}
-
-/* ── Reduced motion / mobile: no sticky trap ── */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .sophia-chapters__scroll {
-    height: auto;
+    height: 190vh;
   }
 
-  .sophia-chapters__sticky {
-    position: relative;
-    height: auto;
-    overflow: visible;
+  .sophia-chapters__title {
+    font-size: 15px;
+    letter-spacing: 0.1em;
   }
 
-  .sophia-chapters__layer {
-    position: relative;
-    inset: auto;
-    min-height: auto;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    pointer-events: auto;
-  }
-
-  .sophia-chapters__layer--title {
-    min-height: 50vh;
-    min-height: 50dvh;
-    padding: clamp(64px, 12vw, 96px) 24px;
-  }
-
-  .sophia-chapters__layer--chapter {
-    min-height: auto;
-    padding: 0;
-  }
-
-  .sophia-chapter-live {
-    grid-template-columns: 1fr;
-    max-height: none;
-  }
-
-  .sophia-chapter-live__visual {
-    aspect-ratio: 16 / 10;
-    min-height: 280px;
-  }
-
-  .sophia-chapter-live__shade {
-    background: linear-gradient(
-      180deg,
-      transparent 30%,
-      rgba(26, 18, 8, 0.5) 100%
-    );
-  }
-
-  .sophia-chapter-live__copy {
-    padding: 32px 24px 48px;
-  }
-
-  .sophia-chapter-live__nav {
-    flex-direction: column;
-  }
-
-  .sophia-chapter-live__nav a {
+  .sophia-chapters__cta {
     width: 100%;
-    justify-content: center;
+    max-width: 280px;
+    padding: 0 32px;
+  }
+
+  .sophia-chapters__video {
+    object-position: center 32%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sophia-chapters {
+    --chapter-overlay: 0.5;
+    --chapter-enter: 1;
+    --chapter-exit: 0;
+    --chapter-approach: 1;
+  }
+
+  .sophia-chapters.is-entering .sophia-chapters__badge {
+    animation: none;
+  }
+
   .sophia-chapters__scroll {
     height: auto;
   }
 
-  .sophia-chapters__sticky {
+  .sophia-chapters__stage {
     position: relative;
-    height: auto;
+    min-height: 90vh;
+    min-height: 90dvh;
   }
 
-  .sophia-chapters__layer {
-    position: relative;
-    --layer-o: 1;
-    --layer-y: 0px;
-    --layer-s: 1;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    transition: none;
+  .sophia-chapters__video {
+    transform: none !important;
+    filter: none !important;
   }
 
-  .sophia-chapter-live__img {
-    transform: none;
-    transition: none;
+  .sophia-chapters__badge,
+  .sophia-chapters__rule,
+  .sophia-chapters__title-line,
+  .sophia-chapters__cta {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sophia-chapters__rule {
+    width: 48px !important;
   }
 }

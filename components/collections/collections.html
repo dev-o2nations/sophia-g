@@ -1,40 +1,32 @@
 <section class="sophia-chapters" id="chapters">
   <div class="sophia-chapters__scroll">
-    <div class="sophia-chapters__sticky">
-      <!-- Layer 1 — section title (appears first) -->
-      <div class="sophia-chapters__layer sophia-chapters__layer--title is-active" data-chapter-layer="title">
-        <div class="sophia-chapters__title-inner">
-          <span class="sophia-chapters__eyebrow">The Chapters</span>
-          <h2 class="sophia-chapters__heading">One World,<br><em>lived at a time</em></h2>
-          <p class="sophia-chapters__tagline">Scroll to enter the current Chapter</p>
-        </div>
-      </div>
+    <div class="sophia-chapters__stage">
+      <video
+        class="sophia-chapters__video"
+        src="assets/videos/Video-1.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        aria-hidden="true"
+      ></video>
 
-      <!-- Layer 2 — launched chapter (sticks above title) -->
-      <div class="sophia-chapters__layer sophia-chapters__layer--chapter" data-chapter-layer="chapter">
-        <article class="sophia-chapter-live">
-          <div class="sophia-chapter-live__visual">
-            <img
-              src="assets/images/img3.jpg"
-              alt="Hannah Chapter — SOPHIA-G editorial"
-              class="sophia-chapter-live__img"
-              loading="lazy"
-            >
-            <div class="sophia-chapter-live__shade" aria-hidden="true"></div>
-          </div>
-          <div class="sophia-chapter-live__copy">
-            <span class="sophia-chapter-live__badge">Now open</span>
-            <h3 class="sophia-chapter-live__name">The Chapter — <em>Hannah</em></h3>
-            <p class="sophia-chapter-live__lead">
-              The current Chapter in full — story, the World, and the fan, each on its own page.
-            </p>
-            <nav class="sophia-chapter-live__nav" aria-label="Explore Chapter One">
-              <a href="#">Read the story</a>
-              <a href="#">The World</a>
-              <a href="#">The folding fan</a>
-            </nav>
-          </div>
-        </article>
+      <div class="sophia-chapters__overlay sophia-chapters__overlay--base" aria-hidden="true"></div>
+      <div class="sophia-chapters__overlay sophia-chapters__overlay--vignette" aria-hidden="true"></div>
+      <div class="sophia-chapters__grain" aria-hidden="true"></div>
+
+      <div class="sophia-chapters__content">
+        <div class="sophia-chapters__content-inner">
+          <span class="sophia-chapters__badge">Now open</span>
+          <span class="sophia-chapters__rule" aria-hidden="true"></span>
+          <h2 class="sophia-chapters__title">
+            <span class="sophia-chapters__title-line">The Chapter —</span>
+            <span class="sophia-chapters__title-line"><em>Hannah</em></span>
+          </h2>
+          <a href="#" class="sophia-chapters__cta">Explore</a>
+        </div>
       </div>
     </div>
   </div>

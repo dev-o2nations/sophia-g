@@ -10,16 +10,18 @@
   --black:     #4d3d58;
   --white:     #ffffff;
   --dark-soft: #635170;
-  /* Main footer (.sf): Princeton Orange — champagne / white type & rules */
-  --footer-surface: var(--orange);
-  --sf-text:        rgba(255, 255, 255, 0.96);
-  --sf-text-mid:    rgba(252, 233, 210, 0.88);
-  --sf-text-dim:    rgba(252, 233, 210, 0.70);
-  --sf-text-faint:  rgba(252, 233, 210, 0.52);
-  --sf-border:      rgba(255, 255, 255, 0.28);
-  --sf-border-soft: rgba(255, 255, 255, 0.20);
-  --sf-border-faint: rgba(255, 255, 255, 0.14);
-  --sf-option-bg:   #fff8f4;
+  /* Main footer (.sf): dark gray */
+  --footer-surface: #45404a;
+  --footer-surface-end: #3a3640;
+  --sf-text:        rgba(255, 255, 255, 0.94);
+  --sf-text-mid:    rgba(252, 233, 210, 0.78);
+  --sf-text-dim:    rgba(252, 233, 210, 0.55);
+  --sf-text-faint:  rgba(252, 233, 210, 0.4);
+  --sf-border:      rgba(255, 255, 255, 0.2);
+  --sf-border-soft: rgba(255, 255, 255, 0.12);
+  --sf-border-faint: rgba(255, 255, 255, 0.08);
+  --sf-option-bg:   rgba(255, 255, 255, 0.08);
+  --sf-accent:      var(--champagne);
 
   --font-serif: "Cormorant Garamond", serif;
   --font-sans:  "Jost", sans-serif;
