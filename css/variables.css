@@ -3,6 +3,7 @@
 /* ── Immutable brand palette ── */
 :root {
   --orange:    #FF6808;
+  --color-primary: var(--orange);
   --champagne: #FCE9D2;
   --cerise:    #DB2E6D;
   --lavender:  #FEC9FC;

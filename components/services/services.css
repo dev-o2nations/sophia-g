@@ -27,7 +27,7 @@
   line-height: var(--lh-section-heading);
   letter-spacing: var(--ls-section-heading);
   text-transform: uppercase;
-  color: var(--heading-color);
+  color: var(--color-primary);
   margin: 0;
 }
 
