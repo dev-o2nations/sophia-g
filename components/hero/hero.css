@@ -16,7 +16,7 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
-  background: var(--black);
+  background: #000000;
   color: var(--champagne);
   display: flex;
   align-items: flex-end;
@@ -45,16 +45,17 @@
   z-index: 1;
   pointer-events: none;
   background:
-    /* top bar — matches Gucci dark header blending */
-    linear-gradient(to bottom, rgba(77,61,88,0.52) 0%, transparent 18%),
+    /* top bar — dark header blend */
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.52) 0%, transparent 18%),
     /* bottom fade into next section */
-    linear-gradient(to top,    rgba(77,61,88,0.68) 0%, transparent 38%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.68) 0%, transparent 38%),
     /* orange warmth at bottom-left */
-    radial-gradient(ellipse at 10% 90%, rgba(255,104,8,0.22) 0%, transparent 52%),
+    radial-gradient(ellipse at 10% 90%, rgba(255, 104, 8, 0.22) 0%, transparent 52%),
     /* subtle edge vignette */
-    radial-gradient(ellipse at 50% 50%,
+    radial-gradient(
+      ellipse at 50% 50%,
       transparent 42%,
-      rgba(77,61,88,0.34) 100%
+      rgba(0, 0, 0, 0.34) 100%
     );
 }
 
