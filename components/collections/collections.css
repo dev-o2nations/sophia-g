@@ -176,8 +176,8 @@
 
 .sophia-chapters__title em {
   font-family: var(--font-heading);
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 600;
   font-size: 1.15em;
   letter-spacing: 0.02em;
   color: #f4d4e8;

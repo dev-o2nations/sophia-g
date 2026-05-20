@@ -8,25 +8,18 @@
   <meta http-equiv="Expires" content="0" />
   <title>SOPHIA-G — Born to celebrate all layers of you.</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
   <!-- Dynamic CSS loader — bypasses every layer of caching -->
   <script>
     (function () {
       var t = Date.now();
       var sheets = [
+        "css/proxima-nova.css",
+        "css/avenir-next.css",
         "css/variables.css",
         "css/animations.css",
         "components/header/header.css",
         "components/hero/hero.css",
         "components/welcome/welcome.css",
-        "components/collections/collections.css",
         "components/services/services.css",
         "components/subscribe/subscribe.css",
         "components/footer/footer.css",
@@ -54,7 +47,6 @@
   <!-- Light sections (white page band) -->
   <main class="sophia-page">
     <div data-component="welcome"></div>
-    <div data-component="collections"></div>
     <div data-component="services"></div>
     <div data-component="subscribe"></div>
   </main>

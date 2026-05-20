@@ -59,45 +59,33 @@
   transition-delay: 0.36s;
 }
 
+/* Same rhythm as .sophia-services__title */
 .sophia-subscribe__label {
-  font-size: 10px;
-  letter-spacing: 3px;
+  font-family: var(--font-heading);
+  font-size: var(--text-section-heading);
+  font-weight: var(--fw-section-heading);
+  line-height: var(--lh-section-heading);
+  letter-spacing: var(--ls-section-heading);
   text-transform: uppercase;
-  font-weight: 700;
-  color: var(--orange);
-  margin-bottom: 32px;
-}
-
-.sophia-subscribe__label::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 1px;
-  background: var(--orange);
-  margin: 10px auto 0;
-  opacity: 0.7;
-  transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.28s;
-}
-
-.sophia-subscribe.is-inview .sophia-subscribe__label::after {
-  width: 32px;
+  color: var(--heading-color);
+  margin: 0 0 56px;
 }
 
 .sophia-subscribe__body {
-  font-size: clamp(16px, 2.2vw, 22px);
-  line-height: 1.75;
+  font-size: var(--text-editorial);
+  line-height: var(--lh-editorial);
   color: rgba(26, 18, 8, 0.78);
   margin-bottom: 32px;
-  font-weight: 300;
-  letter-spacing: 0.2px;
+  font-weight: var(--fw-editorial);
+  letter-spacing: var(--ls-editorial);
 }
 
 .sophia-subscribe__link {
   display: inline-block;
-  font-size: 11px;
-  letter-spacing: 2px;
+  font-size: var(--text-cta-link);
+  letter-spacing: var(--ls-cta-link);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: var(--fw-cta-link);
   color: var(--orange);
   text-decoration: none;
   transition:
@@ -139,11 +127,6 @@
   .sophia-subscribe__link {
     opacity: 1;
     transform: none;
-    transition: none;
-  }
-
-  .sophia-subscribe__label::after {
-    width: 32px;
     transition: none;
   }
 

@@ -506,8 +506,8 @@
 }
 
 .sf__brand-tagline {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
+  font-style: normal;
   font-size: clamp(14px, 1.8vw, 17px);
   font-weight: 400;
   color: var(--sf-text-mid);

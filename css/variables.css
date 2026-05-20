@@ -23,19 +23,55 @@
   --sf-option-bg:   rgba(255, 255, 255, 0.08);
   --sf-accent:      var(--champagne);
 
-  --font-serif: "Cormorant Garamond", serif;
-  --font-sans:  "Jost", sans-serif;
-  --font-heading: var(--font-serif);
+  --font-avenir: "Avenir Next Pro", system-ui, -apple-system, sans-serif;
+  --font-proxima: "Proxima Nova", var(--font-avenir);
+  --font-sans: var(--font-avenir);
+  --font-serif: var(--font-avenir);
+  --font-heading: var(--font-proxima);
+  --font-welcome-lead: var(--font-heading);
+  --font-welcome-body: var(--font-avenir);
+
+  /* Headings on light backgrounds — true black (body/UI still use --black plum) */
+  --heading-color: #000000;
+
+  /* Typography — sizes & weights (light editorial + cards) */
+  --text-editorial: clamp(16px, 2.2vw, 22px);
+  --lh-editorial: 1.75;
+  --ls-editorial: 0.2px;
+  --fw-editorial: 300;
+
+  --text-section-heading: 1rem;
+  --lh-section-heading: 1.35;
+  --ls-section-heading: 0.14em;
+  --fw-section-heading: 600;
+
+  --text-card-heading: 1rem;
+  --fw-card-heading: 500;
+  --ls-card-heading: 0.1em;
+
+  --text-card-body: clamp(13px, 1.35vw, 15px);
+  --lh-card-body: 1.65;
+  --fw-card-body: 400;
+
+  --text-kicker: 10px;
+  --ls-kicker: 3px;
+  --fw-kicker: 600;
+
+  --text-cta-link: 11px;
+  --ls-cta-link: 2px;
+  --fw-cta-link: 600;
 }
 
-/* Display headings — brand guide: Cormorant Garamond italic */
+/* Display headings — Proxima Nova (see --font-heading) */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-heading);
-  font-style: italic;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--heading-color);
 }
 
 /* ── DARK theme (default) ── */
@@ -44,8 +80,8 @@ h4 {
   --bg-page:        #ffffff;          /* light sections — unified white */
   --bg-body:        var(--champagne);
   --bg-dark-section: #574066;          /* hero stage — plum */
-  --bg-header-scroll: rgba(77, 61, 88, 0.52);
-  --header-border-scroll: rgba(255,104,8,0.22);
+  --bg-header-scroll: rgba(0, 0, 0, 0.92);
+  --header-border-scroll: rgba(255, 255, 255, 0.08);
 
   --text-primary:   var(--black);
   --text-on-dark:   var(--champagne);
@@ -60,8 +96,8 @@ h4 {
   --bg-page:        #ffffff;
   --bg-body:        #f7f2eb;
   --bg-dark-section: #5c4868;          /* plum — no pure black */
-  --bg-header-scroll: rgba(255,250,245,0.88);
-  --header-border-scroll: rgba(255,104,8,0.20);
+  --bg-header-scroll: rgba(0, 0, 0, 0.92);
+  --header-border-scroll: rgba(255, 255, 255, 0.08);
 
   --text-primary:   #453a52;
   --text-on-dark:   var(--champagne);
@@ -82,20 +118,26 @@ h4 {
   backdrop-filter: blur(8px);
 }
 
-[data-theme="light"] .sophia-header.is-scrolled {
-  background: var(--bg-header-scroll);
-  border-bottom-color: var(--header-border-scroll);
-}
-
-[data-theme="light"] .sophia-header__link,
-[data-theme="light"] .sophia-header__icon-btn,
-[data-theme="light"] .sophia-header__menu-btn {
+[data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__link,
+[data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__icon-btn,
+[data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__menu-btn {
   color: var(--icon-color);
 }
 
-/* Light mode: invert logo inside the header so it shows dark on light bg */
-[data-theme="light"] .sophia-header__logo {
-  filter: brightness(0); /* dark logo on light header */
+/* Black scrolled bar: light text + white logo (same as dark theme header) */
+[data-theme="light"] .sophia-header.is-scrolled .sophia-header__link,
+[data-theme="light"] .sophia-header.is-scrolled .sophia-header__icon-btn,
+[data-theme="light"] .sophia-header.is-scrolled .sophia-header__menu-btn {
+  color: rgba(252, 233, 210, 0.82);
+}
+
+/* Light mode: dark logo only on the light (top) bar; white logo on black when scrolled */
+[data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__logo {
+  filter: brightness(0);
+}
+
+[data-theme="light"] .sophia-header.is-scrolled .sophia-header__logo {
+  filter: brightness(0) invert(1);
 }
 
 /* ── Light theme: page background ── */

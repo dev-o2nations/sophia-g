@@ -11,9 +11,9 @@
   height: 44px;
   border-radius: 0;
 
-  background: var(--champagne);
+  background: var(--orange);
   /* Border ramps up when revealed (smooth “square fills in”) */
-  border: 1px solid rgba(255, 104, 8, 0.22);
+  border: 1px solid rgba(255, 104, 8, 0.72);
   color: var(--black);
   cursor: pointer;
   box-shadow: none;
@@ -46,9 +46,10 @@
 }
 
 .sophia-scroll-top:hover {
-  background: var(--orange);
-  border-color: var(--orange);
+  background: #ff7a24;
+  border-color: #ff7a24;
   color: var(--black);
+  transform: translateY(-1px);
   box-shadow:
     0 0 0 1px rgba(255, 104, 8, 0.12),
     0 14px 42px rgba(255, 104, 8, 0.45);
@@ -63,6 +64,7 @@
   display: block;
   /* Slightly thinner stroke for a lighter feel */
   stroke-width: 1.5;
+  color: aliceblue;
 }
 
 @media (max-width: 768px) {

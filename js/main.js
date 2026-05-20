@@ -13,8 +13,6 @@ window.__sophiaInit = function () {
   initSectionReveal(".sophia-subscribe");
   initWelcomeParallax();
   initHeroEffects();
-  initChapterEffects();
-  initChapterVideo();
   initHeader();
   initMenu();
   initServicesDrag();
@@ -119,15 +117,15 @@ function initWelcomeReveal() {
 /* ─── Welcome: subtle parallax while scrolling through copy ─── */
 function initWelcomeParallax() {
   const section = document.querySelector(".sophia-welcome");
-  const main = section?.querySelector(".sophia-welcome__main");
-  if (!section || !main) return;
+  const inner = section?.querySelector(".sophia-welcome__inner");
+  if (!section || !inner) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reducedMotion) return;
 
   const onScroll = () => {
     if (!section.classList.contains("is-inview")) {
-      main.style.transform = "";
+      inner.style.transform = "";
       return;
     }
 
@@ -136,8 +134,8 @@ function initWelcomeParallax() {
     if (rect.bottom < 0 || rect.top > vh) return;
 
     const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height * 0.35)));
-    const drift = (progress - 0.5) * 14;
-    main.style.transform = `translateY(${drift}px)`;
+    const drift = (progress - 0.5) * 10;
+    inner.style.transform = `translateY(${drift}px)`;
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -423,21 +421,33 @@ function initMenu() {
   const closeBtn = document.getElementById("nav-close");
   const drawer   = document.getElementById("nav-drawer");
   const body     = document.body;
+  let restoreFocusEl = null;
 
   if (!openBtn || !drawer) return;
+  openBtn.setAttribute("aria-controls", "nav-drawer");
+  openBtn.setAttribute("aria-expanded", "false");
 
   function openDrawer() {
+    restoreFocusEl = document.activeElement;
     drawer.classList.add("is-open");
     drawer.setAttribute("aria-hidden", "false");
     body.style.overflow = "hidden"; // prevent background scroll
+    body.classList.add("sg-menu-open");
     openBtn.setAttribute("aria-expanded", "true");
+    if (closeBtn) closeBtn.focus();
   }
 
   function closeDrawer() {
     drawer.classList.remove("is-open");
     drawer.setAttribute("aria-hidden", "true");
     body.style.overflow = "";
+    body.classList.remove("sg-menu-open");
     openBtn.setAttribute("aria-expanded", "false");
+    if (restoreFocusEl instanceof HTMLElement) {
+      restoreFocusEl.focus();
+    } else {
+      openBtn.focus();
+    }
   }
 
   openBtn.addEventListener("click", openDrawer);
@@ -545,6 +555,50 @@ function initServiceVideoControls() {
     const media = btn.closest(".sophia-service-card__media");
     const video = media?.querySelector(".sophia-service-card__video");
     if (!video) return;
+    const maxSeconds = Number(video.dataset.maxSeconds);
+    const clipRangesAttr = video.dataset.clipRanges;
+    const clipRanges = (clipRangesAttr || "")
+      .split(",")
+      .map((part) => part.trim())
+      .map((part) => {
+        const [startRaw, endRaw] = part.split("-");
+        const start = Number(startRaw);
+        const end = Number(endRaw);
+        if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return null;
+        return { start, end };
+      })
+      .filter(Boolean);
+
+    let clipIndex = 0;
+
+    if (clipRanges.length) {
+      const firstStart = clipRanges[0].start;
+      const seekToClipStart = () => {
+        video.currentTime = firstStart;
+      };
+      video.addEventListener("loadedmetadata", seekToClipStart);
+      video.addEventListener("loadeddata", seekToClipStart, { once: true });
+
+      video.addEventListener("timeupdate", () => {
+        const current = clipRanges[clipIndex];
+        if (!current) return;
+        // Until metadata/seek applies, autoplay can sit at 0 — snap into the active clip
+        if (video.currentTime < current.start) {
+          video.currentTime = current.start;
+          return;
+        }
+        if (video.currentTime >= current.end) {
+          clipIndex = (clipIndex + 1) % clipRanges.length;
+          video.currentTime = clipRanges[clipIndex].start;
+        }
+      });
+    } else if (Number.isFinite(maxSeconds) && maxSeconds > 0) {
+      video.addEventListener("timeupdate", () => {
+        if (video.currentTime >= maxSeconds) {
+          video.currentTime = 0;
+        }
+      });
+    }
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();

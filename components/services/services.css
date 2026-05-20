@@ -1,33 +1,12 @@
-/* ─── Services — luxury editorial ─── */
+/* ─── Services — minimal editorial cards ─── */
 
 .sophia-services {
   position: relative;
   background: #ffffff;
   color: var(--black);
-  padding: clamp(80px, 11vw, 128px) clamp(24px, 7vw, 80px) clamp(96px, 12vw, 140px);
+  /* Top padding aligns with subscribe’s top band so welcome→here ≈ services→subscribe */
+  padding: clamp(64px, 8vw, 92px) clamp(24px, 7vw, 80px) clamp(96px, 12vw, 140px);
   overflow: hidden;
-}
-
-.sophia-services__ambient {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 40% at 100% 0%, rgba(255, 104, 8, 0.04) 0%, transparent 55%),
-    radial-gradient(ellipse 45% 35% at 0% 100%, rgba(219, 46, 109, 0.03) 0%, transparent 50%);
-}
-
-.sophia-services__rule {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: clamp(48px, 7vw, 72px);
-  background: linear-gradient(to bottom, transparent, rgba(255, 104, 8, 0.4));
-  pointer-events: none;
-  z-index: 1;
 }
 
 .sophia-services__header,
@@ -36,158 +15,42 @@
   z-index: 1;
 }
 
-/* ── Header — editorial grid ── */
 .sophia-services__header {
-  margin-bottom: clamp(52px, 7vw, 72px);
-}
-
-.sophia-services__header-grid {
-  display: grid;
-  grid-template-columns: minmax(72px, 120px) minmax(0, 1fr);
-  gap: clamp(28px, 5vw, 64px);
-  max-width: 980px;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.sophia-services__header-aside {
-  padding-top: 10px;
-}
-
-.sophia-services__eyebrow {
-  font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: rgba(77, 61, 88, 0.45);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  transform-origin: center;
-  white-space: nowrap;
+  margin-bottom: 56px;
+  text-align: center;
 }
 
 .sophia-services__title {
   font-family: var(--font-heading);
-  font-size: clamp(38px, 5.8vw, 68px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  color: var(--black);
-  margin: 0 0 clamp(20px, 3vw, 28px);
+  font-size: var(--text-section-heading);
+  font-weight: var(--fw-section-heading);
+  line-height: var(--lh-section-heading);
+  letter-spacing: var(--ls-section-heading);
+  text-transform: uppercase;
+  color: var(--heading-color);
+  margin: 0;
 }
 
-.sophia-services__title em {
-  font-style: italic;
-  color: var(--cerise);
-}
-
-.sophia-services__intro {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(16px, 1.75vw, 19px);
-  font-weight: 400;
-  line-height: 1.68;
-  color: rgba(77, 61, 88, 0.62);
-  max-width: 42ch;
-  margin: 0 0 clamp(28px, 4vw, 36px);
-}
-
-.sophia-services__header-rule {
-  width: min(120px, 28%);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    var(--orange),
-    rgba(255, 104, 8, 0.15)
-  );
-}
-
-/* ── Grid ── */
 .sophia-services__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(22px, 2.8vw, 36px);
+  gap: 40px;
   max-width: 1320px;
   margin: 0 auto;
 }
 
-/* ── Card ── */
+/* ── Card — borderless ── */
 .sophia-service-card {
-  position: relative;
-}
-
-.sophia-service-card__link {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
-  background: var(--black);
-  overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(77, 61, 88, 0.12),
-    0 20px 50px rgba(77, 61, 88, 0.14);
-  transition:
-    box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-service-card__link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(252, 233, 210, 0.08);
-  transition: box-shadow 0.5s ease;
-}
-
-.sophia-service-card__link:hover {
-  transform: translateY(-10px);
-  box-shadow:
-    0 0 0 1px rgba(255, 104, 8, 0.25),
-    0 32px 64px rgba(77, 61, 88, 0.2),
-    0 12px 32px rgba(255, 104, 8, 0.1);
-}
-
-.sophia-service-card__link:hover::before {
-  box-shadow: inset 0 0 0 1px rgba(252, 233, 210, 0.22);
-}
-
-.sophia-service-card--atelier .sophia-service-card__link:hover {
-  box-shadow:
-    0 0 0 1px rgba(219, 46, 109, 0.35),
-    0 32px 64px rgba(219, 46, 109, 0.16),
-    0 12px 32px rgba(254, 201, 252, 0.15);
-}
-
-/* Media */
 .sophia-service-card__media {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: #2a2030;
-}
-
-.sophia-service-card__media-shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 18, 8, 0.15) 0%,
-    rgba(26, 18, 8, 0) 38%,
-    rgba(26, 18, 8, 0.72) 100%
-  );
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-}
-
-.sophia-service-card__link:hover .sophia-service-card__media-shade {
-  opacity: 0.95;
+  background: var(--dark-soft);
 }
 
 .sophia-service-card__video {
@@ -195,102 +58,58 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(15%) brightness(0.94) contrast(1.03);
-  transform: scale(1.03);
-  transition:
-    filter 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: contrast(1.03);
+  transition: filter 0.7s ease;
 }
 
-.sophia-service-card__link:hover .sophia-service-card__video {
-  filter: grayscale(0%) brightness(1.04) contrast(1.05);
-  transform: scale(1.08);
+.sophia-service-card:hover .sophia-service-card__video {
+  filter: contrast(1.05);
 }
 
-.sophia-service-card__overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  padding: clamp(24px, 3.5vw, 32px) clamp(22px, 2.8vw, 28px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  pointer-events: none;
+/* Center card — full color at rest (no grayscale) */
+.sophia-service-card--color .sophia-service-card__video {
+  filter: contrast(1.03);
 }
 
-.sophia-service-card__tag {
-  font-family: var(--font-sans);
-  font-size: 8px;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: rgba(252, 233, 210, 0.7);
-}
-
-.sophia-service-card__name {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(36px, 4vw, 48px);
-  font-weight: 500;
-  line-height: 1;
-  color: var(--champagne);
-  letter-spacing: 0.01em;
-}
-
-.sophia-service-card__enter {
-  font-family: var(--font-sans);
-  font-size: 8px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--orange);
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sophia-service-card__link:hover .sophia-service-card__enter {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.sophia-service-card--atelier .sophia-service-card__enter {
-  color: var(--lavender);
+.sophia-service-card--color:hover .sophia-service-card__video {
+  filter: contrast(1.05);
 }
 
 .sophia-service-card__vp-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 4;
-  width: 30px;
-  height: 30px;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 1.25rem;
+  height: 1.25rem;
   padding: 0;
-  border: 1px solid rgba(252, 233, 210, 0.2);
-  background: rgba(77, 61, 88, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  border-radius: 0;
+  background: rgba(77, 61, 88, 0.18);
   color: var(--champagne);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow: inset 0 0 0 1px rgba(252, 233, 210, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.35s ease, background 0.25s ease;
-}
-
-.sophia-service-card:hover .sophia-service-card__vp-btn,
-.sophia-service-card__vp-btn:focus-visible {
-  opacity: 1;
+  opacity: 0.95;
+  transition:
+    opacity 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .sophia-service-card__vp-btn:hover {
-  background: rgba(77, 61, 88, 0.65);
+  background: rgba(77, 61, 88, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(252, 233, 210, 0.2);
+  opacity: 1;
+}
+
+.sophia-service-card__vp-btn svg {
+  width: calc(1.25rem * 8 / 24);
+  height: calc(1.25rem * 8 / 24);
 }
 
 .sophia-service-card__vp-btn .sophia-service-card__vp-icon--play {
@@ -309,130 +128,131 @@
   display: block;
 }
 
-/* Body — plum panel */
-.sophia-service-card__body {
-  padding: clamp(24px, 3vw, 32px) clamp(22px, 2.8vw, 28px) clamp(28px, 3.5vw, 36px);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: clamp(18px, 2.5vw, 24px);
-  background: var(--black);
-  border-top: 1px solid rgba(252, 233, 210, 0.08);
+/* ── Body below image ── */
+.sophia-service-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
-.sophia-service-card--atelier .sophia-service-card__body {
-  background: linear-gradient(165deg, #523a58 0%, var(--black) 55%);
-  border-top-color: rgba(219, 46, 109, 0.25);
+.sophia-service-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0 0;
+  gap: 14px;
+}
+
+.sophia-service-card__name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-card-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--ls-card-heading);
+  text-transform: uppercase;
+  color: var(--heading-color);
 }
 
 .sophia-service-card__desc {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(14px, 1.45vw, 16px);
-  font-weight: 400;
-  line-height: 1.7;
-  color: rgba(252, 233, 210, 0.72);
   margin: 0;
-  transition: color 0.4s ease;
-}
-
-.sophia-service-card__link:hover .sophia-service-card__desc {
-  color: rgba(252, 233, 210, 0.9);
-}
-
-.sophia-service-card__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  align-self: flex-start;
-  min-height: 42px;
-  padding: 0 22px;
-  margin-top: auto;
-  border: 1px solid rgba(252, 233, 210, 0.28);
+  max-width: 36ch;
   font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--champagne);
-  background: rgba(252, 233, 210, 0.06);
-  transition:
-    color 0.35s ease,
-    background 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    gap 0.35s ease;
+  font-size: var(--text-card-body);
+  font-weight: var(--fw-card-body);
+  line-height: var(--lh-card-body);
+  color: rgba(77, 61, 88, 0.75);
 }
 
-.sophia-service-card__cta-icon {
-  flex-shrink: 0;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+/* Action link — same rhythm as footer: resting line fades, accent sweeps L → R */
+.sophia-service-card__action {
+  position: relative;
+  display: inline-block;
+  margin-top: 10px;
+  padding-bottom: 4px;
+  font-family: var(--font-sans);
+  font-size: var(--text-cta-link);
+  font-weight: var(--fw-card-body);
+  letter-spacing: var(--ls-cta-link);
+  color: var(--heading-color);
+  text-decoration: none;
+  transition: color 0.22s ease;
 }
 
-.sophia-service-card__link:hover .sophia-service-card__cta {
-  color: #fff;
-  background: var(--orange);
-  border-color: var(--orange);
-  box-shadow: 0 8px 28px rgba(255, 104, 8, 0.4);
-  gap: 16px;
+.sophia-service-card__action::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  letter-spacing: 0;
+  height: 0.2px !important;
+  pointer-events: none;
+  z-index: 0;
+  background: currentColor;
+  opacity: 1;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.34s;
 }
 
-.sophia-service-card__link:hover .sophia-service-card__cta-icon {
-  transform: translateX(4px);
+.sophia-service-card__link:hover .sophia-service-card__action::before {
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 }
 
-.sophia-service-card__cta--primary {
-  border-color: rgba(219, 46, 109, 0.45);
-  color: rgba(254, 201, 252, 0.95);
-  background: rgba(219, 46, 109, 0.12);
+.sophia-service-card__action::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px !important;
+  pointer-events: none;
+  z-index: 1;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1) 0s;
 }
 
-.sophia-service-card__link:hover .sophia-service-card__cta--primary {
-  background: var(--cerise);
-  border-color: var(--cerise);
-  color: #fff;
-  box-shadow: 0 8px 28px rgba(219, 46, 109, 0.45);
+.sophia-service-card__link:hover .sophia-service-card__action {
+  color: var(--orange);
+}
+
+.sophia-service-card__link:hover .sophia-service-card__action::after {
+  transform: scaleX(1);
+  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
 }
 
 .sophia-service-card.is-inview .sophia-service-card__video {
-  animation: service-video-in 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: service-video-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.sophia-service-card--color.is-inview .sophia-service-card__video {
+  animation: service-video-in-color 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes service-video-in {
   from {
-    filter: grayscale(35%) brightness(0.9);
-    transform: scale(1.1);
+    filter: brightness(0.92) contrast(1.01);
   }
   to {
-    filter: grayscale(15%) brightness(0.94);
-    transform: scale(1.03);
+    filter: contrast(1.03);
   }
 }
 
-/* ── Responsive ── */
+@keyframes service-video-in-color {
+  from {
+    filter: brightness(0.92) contrast(1.01);
+  }
+  to {
+    filter: contrast(1.03);
+  }
+}
+
 @media (max-width: 1024px) {
   .sophia-services__grid {
-    gap: 20px;
-  }
-}
-
-@media (max-width: 900px) {
-  .sophia-services__header-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .sophia-services__header-aside {
-    padding-top: 0;
-    border-bottom: 1px solid rgba(77, 61, 88, 0.08);
-    padding-bottom: 16px;
-  }
-
-  .sophia-services__eyebrow {
-    writing-mode: horizontal-tb;
-    transform: none;
-    letter-spacing: 0.28em;
+    gap: 40px;
   }
 }
 
@@ -443,38 +263,41 @@
 
   .sophia-services__grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 40px;
   }
 
   .sophia-service-card__media {
     aspect-ratio: 5 / 6;
   }
-
-  .sophia-service-card__vp-btn {
-    opacity: 1;
-  }
-
-  .sophia-service-card__enter {
-    opacity: 1;
-    transform: none;
-  }
-
-  .sophia-service-card__cta {
-    width: 100%;
-    align-self: stretch;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sophia-service-card__link,
-  .sophia-service-card__video,
-  .sophia-service-card__enter,
-  .sophia-service-card__cta,
-  .sophia-service-card__cta-icon {
+  .sophia-service-card__video {
+    transition: none;
+  }
+
+  .sophia-service-card__action {
     transition-duration: 0.15s;
   }
 
-  .sophia-service-card.is-inview .sophia-service-card__video {
+  .sophia-service-card__action::before {
+    transition: opacity 0.15s ease;
+  }
+
+  .sophia-service-card__link:hover .sophia-service-card__action::before {
+    transition: opacity 0.15s ease;
+  }
+
+  .sophia-service-card__action::after {
+    transition: transform 0.15s ease;
+  }
+
+  .sophia-service-card__link:hover .sophia-service-card__action::after {
+    transition: transform 0.15s ease;
+  }
+
+  .sophia-service-card.is-inview .sophia-service-card__video,
+  .sophia-service-card--color.is-inview .sophia-service-card__video {
     animation: none;
   }
 }
