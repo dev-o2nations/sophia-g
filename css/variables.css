@@ -81,8 +81,11 @@ h4 {
   --bg-page:        #ffffff;          /* light sections — unified white */
   --bg-body:        var(--champagne);
   --bg-dark-section: #574066;          /* hero stage — plum */
-  --bg-header-scroll: rgba(0, 0, 0, 0.92);
-  --header-border-scroll: rgba(255, 255, 255, 0.08);
+  /* Liquid glass — blue-black tint, not solid black */
+  --bg-header-scroll: rgba(18, 22, 40, 0.38);
+  --header-border-scroll: rgba(120, 150, 210, 0.22);
+  --header-scroll-text: rgba(252, 233, 210, 0.94);
+  --header-scroll-text-muted: rgba(252, 233, 210, 0.78);
 
   --text-primary:   var(--black);
   --text-on-dark:   var(--champagne);
@@ -97,8 +100,11 @@ h4 {
   --bg-page:        #ffffff;
   --bg-body:        #f7f2eb;
   --bg-dark-section: #5c4868;          /* plum — no pure black */
-  --bg-header-scroll: rgba(0, 0, 0, 0.92);
-  --header-border-scroll: rgba(255, 255, 255, 0.08);
+  /* Liquid glass — blue-black tint, not solid black */
+  --bg-header-scroll: rgba(18, 22, 40, 0.38);
+  --header-border-scroll: rgba(120, 150, 210, 0.22);
+  --header-scroll-text: rgba(252, 233, 210, 0.94);
+  --header-scroll-text-muted: rgba(252, 233, 210, 0.78);
 
   --text-primary:   #453a52;
   --text-on-dark:   var(--champagne);
@@ -114,9 +120,10 @@ h4 {
 }
 
 [data-theme="light"] .sophia-header:not(.is-scrolled) {
-  background: rgba(255,250,245,0.92);
-  border-bottom-color: rgba(255,104,8,0.12);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.45);
+  border-bottom-color: rgba(120, 150, 210, 0.14);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
 }
 
 [data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__link,
@@ -125,11 +132,14 @@ h4 {
   color: var(--icon-color);
 }
 
-/* Black scrolled bar: light text + white logo (same as dark theme header) */
+[data-theme="light"] .sophia-header.is-scrolled {
+  color: var(--header-scroll-text);
+}
+
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__link,
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__icon-btn,
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__menu-btn {
-  color: rgba(252, 233, 210, 0.82);
+  color: var(--header-scroll-text-muted);
 }
 
 /* Light mode: full-color brand logo in all header states */
