@@ -62,7 +62,8 @@
 .sophia-welcome__text {
   margin: 0;
   padding: 0;
-  max-width: min(68ch, 100%);
+  max-width: min(56ch, 100%);
+  text-wrap: balance;
 }
 
 .sophia-welcome__line-reveal {
@@ -125,7 +126,7 @@
   font-family: var(--font-welcome-body);
   font-size: var(--text-editorial);
   font-weight: var(--fw-editorial);
-  line-height: var(--lh-editorial);
+  line-height: 1.55;
   letter-spacing: var(--ls-editorial);
   text-transform: capitalize;
   color: rgba(77, 61, 88, 0.78);
