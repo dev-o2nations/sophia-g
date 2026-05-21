@@ -11,9 +11,9 @@
   --black:     #4d3d58;
   --white:     #ffffff;
   --dark-soft: #635170;
-  /* Main footer (.sf): dark gray */
-  --footer-surface: #45404a;
-  --footer-surface-end: #3a3640;
+  /* Main footer (.sf): brand primary */
+  --footer-surface: var(--color-primary);
+  --footer-surface-end: #e35607;
   --sf-text:        rgba(255, 255, 255, 0.94);
   --sf-text-mid:    rgba(252, 233, 210, 0.78);
   --sf-text-dim:    rgba(252, 233, 210, 0.55);
@@ -24,16 +24,16 @@
   --sf-option-bg:   rgba(255, 255, 255, 0.08);
   --sf-accent:      var(--champagne);
 
-  --font-avenir: "Avenir Next Pro", system-ui, -apple-system, sans-serif;
-  --font-proxima: "Proxima Nova", var(--font-avenir);
-  --font-sans: var(--font-avenir);
-  --font-serif: var(--font-avenir);
-  --font-heading: var(--font-proxima);
+  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
+  --font-space: "Space Grotesk", var(--font-inter);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-inter);
+  --font-heading: var(--font-space);
   --font-welcome-lead: var(--font-heading);
-  --font-welcome-body: var(--font-avenir);
+  --font-welcome-body: var(--font-sans);
 
-  /* Headings on light backgrounds — true black (body/UI still use --black plum) */
-  --heading-color: #000000;
+  /* Headings on light backgrounds — brand primary */
+  --heading-color: var(--color-primary);
 
   /* Typography — sizes & weights (light editorial + cards) */
   --text-editorial: clamp(16px, 2.2vw, 22px);
@@ -63,7 +63,7 @@
   --fw-cta-link: 600;
 }
 
-/* Display headings — Proxima Nova (see --font-heading) */
+/* Display headings — Space Grotesk (see --font-heading) */
 h1,
 h2,
 h3,
@@ -194,7 +194,13 @@ video {
   display: block;
 }
 
-/* Page wrapper — light sections */
+/* Page wrapper — light sections (welcome, services, subscribe) */
 .sophia-page {
   background: var(--bg-page);
+}
+
+.sophia-page h2,
+.sophia-page h3,
+.sophia-page h4 {
+  color: var(--color-primary);
 }

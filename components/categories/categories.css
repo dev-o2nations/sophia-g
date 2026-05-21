@@ -122,7 +122,7 @@
   filter: brightness(1.04) saturate(1.05);
 }
 
-/* White band + thin luxury type (Jost via --font-sans) */
+/* White band + thin luxury type (Inter via --font-sans) */
 .sophia-category__label {
   flex: 0 0 auto;
   display: block;

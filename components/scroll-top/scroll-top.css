@@ -11,10 +11,9 @@
   height: 44px;
   border-radius: 0;
 
-  background: var(--orange);
-  /* Border ramps up when revealed (smooth “square fills in”) */
-  border: 1px solid rgba(255, 104, 8, 0.72);
-  color: var(--black);
+  background: #000000;
+  border: 1px solid #000000;
+  color: var(--white);
   cursor: pointer;
   box-shadow: none;
 
@@ -39,32 +38,31 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  border-color: rgba(255, 104, 8, 0.45);
+  border-color: #000000;
   box-shadow:
-    0 0 0 1px rgba(255, 104, 8, 0.07),
-    0 10px 32px rgba(255, 104, 8, 0.16);
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
 .sophia-scroll-top:hover {
-  background: #ff7a24;
-  border-color: #ff7a24;
-  color: var(--black);
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: var(--white);
   transform: translateY(-1px);
   box-shadow:
-    0 0 0 1px rgba(255, 104, 8, 0.12),
-    0 14px 42px rgba(255, 104, 8, 0.45);
+    0 0 0 1px rgba(0, 0, 0, 0.12),
+    0 14px 36px rgba(0, 0, 0, 0.35);
 }
 
 .sophia-scroll-top:focus-visible {
-  outline: 1px solid var(--orange);
+  outline: 1px solid #000000;
   outline-offset: 2px;
 }
 
 .sophia-scroll-top__icon {
   display: block;
-  /* Slightly thinner stroke for a lighter feel */
   stroke-width: 1.5;
-  color: aliceblue;
+  color: currentColor;
 }
 
 @media (max-width: 768px) {
@@ -83,6 +81,6 @@
   }
 
   .sophia-scroll-top.is-visible {
-    border-color: rgba(255, 104, 8, 0.45);
+    border-color: #000000;
   }
 }
