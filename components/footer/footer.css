@@ -571,9 +571,9 @@
 }
 
 .sf__wordmark-img {
-  width: min(42vw, 280px);
+  width: min(48vw, 340px);
   height: auto;
-  max-height: min(7.5vw, 64px);
+  max-height: min(9vw, 80px);
   display: block;
   opacity: 0.92;
   object-fit: contain;
@@ -705,8 +705,8 @@
   }
 
   .sf__wordmark-img {
-    width: min(62vw, 240px);
-    max-height: min(11vw, 58px);
+    width: min(68vw, 280px);
+    max-height: min(12vw, 72px);
     opacity: 0.9;
   }
 
