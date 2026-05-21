@@ -376,17 +376,32 @@ function initScrollTop() {
   const btn = document.getElementById("sophia-scroll-top");
   if (!btn) return;
 
-  const threshold = 380;
+  const threshold = 320;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let ticking = false;
+
+  const updateVisibility = () => {
+    const show = window.scrollY > threshold;
+    btn.classList.toggle("is-visible", show);
+    btn.setAttribute("aria-hidden", show ? "false" : "true");
+    btn.tabIndex = show ? 0 : -1;
+    ticking = false;
+  };
 
   const onScroll = () => {
-    btn.classList.toggle("is-visible", window.scrollY > threshold);
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateVisibility);
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  updateVisibility();
 
   btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
   });
 }
 

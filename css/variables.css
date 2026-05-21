@@ -88,7 +88,7 @@ h4 {
   --text-on-dark:   var(--champagne);
   --text-muted-dark: rgba(252,233,210,0.62);
 
-  --logo-filter:    brightness(0) invert(1); /* white on dark bg */
+  --logo-filter:    none;
   --icon-color:     rgba(252,233,210,0.82);
 }
 
@@ -104,7 +104,7 @@ h4 {
   --text-on-dark:   var(--champagne);
   --text-muted-dark: rgba(252,233,210,0.62);
 
-  --logo-filter:    brightness(0) invert(1); /* still white inside dark sections */
+  --logo-filter:    none;
   --icon-color:     rgba(26,18,8,0.78);
 }
 
@@ -132,13 +132,10 @@ h4 {
   color: rgba(252, 233, 210, 0.82);
 }
 
-/* Light mode: dark logo only on the light (top) bar; white logo on black when scrolled */
-[data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__logo {
-  filter: brightness(0);
-}
-
+/* Light mode: full-color brand logo in all header states */
+[data-theme="light"] .sophia-header:not(.is-scrolled) .sophia-header__logo,
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__logo {
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 /* ── Light theme: page background ── */
