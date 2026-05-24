@@ -17,7 +17,6 @@ window.__sophiaInit = function () {
   initMenu();
   initServicesDrag();
   initScrollTop();
-  initWordmarkStretch();
   initHeroScrollVideo();
   initServiceVideoControls();
   initServiceCardsInView();
@@ -403,31 +402,6 @@ function initScrollTop() {
       behavior: reducedMotion ? "auto" : "smooth",
     });
   });
-}
-
-/* ─── Wordmark Scroll Reveal (scale + fade, no clip) ─── */
-function initWordmarkStretch() {
-  const img = document.querySelector(".sf__wordmark-img");
-  if (!img) return;
-
-  function update() {
-    const rect     = img.getBoundingClientRect();
-    const vh       = window.innerHeight;
-
-    // 0 = just entered viewport bottom, 1 = fully visible
-    const progress = Math.min(1, Math.max(0,
-      (vh - rect.top) / (vh * 0.65)
-    ));
-
-    const scale  = 0.94 + (progress * 0.06);
-    const transY = (1 - progress) * 12;
-
-    img.style.transform = `scale(${scale.toFixed(3)}) translateY(${transY.toFixed(1)}px)`;
-    img.style.opacity   = String(0.88 + progress * 0.12);
-  }
-
-  window.addEventListener("scroll", update, { passive: true });
-  update();
 }
 
 /* ─── Nav Drawer ─── */
