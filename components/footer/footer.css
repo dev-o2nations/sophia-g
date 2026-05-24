@@ -4,15 +4,7 @@
   position: relative;
   display: block;
   width: 100%;
-  --sf-text: rgba(255, 255, 255, 0.96);
-  --sf-text-mid: rgba(255, 255, 255, 0.88);
-  --sf-text-dim: rgba(255, 255, 255, 0.72);
-  --sf-text-faint: rgba(255, 255, 255, 0.55);
-  --sf-border: rgba(255, 255, 255, 0.4);
-  --sf-border-soft: rgba(255, 255, 255, 0.28);
-  --sf-border-faint: rgba(255, 255, 255, 0.16);
-  --sf-option-bg: rgba(0, 0, 0, 0.14);
-  --sf-accent: var(--champagne);
+  /* Text tokens: --sf-text*, --sf-border*, --sf-accent from variables.css */
   background: linear-gradient(165deg, var(--footer-surface) 0%, var(--footer-surface-end) 100%);
   color: var(--sf-text);
   font-family: var(--font-sans);
@@ -119,7 +111,7 @@
   height: 1px;
   pointer-events: none;
   z-index: 0;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(252, 233, 210, 0.45);
   opacity: 1;
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.34s;
 }

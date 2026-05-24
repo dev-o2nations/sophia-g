@@ -14,14 +14,14 @@
   /* Main footer (.sf): brand primary */
   --footer-surface: var(--color-primary);
   --footer-surface-end: #e35607;
-  --sf-text:        rgba(255, 255, 255, 0.94);
-  --sf-text-mid:    rgba(252, 233, 210, 0.78);
-  --sf-text-dim:    rgba(252, 233, 210, 0.55);
-  --sf-text-faint:  rgba(252, 233, 210, 0.4);
-  --sf-border:      rgba(255, 255, 255, 0.2);
-  --sf-border-soft: rgba(255, 255, 255, 0.12);
-  --sf-border-faint: rgba(255, 255, 255, 0.08);
-  --sf-option-bg:   rgba(255, 255, 255, 0.08);
+  --sf-text:        var(--champagne);
+  --sf-text-mid:    rgba(252, 233, 210, 0.88);
+  --sf-text-dim:    rgba(252, 233, 210, 0.68);
+  --sf-text-faint:  rgba(252, 233, 210, 0.5);
+  --sf-border:      rgba(252, 233, 210, 0.38);
+  --sf-border-soft: rgba(252, 233, 210, 0.26);
+  --sf-border-faint: rgba(252, 233, 210, 0.16);
+  --sf-option-bg:   rgba(0, 0, 0, 0.14);
   --sf-accent:      var(--champagne);
 
   --font-inter: "Inter", system-ui, -apple-system, sans-serif;
