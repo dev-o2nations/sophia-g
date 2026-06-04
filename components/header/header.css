@@ -52,7 +52,11 @@
 
 .sophia-header.is-scrolled .sophia-header__icon-btn:hover,
 .sophia-header.is-scrolled .sophia-header__menu-btn:hover {
-  color: var(--icon-highlight);
+  color: var(--white);
+}
+
+.sophia-header.is-scrolled .sophia-header__menu-btn:hover svg path {
+  fill: var(--white);
 }
 
 .sophia-header.is-scrolled .sophia-header__logo {
