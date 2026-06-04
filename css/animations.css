@@ -38,20 +38,19 @@
   }
 }
 
-/* ── Light → Dark section bridge (reusable) ── */
+/* ── Section bridges — flat champagne (no gradients) ── */
 .sophia-fade-to-dark {
   width: 100%;
   height: 100px;
-  background: linear-gradient(to bottom, #ffffff 0%, var(--black) 100%);
+  background: var(--champagne);
   pointer-events: none;
   display: block;
 }
 
-/* ── Dark → Light section bridge ── */
 .sophia-fade-to-light {
   width: 100%;
   height: 100px;
-  background: linear-gradient(to bottom, var(--black) 0%, #ffffff 100%);
+  background: var(--champagne);
   pointer-events: none;
   display: block;
 }

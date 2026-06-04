@@ -6,7 +6,13 @@
   --color-primary: var(--orange);
   --champagne: #FCE9D2;
   --cerise:    #DB2E6D;
+  --icon-highlight: var(--cerise);
   --lavender:  #FEC9FC;
+  /* Sticky header — glassy Princeton Orange */
+  --header-glass-orange-start: rgba(255, 104, 8, 0.78);
+  --header-glass-orange-end:   rgba(255, 104, 8, 0.58);
+  --header-glass-orange-shine: rgba(252, 233, 210, 0.28);
+  --header-glass-orange-shadow: rgba(200, 72, 6, 0.28);
   /* Brand “black” — deep plum/violet (no #000 / #050505) */
   --black:     #4d3d58;
   --white:     #ffffff;
@@ -82,14 +88,12 @@ h4 {
 /* ── DARK theme (default) ── */
 [data-theme="dark"],
 :root {
-  --bg-page:        #ffffff;          /* light sections — unified white */
+  --bg-page:        var(--champagne); /* flat — no gradients */
   --bg-body:        var(--champagne);
   --bg-dark-section: #574066;          /* hero stage — plum */
-  /* Liquid glass — blue-black tint, not solid black */
-  --bg-header-scroll: rgba(18, 22, 40, 0.38);
-  --header-border-scroll: rgba(120, 150, 210, 0.22);
-  --header-scroll-text: rgba(252, 233, 210, 0.94);
-  --header-scroll-text-muted: rgba(252, 233, 210, 0.78);
+  --header-border-scroll: rgba(252, 233, 210, 0.32);
+  --header-scroll-text: rgba(252, 233, 210, 0.96);
+  --header-scroll-text-muted: rgba(252, 233, 210, 0.82);
 
   --text-primary:   var(--black);
   --text-on-dark:   var(--champagne);
@@ -101,14 +105,12 @@ h4 {
 
 /* ── LIGHT theme ── */
 [data-theme="light"] {
-  --bg-page:        #ffffff;
-  --bg-body:        #f7f2eb;
+  --bg-page:        var(--champagne);
+  --bg-body:        var(--champagne);
   --bg-dark-section: #5c4868;          /* plum — no pure black */
-  /* Liquid glass — blue-black tint, not solid black */
-  --bg-header-scroll: rgba(18, 22, 40, 0.38);
-  --header-border-scroll: rgba(120, 150, 210, 0.22);
-  --header-scroll-text: rgba(252, 233, 210, 0.94);
-  --header-scroll-text-muted: rgba(252, 233, 210, 0.78);
+  --header-border-scroll: rgba(252, 233, 210, 0.32);
+  --header-scroll-text: rgba(252, 233, 210, 0.96);
+  --header-scroll-text-muted: rgba(252, 233, 210, 0.82);
 
   --text-primary:   #453a52;
   --text-on-dark:   var(--champagne);

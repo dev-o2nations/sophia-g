@@ -2,7 +2,7 @@
 
 .sophia-welcome {
   position: relative;
-  background: #ffffff;
+  background: var(--champagne);
   /* Tighter bottom so gap to SOPHIA-G WORLD matches services → subscribe rhythm */
   padding: clamp(96px, 14vw, 160px) clamp(24px, 6vw, 64px) clamp(56px, 7vw, 96px);
   overflow: hidden;

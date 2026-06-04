@@ -108,33 +108,109 @@
   transform: translateY(-2px);
 }
 
-/* ── Scroll hint ── */
+/* ── Scroll hint — luxury editorial rail ── */
 .sophia-hero__scroll-hint {
   position: absolute;
-  bottom: 20px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 14px;
+  text-decoration: none;
+  color: rgba(252, 233, 210, 0.68);
+  transition: color 0.45s ease;
 }
 
-.sophia-hero__scroll-hint span {
-  display: block;
+.sophia-hero__scroll-hint:hover,
+.sophia-hero__scroll-hint:focus-visible {
+  color: var(--champagne);
+}
+
+.sophia-hero__scroll-hint:focus-visible {
+  outline: 1px solid rgba(252, 233, 210, 0.45);
+  outline-offset: 8px;
+}
+
+.sophia-hero__scroll-word {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding-left: 0.38em;
+}
+
+.sophia-hero__scroll-rail {
+  position: relative;
   width: 1px;
-  height: 7px;
-  background: rgba(252, 233, 210, 0.45);
-  animation: sophia-scroll-pulse 1.9s ease-in-out infinite;
+  height: 52px;
 }
 
-.sophia-hero__scroll-hint span:nth-child(2) { animation-delay: 0.22s; }
-.sophia-hero__scroll-hint span:nth-child(3) { animation-delay: 0.44s; }
+.sophia-hero__scroll-rail-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(252, 233, 210, 0.18) 12%,
+    rgba(252, 233, 210, 0.42) 50%,
+    rgba(252, 233, 210, 0.18) 88%,
+    transparent 100%
+  );
+}
 
-@keyframes sophia-scroll-pulse {
-  0%, 100% { opacity: 0.2; transform: scaleY(0.6); }
-  50%       { opacity: 1;   transform: scaleY(1.5); }
+.sophia-hero__scroll-rail-gem {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  background: var(--champagne);
+  box-shadow:
+    0 0 0 1px rgba(252, 233, 210, 0.35),
+    0 0 12px rgba(252, 233, 210, 0.28);
+  transform: rotate(45deg);
+  transform-origin: center center;
+  animation: sophia-scroll-luxury 2.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.sophia-hero__scroll-hint:hover .sophia-hero__scroll-rail-gem,
+.sophia-hero__scroll-hint:focus-visible .sophia-hero__scroll-rail-gem {
+  background: var(--cerise);
+  box-shadow:
+    0 0 0 1px rgba(219, 46, 109, 0.4),
+    0 0 14px rgba(219, 46, 109, 0.35);
+}
+
+@keyframes sophia-scroll-luxury {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  72% {
+    top: calc(100% - 4px);
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 4px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sophia-hero__scroll-rail-gem {
+    animation: none;
+    top: calc(50% - 2px);
+    opacity: 0.85;
+  }
 }
 
 /* ── Shared .sophia-btn (used in other sections) ── */
@@ -172,6 +248,15 @@
 
   .sophia-hero__content {
     padding-bottom: 44px;
+  }
+
+  .sophia-hero__scroll-hint {
+    bottom: max(20px, env(safe-area-inset-bottom, 0px));
+    gap: 11px;
+  }
+
+  .sophia-hero__scroll-rail {
+    height: 40px;
   }
 
   .sophia-hero__video {

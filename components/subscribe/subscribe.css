@@ -2,25 +2,14 @@
 
 .sophia-subscribe {
   position: relative;
-  background: #ffffff;
+  background: var(--champagne);
   padding: 92px 20px 100px;
   border-bottom: 1px solid rgba(26, 18, 8, 0.07);
   overflow: hidden;
 }
 
 .sophia-subscribe__ambient {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255, 104, 8, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(254, 201, 252, 0.08) 0%, transparent 55%);
-  opacity: 0;
-  transition: opacity 1.2s ease 0.1s;
-}
-
-.sophia-subscribe.is-inview .sophia-subscribe__ambient {
-  opacity: 1;
+  display: none;
 }
 
 .sophia-subscribe__inner {
@@ -120,11 +109,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sophia-subscribe__ambient {
-    opacity: 1;
-    transition: none;
-  }
-
   .sophia-subscribe__label,
   .sophia-subscribe__body,
   .sophia-subscribe__link {
