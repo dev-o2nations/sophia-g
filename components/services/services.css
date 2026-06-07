@@ -24,9 +24,10 @@
   font-family: var(--font-heading);
   font-size: var(--text-section-heading);
   font-weight: var(--fw-section-heading);
+  font-style: normal;
   line-height: var(--lh-section-heading);
   letter-spacing: var(--ls-section-heading);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--color-primary);
   margin: 0;
 }
@@ -149,10 +150,11 @@
   margin: 0;
   font-family: var(--font-heading);
   font-size: var(--text-card-heading);
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: var(--fw-card-heading);
+  font-style: normal;
+  line-height: 1.3;
   letter-spacing: var(--ls-card-heading);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--heading-color);
 }
 

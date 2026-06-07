@@ -53,9 +53,10 @@
   font-family: var(--font-heading);
   font-size: var(--text-section-heading);
   font-weight: var(--fw-section-heading);
+  font-style: normal;
   line-height: var(--lh-section-heading);
   letter-spacing: var(--ls-section-heading);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--color-primary);
   margin: 0 0 56px;
 }

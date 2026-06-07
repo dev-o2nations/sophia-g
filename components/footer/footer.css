@@ -46,8 +46,9 @@
 
 /* ── Column heading ── */
 .sf__heading {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: 9px;
+  font-style: normal;
   letter-spacing: 2.8px;
   text-transform: uppercase;
   font-weight: 700;

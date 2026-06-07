@@ -108,15 +108,16 @@
   transition-delay: 0s;
 }
 
-/* Small caps label — Gucci editorial */
+/* Display lead — Cormorant Garamond + italic highlight */
 .sophia-welcome__line-part--lead {
   display: block;
   font-family: var(--font-welcome-lead);
   font-size: var(--text-section-heading);
   font-weight: var(--fw-section-heading);
+  font-style: normal;
   line-height: var(--lh-section-heading);
   letter-spacing: var(--ls-section-heading);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--color-primary);
 }
 
@@ -156,8 +157,7 @@
   }
 
   .sophia-welcome__line-part--lead {
-    font-size: 0.9375rem;
-    letter-spacing: 0.12em;
+    font-size: clamp(1.375rem, 5vw, 1.75rem);
   }
 }
 
