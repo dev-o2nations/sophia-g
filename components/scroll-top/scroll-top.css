@@ -1,4 +1,4 @@
-/* ─── Scroll to top — minimal editorial control ─── */
+/* ─── Scroll to top — luxury glass + scroll progress ring ─── */
 
 .sophia-scroll-top {
   position: fixed;
@@ -6,14 +6,11 @@
   bottom: max(24px, env(safe-area-inset-bottom, 0px));
   z-index: 260;
 
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
   padding: 0;
-
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--white);
+  border: none;
+  background: transparent;
   cursor: pointer;
 
   display: flex;
@@ -23,102 +20,178 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(16px) scale(0.92);
-  box-shadow: none;
+  transform: translateY(14px);
 
   transition:
-    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    color 0.25s ease;
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sophia-scroll-top.is-visible {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.06),
-    0 8px 24px rgba(0, 0, 0, 0.22),
-    0 2px 6px rgba(0, 0, 0, 0.12);
+  transform: translateY(0);
 }
 
-.sophia-scroll-top:hover {
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.22);
-  transform: translateY(-3px) scale(1);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.1),
-    0 14px 32px rgba(0, 0, 0, 0.32),
-    0 4px 10px rgba(0, 0, 0, 0.16);
+.sophia-scroll-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
 }
 
-.sophia-scroll-top:active {
-  transform: translateY(-1px) scale(0.98);
+.sophia-scroll-top__ring-track,
+.sophia-scroll-top__ring-progress {
+  fill: none;
+  stroke-width: 1.35;
+}
+
+.sophia-scroll-top__ring-track {
+  stroke: rgba(252, 233, 210, 0.22);
+}
+
+.sophia-scroll-top__ring-progress {
+  stroke: var(--orange);
+  stroke-linecap: round;
+  stroke-dasharray: 150.8;
+  stroke-dashoffset: 150.8;
+}
+
+.sophia-scroll-top__inner {
+  position: relative;
+  z-index: 1;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(77, 61, 88, 0.34);
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  backdrop-filter: blur(16px) saturate(1.25);
+  color: var(--champagne);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.08),
-    0 6px 16px rgba(0, 0, 0, 0.24);
-  transition-duration: 0.12s;
+    inset 0 1px 0 rgba(252, 233, 210, 0.42),
+    0 4px 18px rgba(77, 61, 88, 0.18);
+
+  transition:
+    background 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sophia-scroll-top:hover .sophia-scroll-top__inner {
+  background: var(--champagne);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 10px 28px rgba(77, 61, 88, 0.24);
+}
+
+.sophia-scroll-top:active .sophia-scroll-top__inner {
+  background: rgba(252, 233, 210, 0.88);
+  transform: translateY(0);
+  transition-duration: 0.15s;
 }
 
 .sophia-scroll-top:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
+  outline: none;
 }
 
-.sophia-scroll-top.is-visible:hover .sophia-scroll-top__icon {
-  transform: translateY(-2px);
+.sophia-scroll-top:focus-visible .sophia-scroll-top__inner {
+  outline: 1px solid var(--champagne);
+  outline-offset: 2px;
+}
+
+.sophia-scroll-top:hover .sophia-scroll-top__ring-progress {
+  stroke: var(--orange);
+}
+
+/* Over orange footer */
+.sophia-scroll-top.is-on-orange .sophia-scroll-top__ring-track {
+  stroke: rgba(252, 233, 210, 0.28);
+}
+
+.sophia-scroll-top.is-on-orange .sophia-scroll-top__ring-progress {
+  stroke: var(--champagne);
+}
+
+.sophia-scroll-top.is-on-orange .sophia-scroll-top__inner {
+  background: rgba(77, 61, 88, 0.38);
+  color: var(--champagne);
+  box-shadow:
+    inset 0 1px 0 rgba(252, 233, 210, 0.48),
+    0 6px 22px rgba(0, 0, 0, 0.16);
+}
+
+.sophia-scroll-top.is-on-orange:hover .sophia-scroll-top__inner,
+.sophia-scroll-top.is-on-orange:focus-visible .sophia-scroll-top__inner {
+  background: var(--white);
+  color: var(--orange);
+  box-shadow:
+    inset 0 1px 0 rgba(252, 233, 210, 0.7),
+    0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sophia-scroll-top.is-on-orange:hover .sophia-scroll-top__ring-progress,
+.sophia-scroll-top.is-on-orange:focus-visible .sophia-scroll-top__ring-progress {
+  stroke: var(--white);
 }
 
 .sophia-scroll-top__icon {
   display: block;
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.75;
-  color: currentColor;
-  transform: translateY(0);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(1px);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sophia-scroll-top.is-visible:hover .sophia-scroll-top__icon,
+.sophia-scroll-top.is-visible:focus-visible .sophia-scroll-top__icon {
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
   .sophia-scroll-top {
     right: max(16px, env(safe-area-inset-right, 0px));
     bottom: max(18px, env(safe-area-inset-bottom, 0px));
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
   }
 
-  .sophia-scroll-top__icon {
-    width: 18px;
-    height: 18px;
+  .sophia-scroll-top__inner {
+    width: 42px;
+    height: 42px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sophia-scroll-top,
+  .sophia-scroll-top__inner,
   .sophia-scroll-top__icon {
     transition-duration: 0.01ms;
     transition-delay: 0ms;
   }
 
-  .sophia-scroll-top {
-    transform: none;
-  }
-
-  .sophia-scroll-top.is-visible {
-    transform: none;
-  }
-
+  .sophia-scroll-top,
+  .sophia-scroll-top.is-visible,
   .sophia-scroll-top:hover,
   .sophia-scroll-top:active {
     transform: none;
   }
 
-  .sophia-scroll-top.is-visible:hover .sophia-scroll-top__icon {
+  .sophia-scroll-top:hover .sophia-scroll-top__inner,
+  .sophia-scroll-top:active .sophia-scroll-top__inner {
     transform: none;
+  }
+
+  .sophia-scroll-top.is-visible:hover .sophia-scroll-top__icon,
+  .sophia-scroll-top.is-visible:focus-visible .sophia-scroll-top__icon {
+    transform: translateY(1px);
   }
 }

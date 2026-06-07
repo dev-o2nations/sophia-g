@@ -5,8 +5,14 @@
   aria-label="Scroll to top"
   title="Back to top"
 >
-  <svg class="sophia-scroll-top__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M12 19V5"/>
-    <path d="M7 10l5-5 5 5"/>
+  <svg class="sophia-scroll-top__ring" viewBox="0 0 52 52" aria-hidden="true">
+    <circle class="sophia-scroll-top__ring-track" cx="26" cy="26" r="24" />
+    <circle class="sophia-scroll-top__ring-progress" cx="26" cy="26" r="24" />
   </svg>
+  <span class="sophia-scroll-top__inner">
+    <svg class="sophia-scroll-top__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 18V8" stroke-width="1.15"/>
+      <path d="M8 12l4-4 4 4" stroke-width="1.15"/>
+    </svg>
+  </span>
 </button>

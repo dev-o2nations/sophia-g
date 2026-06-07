@@ -375,15 +375,39 @@ function initScrollTop() {
   const btn = document.getElementById("sophia-scroll-top");
   if (!btn) return;
 
+  const footer = document.querySelector(".sf");
+  const progressRing = btn.querySelector(".sophia-scroll-top__ring-progress");
   const threshold = 320;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let ticking = false;
+  let ringLength = 0;
+
+  const setRingMetrics = () => {
+    if (!progressRing) return;
+    const radius = progressRing.r.baseVal.value;
+    ringLength = 2 * Math.PI * radius;
+    progressRing.style.strokeDasharray = `${ringLength}`;
+  };
 
   const updateVisibility = () => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollHeight)) : 0;
     const show = window.scrollY > threshold;
+
     btn.classList.toggle("is-visible", show);
     btn.setAttribute("aria-hidden", show ? "false" : "true");
     btn.tabIndex = show ? 0 : -1;
+
+    if (progressRing && ringLength) {
+      progressRing.style.strokeDashoffset = `${ringLength * (1 - progress)}`;
+    }
+
+    if (footer) {
+      const footerTop = footer.getBoundingClientRect().top;
+      const onOrange = footerTop < window.innerHeight - 56;
+      btn.classList.toggle("is-on-orange", onOrange);
+    }
+
     ticking = false;
   };
 
@@ -393,6 +417,8 @@ function initScrollTop() {
     requestAnimationFrame(updateVisibility);
   };
 
+  setRingMetrics();
+  window.addEventListener("resize", setRingMetrics);
   window.addEventListener("scroll", onScroll, { passive: true });
   updateVisibility();
 
