@@ -118,7 +118,8 @@
   line-height: var(--lh-section-heading);
   letter-spacing: var(--ls-section-heading);
   text-transform: none;
-  color: var(--color-primary);
+  color: var(--heading-color);
+  transition: color 0.3s ease;
 }
 
 /* Body — same scale as subscribe section body */

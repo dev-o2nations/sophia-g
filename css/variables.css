@@ -7,19 +7,38 @@
   --champagne: #FCE9D2;
   --cerise:    #DB2E6D;
   --icon-highlight: var(--cerise);
+  --nav-hover: var(--cerise);
   --lavender:  #FEC9FC;
-  /* Sticky header — glassy Princeton Orange */
-  --header-glass-orange-start: rgba(255, 104, 8, 0.78);
-  --header-glass-orange-end:   rgba(255, 104, 8, 0.58);
-  --header-glass-orange-shine: rgba(252, 233, 210, 0.28);
-  --header-glass-orange-shadow: rgba(200, 72, 6, 0.28);
-  /* Brand “black” — deep plum/violet (no #000 / #050505) */
-  --black:     #4d3d58;
+  /* Brand black — deep plum/violet (no pure #000) */
+  --black:           #4d3d58;
+  --black-rgb:       77, 61, 88;
+  --black-soft:      #635170;
+  --black-deep:      #3d3048;
+  /* Sticky header — lighter glassy black */
+  --header-glass-bg: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.48) 0%,
+    rgba(0, 0, 0, 0.38) 100%
+  );
+  --header-glass-blur: blur(24px) saturate(1.2);
+  --header-glass-border: rgba(252, 233, 210, 0.12);
+  --header-glass-shine: rgba(252, 233, 210, 0.08);
+  --header-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
   --white:     #ffffff;
-  --dark-soft: #635170;
-  /* Main footer (.sf): brand primary */
-  --footer-surface: var(--color-primary);
-  --footer-surface-end: #e35607;
+  --dark-soft: var(--black-soft);
+  /* Main footer (.sf) — pure black + liquid glass accents */
+  --footer-surface: #000000;
+  --footer-surface-end: #000000;
+  --footer-glass-black-start: #000000;
+  --footer-glass-black-mid:   #000000;
+  --footer-glass-black-end:   #000000;
+  --footer-glass-shine:       rgba(252, 233, 210, 0.12);
+  --footer-glass-border:      rgba(252, 233, 210, 0.14);
+  --footer-glass-cerise-glow: rgba(219, 46, 109, 0.12);
+  --footer-glass-lavender-glow: rgba(254, 201, 252, 0.08);
+  --footer-glass-liquid-sheen: rgba(255, 255, 255, 0.05);
+  --footer-glass-blur: blur(28px) saturate(1.55) brightness(0.98);
+  --footer-glass-shadow: rgba(0, 0, 0, 0.32);
   --sf-text:           var(--champagne);
   --sf-text-mid:       var(--champagne);
   --sf-text-dim:       rgba(252, 233, 210, 0.82);
@@ -43,8 +62,15 @@
   --font-welcome-lead: var(--font-display);
   --font-welcome-body: var(--font-sans);
 
-  /* Headings on light backgrounds — brand primary */
-  --heading-color: var(--color-primary);
+  /* Headings on light backgrounds — #000, primary on hover */
+  --heading-color: #000000;
+  --heading-color-hover: var(--color-primary);
+  /* Buttons — #000 at rest, primary on hover */
+  --btn-text: #000000;
+  --btn-border: #000000;
+  --btn-bg: var(--champagne);
+  --btn-bg-hover: var(--color-primary);
+  --btn-text-hover: var(--white);
 
   /* Typography — sizes & weights (light editorial + cards) */
   --text-editorial: clamp(16px, 2.2vw, 22px);
@@ -86,6 +112,18 @@ h4 {
   letter-spacing: 0.01em;
   text-transform: none;
   color: var(--heading-color);
+  transition: color 0.3s ease;
+}
+
+a:hover h1,
+a:hover h2,
+a:hover h3,
+a:hover h4,
+a:focus-visible h1,
+a:focus-visible h2,
+a:focus-visible h3,
+a:focus-visible h4 {
+  color: var(--heading-color-hover);
 }
 
 /* Italic highlight within display titles */
@@ -109,11 +147,11 @@ h4 em,
   --bg-page:        var(--champagne); /* flat — no gradients */
   --bg-body:        var(--champagne);
   --bg-dark-section: #574066;          /* hero stage — plum */
-  --header-border-scroll: rgba(252, 233, 210, 0.32);
+  --header-border-scroll: rgba(252, 233, 210, 0.1);
   --header-scroll-text: rgba(252, 233, 210, 0.96);
   --header-scroll-text-muted: rgba(252, 233, 210, 0.82);
 
-  --text-primary:   var(--black);
+  --text-primary:   #000000;
   --text-on-dark:   var(--champagne);
   --text-muted-dark: rgba(252,233,210,0.62);
 
@@ -126,11 +164,11 @@ h4 em,
   --bg-page:        var(--champagne);
   --bg-body:        var(--champagne);
   --bg-dark-section: #5c4868;          /* plum — no pure black */
-  --header-border-scroll: rgba(252, 233, 210, 0.32);
+  --header-border-scroll: rgba(252, 233, 210, 0.1);
   --header-scroll-text: rgba(252, 233, 210, 0.96);
   --header-scroll-text-muted: rgba(252, 233, 210, 0.82);
 
-  --text-primary:   #453a52;
+  --text-primary:   #000000;
   --text-on-dark:   var(--champagne);
   --text-muted-dark: rgba(252,233,210,0.62);
 
@@ -235,5 +273,16 @@ video {
 .sophia-page h2,
 .sophia-page h3,
 .sophia-page h4 {
-  color: var(--color-primary);
+  color: var(--heading-color);
+}
+
+/* In-page anchor targets — clear fixed header */
+#welcome,
+#services,
+#house,
+#life,
+#atelier,
+#subscribe,
+#contact {
+  scroll-margin-top: 80px;
 }

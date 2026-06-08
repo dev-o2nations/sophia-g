@@ -1,13 +1,16 @@
-/* ─── Footer ─── */
+/* ─── Footer — solid #000 ─── */
+
+[data-component="footer"] {
+  background-color: var(--footer-surface);
+}
 
 .sf {
   position: relative;
   display: block;
   width: 100%;
-  /* Text tokens: --sf-text*, --sf-border*, --sf-accent from variables.css */
-  background: var(--footer-surface);
   color: var(--sf-text);
   font-family: var(--font-sans);
+  background-color: var(--footer-surface);
 }
 
 /* ── Top: flex row of 3 columns ── */

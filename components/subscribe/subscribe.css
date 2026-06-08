@@ -57,7 +57,8 @@
   line-height: var(--lh-section-heading);
   letter-spacing: var(--ls-section-heading);
   text-transform: none;
-  color: var(--color-primary);
+  color: var(--heading-color);
+  transition: color 0.3s ease;
   margin: 0 0 56px;
 }
 
@@ -79,17 +80,18 @@
   letter-spacing: var(--ls-cta-link);
   text-transform: uppercase;
   font-weight: var(--fw-cta-link);
-  color: var(--orange);
+  color: var(--btn-text);
   text-decoration: none;
   transition:
-    color 0.25s ease,
+    color 0.3s ease,
     opacity 0.25s ease,
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-subscribe__link:hover {
+.sophia-subscribe__link:hover,
+.sophia-subscribe__link:focus-visible {
   opacity: 1;
-  color: var(--orange);
+  color: var(--heading-color-hover);
   transform: translateY(-2px);
 }
 

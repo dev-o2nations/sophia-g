@@ -88,27 +88,34 @@
   justify-content: center;
   height: 44px;
   padding: 0 44px;
-  background: var(--champagne);
-  color: var(--black);
+  background: var(--btn-bg);
+  color: var(--btn-text);
   font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: 2.8px;
   text-transform: uppercase;
   font-weight: 700;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--btn-border);
   border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
 }
 
-.sophia-hero__cta:hover {
-  background: var(--orange);
-  color: #fff;
+.sophia-hero__cta:hover,
+.sophia-hero__cta:focus-visible {
+  background: var(--btn-bg-hover);
+  color: var(--btn-text-hover);
+  border-color: var(--btn-bg-hover);
   box-shadow: 0 8px 32px rgba(255, 104, 8, 0.5);
   transform: translateY(-2px);
 }
 
-/* ── Scroll hint — editorial elegant ── */
+/* ── Scroll hint — indicator always; label after CTA fades ── */
 .sophia-hero__scroll-hint {
   position: absolute;
   bottom: 26px;
@@ -145,14 +152,22 @@
   text-transform: uppercase;
   line-height: 1;
   padding-left: 0.44em;
-  opacity: 0.78;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
   transition:
-    opacity 0.55s ease,
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     letter-spacing 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-hero__scroll-hint:hover .sophia-hero__scroll-label,
-.sophia-hero__scroll-hint:focus-visible .sophia-hero__scroll-label {
+.sophia-hero__scroll-label.is-visible {
+  opacity: 0.78;
+  max-height: 1.5em;
+}
+
+.sophia-hero__scroll-hint:hover .sophia-hero__scroll-label.is-visible,
+.sophia-hero__scroll-hint:focus-visible .sophia-hero__scroll-label.is-visible {
   opacity: 1;
   letter-spacing: 0.48em;
 }
@@ -285,21 +300,26 @@
   min-width: 116px;
   height: 40px;
   padding: 0 24px;
-  border: 1px solid currentColor;
-  background: var(--champagne);
-  color: var(--black);
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-weight: 700;
-  transition: background 0.35s ease, color 0.35s ease,
-              border-color 0.35s ease, transform 0.35s ease;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
 }
 
-.sophia-btn:hover {
-  background: var(--orange);
-  color: #fff;
-  border-color: var(--orange);
+.sophia-btn:hover,
+.sophia-btn:focus-visible {
+  background: var(--btn-bg-hover);
+  color: var(--btn-text-hover);
+  border-color: var(--btn-bg-hover);
   box-shadow: 0 6px 24px rgba(255, 104, 8, 0.4);
   transform: translateY(-2px);
 }

@@ -202,34 +202,40 @@ function initHeroEffects() {
   const img     = document.querySelector(".sophia-hero__img");
   const video   = document.querySelector(".sophia-hero__video");
   const media   = img || video;
-  const content = document.querySelector(".sophia-hero__content");
+  const content     = document.querySelector(".sophia-hero__content");
+  const scrollLabel = document.querySelector(".sophia-hero__scroll-label");
 
   if (!hero) return;
 
   const stageH = window.innerHeight; // 100vh
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      const y = window.scrollY;
+  function updateHeroScroll() {
+    const y = window.scrollY;
 
-      /* Slow scale-zoom on hero image or video */
-      if (media) {
-        const progress = Math.min(y / stageH, 1);      // 0 → 1 across first 100vh
-        media.style.transform = `scale(${1 + progress * 0.06})`;
-      }
+    /* Slow scale-zoom on hero image or video */
+    if (media) {
+      const progress = Math.min(y / stageH, 1);      // 0 → 1 across first 100vh
+      media.style.transform = `scale(${1 + progress * 0.06})`;
+    }
 
-      /* Label + button: fade out + float up as hero nears its end */
-      if (content) {
-        const fadeStart = stageH * 0.55;
-        const fadeEnd   = stageH * 0.88;
-        const t         = Math.max(0, Math.min(1, (y - fadeStart) / (fadeEnd - fadeStart)));
-        content.style.opacity   = 1 - t;
-        content.style.transform = `translateY(-${t * 24}px)`;
-      }
-    },
-    { passive: true }
-  );
+    /* CTA: fade out + float up as hero nears its end */
+    const fadeStart = stageH * 0.55;
+    const fadeEnd   = stageH * 0.88;
+    const t         = Math.max(0, Math.min(1, (y - fadeStart) / (fadeEnd - fadeStart)));
+
+    if (content) {
+      content.style.opacity   = 1 - t;
+      content.style.transform = `translateY(-${t * 24}px)`;
+    }
+
+    /* Scroll label — only after CTA has disappeared; indicator stays */
+    if (scrollLabel) {
+      scrollLabel.classList.toggle("is-visible", t >= 1);
+    }
+  }
+
+  updateHeroScroll();
+  window.addEventListener("scroll", updateHeroScroll, { passive: true });
 }
 
 /* ─── Chapters: sticky stage + cinematic scroll reveal ─── */
@@ -404,8 +410,8 @@ function initScrollTop() {
 
     if (footer) {
       const footerTop = footer.getBoundingClientRect().top;
-      const onOrange = footerTop < window.innerHeight - 56;
-      btn.classList.toggle("is-on-orange", onOrange);
+      const onDarkFooter = footerTop < window.innerHeight - 56;
+      btn.classList.toggle("is-on-dark", onDarkFooter);
     }
 
     ticking = false;
@@ -431,6 +437,25 @@ function initScrollTop() {
 }
 
 /* ─── Nav Drawer ─── */
+const DRAWER_CLOSE_MS = 380;
+
+function scrollToAnchor(selector) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+
+  const header = document.getElementById("sophia-header");
+  const offset = header ? header.offsetHeight + 8 : 0;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior: reducedMotion ? "auto" : "smooth",
+  });
+
+  history.pushState(null, "", selector);
+}
+
 function initMenu() {
   const openBtn  = document.getElementById("menu-icon-btn");
   const closeBtn = document.getElementById("nav-close");
@@ -465,8 +490,27 @@ function initMenu() {
     }
   }
 
+  function closeDrawerAndGo(selector) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const wasOpen = drawer.classList.contains("is-open");
+
+    if (wasOpen) closeDrawer();
+
+    const delay = wasOpen && !reducedMotion ? DRAWER_CLOSE_MS : 0;
+    window.setTimeout(() => scrollToAnchor(selector), delay);
+  }
+
   openBtn.addEventListener("click", openDrawer);
   if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+
+  drawer.querySelectorAll('.sg-drawer__link[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (!href || href.length <= 1) return;
+      e.preventDefault();
+      closeDrawerAndGo(href);
+    });
+  });
 
   // Close when clicking the dark backdrop (outside the inner panel)
   drawer.addEventListener("click", (e) => {
