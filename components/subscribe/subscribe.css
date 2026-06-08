@@ -80,7 +80,7 @@
   letter-spacing: var(--ls-cta-link);
   text-transform: uppercase;
   font-weight: var(--fw-cta-link);
-  color: var(--btn-text);
+  color: var(--cta-text);
   text-decoration: none;
   transition:
     color 0.3s ease,
@@ -91,7 +91,7 @@
 .sophia-subscribe__link:hover,
 .sophia-subscribe__link:focus-visible {
   opacity: 1;
-  color: var(--heading-color-hover);
+  color: var(--cta-text-hover);
   transform: translateY(-2px);
 }
 

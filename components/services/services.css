@@ -187,7 +187,7 @@
   font-size: var(--text-cta-link);
   font-weight: var(--fw-cta-link);
   letter-spacing: var(--ls-cta-link);
-  color: var(--btn-text);
+  color: var(--cta-text);
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -208,7 +208,7 @@
 
 .sophia-service-card__link:hover .sophia-service-card__action,
 .sophia-service-card__link:focus-visible .sophia-service-card__action {
-  color: var(--heading-color-hover);
+  color: var(--cta-text-hover);
 }
 
 .sophia-service-card__link:hover .sophia-service-card__action::after,

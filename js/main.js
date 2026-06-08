@@ -437,7 +437,8 @@ function initScrollTop() {
 }
 
 /* ─── Nav Drawer ─── */
-const DRAWER_CLOSE_MS = 380;
+const DRAWER_NAV_CLOSE_MS = 820;
+const DRAWER_NAV_SCROLL_DELAY_MS = 420;
 
 function scrollToAnchor(selector) {
   const target = document.querySelector(selector);
@@ -462,13 +463,41 @@ function initMenu() {
   const drawer   = document.getElementById("nav-drawer");
   const body     = document.body;
   let restoreFocusEl = null;
+  let isDrawerAnimating = false;
 
   if (!openBtn || !drawer) return;
   openBtn.setAttribute("aria-controls", "nav-drawer");
   openBtn.setAttribute("aria-expanded", "false");
 
+  function resetDrawerLinks() {
+    drawer.querySelectorAll(".sg-drawer__link.is-selected").forEach((link) => {
+      link.classList.remove("is-selected");
+    });
+  }
+
+  function finishDrawerClose({ restoreFocus = true } = {}) {
+    drawer.classList.remove("is-open", "is-closing");
+    drawer.setAttribute("aria-hidden", "true");
+    body.style.overflow = "";
+    body.classList.remove("sg-menu-open");
+    openBtn.setAttribute("aria-expanded", "false");
+    resetDrawerLinks();
+    isDrawerAnimating = false;
+
+    if (!restoreFocus) return;
+
+    if (restoreFocusEl instanceof HTMLElement) {
+      restoreFocusEl.focus();
+    } else {
+      openBtn.focus();
+    }
+  }
+
   function openDrawer() {
+    if (isDrawerAnimating) return;
     restoreFocusEl = document.activeElement;
+    drawer.classList.remove("is-closing");
+    resetDrawerLinks();
     drawer.classList.add("is-open");
     drawer.setAttribute("aria-hidden", "false");
     body.style.overflow = "hidden"; // prevent background scroll
@@ -477,38 +506,55 @@ function initMenu() {
     if (closeBtn) closeBtn.focus();
   }
 
-  function closeDrawer() {
-    drawer.classList.remove("is-open");
-    drawer.setAttribute("aria-hidden", "true");
-    body.style.overflow = "";
-    body.classList.remove("sg-menu-open");
-    openBtn.setAttribute("aria-expanded", "false");
-    if (restoreFocusEl instanceof HTMLElement) {
-      restoreFocusEl.focus();
-    } else {
-      openBtn.focus();
+  function closeDrawer({ cinematic = false, activeLink = null, restoreFocus = true } = {}) {
+    if (isDrawerAnimating) return;
+    if (!drawer.classList.contains("is-open")) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!cinematic || reducedMotion) {
+      finishDrawerClose({ restoreFocus });
+      return;
     }
+
+    isDrawerAnimating = true;
+    resetDrawerLinks();
+    if (activeLink) activeLink.classList.add("is-selected");
+    drawer.classList.add("is-closing");
+
+    window.setTimeout(() => {
+      finishDrawerClose({ restoreFocus });
+    }, DRAWER_NAV_CLOSE_MS);
   }
 
-  function closeDrawerAndGo(selector) {
+  function closeDrawerAndGo(selector, link) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const wasOpen = drawer.classList.contains("is-open");
 
-    if (wasOpen) closeDrawer();
+    if (!wasOpen) {
+      scrollToAnchor(selector);
+      return;
+    }
 
-    const delay = wasOpen && !reducedMotion ? DRAWER_CLOSE_MS : 0;
-    window.setTimeout(() => scrollToAnchor(selector), delay);
+    if (reducedMotion) {
+      closeDrawer();
+      scrollToAnchor(selector);
+      return;
+    }
+
+    closeDrawer({ cinematic: true, activeLink: link, restoreFocus: false });
+    window.setTimeout(() => scrollToAnchor(selector), DRAWER_NAV_SCROLL_DELAY_MS);
   }
 
   openBtn.addEventListener("click", openDrawer);
-  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+  if (closeBtn) closeBtn.addEventListener("click", () => closeDrawer({ cinematic: true }));
 
   drawer.querySelectorAll('.sg-drawer__link[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
       const href = link.getAttribute("href");
       if (!href || href.length <= 1) return;
       e.preventDefault();
-      closeDrawerAndGo(href);
+      closeDrawerAndGo(href, link);
     });
   });
 
