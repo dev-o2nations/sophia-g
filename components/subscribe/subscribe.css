@@ -1,6 +1,7 @@
 /* ─── Subscribe Section ─── */
 
 .sophia-subscribe {
+  display: none;
   position: relative;
   background: var(--section-surface);
   padding: 92px 20px 100px;
@@ -96,15 +97,33 @@
 
 @media (max-width: 768px) {
   .sophia-subscribe {
-    padding: 64px 20px 72px;
+    padding: 56px max(20px, 5vw) calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .sophia-subscribe__label {
+    margin-bottom: 32px;
+    font-size: var(--text-editorial);
+    line-height: var(--lh-editorial);
+  }
+
+  .sophia-subscribe__body {
+    margin-bottom: 28px;
+    font-size: var(--text-editorial);
+    line-height: var(--lh-editorial);
+    max-width: 34ch;
+  }
+
+  .sophia-subscribe__link {
+    min-height: 44px;
+    padding: 12px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-cta-link);
   }
 }
 
 @media (max-width: 480px) {
-  .sophia-subscribe {
-    padding: 48px 18px 56px;
-  }
-
   .sophia-subscribe__inner {
     max-width: 100%;
   }

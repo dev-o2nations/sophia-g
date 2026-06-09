@@ -296,3 +296,26 @@ video {
 #contact {
   scroll-margin-top: 80px;
 }
+
+/* Mobile — larger readable type + comfortable tap rhythm */
+@media (max-width: 768px) {
+  :root {
+    --text-editorial: clamp(17px, 4.25vw, 20px);
+    --lh-editorial: 1.7;
+    --text-card-heading: clamp(1.5rem, 5.2vw, 1.75rem);
+    --text-card-body: clamp(15px, 3.9vw, 17px);
+    --lh-card-body: 1.72;
+    --text-cta-link: 12px;
+    --ls-cta-link: 2.2px;
+  }
+
+  #welcome,
+  #services,
+  #house,
+  #life,
+  #atelier,
+  #subscribe,
+  #contact {
+    scroll-margin-top: 72px;
+  }
+}
