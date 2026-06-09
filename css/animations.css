@@ -38,11 +38,11 @@
   }
 }
 
-/* ── Section bridges — flat champagne (no gradients) ── */
+/* ── Section bridges — flat section surface (no gradients) ── */
 .sophia-fade-to-dark {
   width: 100%;
   height: 100px;
-  background: var(--champagne);
+  background: var(--section-surface);
   pointer-events: none;
   display: block;
 }
@@ -50,7 +50,7 @@
 .sophia-fade-to-light {
   width: 100%;
   height: 100px;
-  background: var(--champagne);
+  background: var(--section-surface);
   pointer-events: none;
   display: block;
 }

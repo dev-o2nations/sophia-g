@@ -2,7 +2,7 @@
 
 .sophia-services {
   position: relative;
-  background: var(--champagne);
+  background: var(--section-surface);
   color: var(--black);
   /* Top padding aligns with subscribe’s top band so welcome→here ≈ services→subscribe */
   padding: clamp(64px, 8vw, 92px) clamp(24px, 7vw, 80px) clamp(96px, 12vw, 140px);

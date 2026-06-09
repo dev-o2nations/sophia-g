@@ -5,6 +5,8 @@
   --orange:    #FF6808;
   --color-primary: var(--orange);
   --champagne: #FCE9D2;
+  /* Light page band — near white with a soft champagne tint */
+  --section-surface: #FEFBF7;
   --cerise:    #DB2E6D;
   --icon-highlight: var(--cerise);
   --nav-hover: var(--cerise);
@@ -152,8 +154,8 @@ h4 em,
 /* ── DARK theme (default) ── */
 [data-theme="dark"],
 :root {
-  --bg-page:        var(--champagne); /* flat — no gradients */
-  --bg-body:        var(--champagne);
+  --bg-page:        var(--section-surface); /* flat — no gradients */
+  --bg-body:        var(--section-surface);
   --bg-dark-section: #574066;          /* hero stage — plum */
   --header-border-scroll: rgba(252, 233, 210, 0.1);
   --header-scroll-text: rgba(252, 233, 210, 0.96);
@@ -169,8 +171,8 @@ h4 em,
 
 /* ── LIGHT theme ── */
 [data-theme="light"] {
-  --bg-page:        var(--champagne);
-  --bg-body:        var(--champagne);
+  --bg-page:        var(--section-surface);
+  --bg-body:        var(--section-surface);
   --bg-dark-section: #5c4868;          /* plum — no pure black */
   --header-border-scroll: rgba(252, 233, 210, 0.1);
   --header-scroll-text: rgba(252, 233, 210, 0.96);

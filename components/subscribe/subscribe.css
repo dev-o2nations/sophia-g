@@ -2,7 +2,7 @@
 
 .sophia-subscribe {
   position: relative;
-  background: var(--champagne);
+  background: var(--section-surface);
   padding: 92px 20px 100px;
   border-bottom: 1px solid rgba(26, 18, 8, 0.07);
   overflow: hidden;
@@ -48,16 +48,15 @@
   transition-delay: 0.36s;
 }
 
-/* Same rhythm as .sophia-services__title */
 .sophia-subscribe__label {
-  font-family: var(--font-heading);
-  font-size: var(--text-section-heading);
-  font-weight: var(--fw-section-heading);
+  font-family: var(--font-sans);
+  font-size: var(--text-editorial);
+  font-weight: var(--fw-editorial);
   font-style: normal;
-  line-height: var(--lh-section-heading);
-  letter-spacing: var(--ls-section-heading);
+  line-height: var(--lh-editorial);
+  letter-spacing: var(--ls-editorial);
   text-transform: none;
-  color: var(--heading-color);
+  color: rgba(26, 18, 8, 0.78);
   transition: color 0.3s ease;
   margin: 0 0 56px;
 }
