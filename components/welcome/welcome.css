@@ -54,6 +54,7 @@
 }
 
 .sophia-welcome__heading {
+  display: none;
   margin: 0;
   padding: 0;
   max-width: 100%;
