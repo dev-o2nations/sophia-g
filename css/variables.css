@@ -139,7 +139,6 @@ h2 em,
 h3 em,
 h4 em,
 .sophia-services__title em,
-.sophia-service-card__name em,
 .sophia-subscribe__label em,
 .sophia-welcome__line-part--lead em {
   font-style: italic;
@@ -148,11 +147,6 @@ h4 em,
   letter-spacing: 0.02em;
   padding-left: 0.1em;
   transition: color 0.3s ease;
-}
-
-a:hover .sophia-service-card__name em,
-a:focus-visible .sophia-service-card__name em {
-  color: var(--heading-color-hover);
 }
 
 /* ── DARK theme (default) ── */

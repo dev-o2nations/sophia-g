@@ -161,6 +161,15 @@
   transition: color 0.3s ease;
 }
 
+.sophia-service-card__name em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--heading-color-accent);
+  letter-spacing: inherit;
+  padding-left: 0;
+  transition: color 0.3s ease;
+}
+
 .sophia-service-card__link:hover .sophia-service-card__name,
 .sophia-service-card__link:hover .sophia-service-card__name em,
 .sophia-service-card__link:focus-visible .sophia-service-card__name,
