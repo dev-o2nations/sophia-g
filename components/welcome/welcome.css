@@ -107,19 +107,32 @@
   transition: color 0.3s ease;
 }
 
-/* Body — natural wrap inside fixed inner width */
+/* Body — centered lines inside fixed inner width */
 .sophia-welcome__line-part--body {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   width: 100%;
+  gap: 0.14em;
   font-family: var(--font-welcome-body);
   font-size: var(--text-editorial);
   font-weight: var(--fw-editorial);
   line-height: var(--lh-editorial);
   letter-spacing: var(--ls-editorial);
   text-transform: none;
+  color: rgba(77, 61, 88, 0.78);
+}
+
+.sophia-welcome__text-line {
+  display: block;
+  width: 100%;
   text-align: center;
   text-wrap: pretty;
-  color: rgba(77, 61, 88, 0.78);
+}
+
+.sophia-welcome__text-line--short {
+  max-width: 68%;
+  margin-inline: auto;
 }
 
 @media (max-width: 768px) {
