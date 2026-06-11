@@ -150,21 +150,21 @@
 
 .sophia-service-card__name {
   margin: 0;
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--text-card-body);
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
   line-height: var(--lh-card-body);
   letter-spacing: var(--ls-editorial);
   text-transform: uppercase;
-  color: var(--heading-color);
+  color: #000000;
   transition: color 0.3s ease;
 }
 
 .sophia-service-card__name em {
   font-style: normal;
-  font-weight: 700;
-  color: var(--heading-color-accent);
+  font-weight: 500;
+  color: #000000;
   letter-spacing: inherit;
   padding-left: 0;
   transition: color 0.3s ease;

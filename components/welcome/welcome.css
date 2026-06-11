@@ -31,9 +31,11 @@
 .sophia-welcome__statement {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(20px, 3vw, 32px);
-  max-width: min(720px, 100%);
+  align-items: stretch;
+  gap: clamp(28px, 4vw, 40px);
+  width: min(30rem, 92vw);
+  max-width: min(30rem, 92vw);
+  margin-inline: auto;
   opacity: 0;
   transition: opacity 0.7s ease 0.16s;
 }
@@ -52,18 +54,10 @@
   opacity: 1;
 }
 
-.sophia-welcome__heading {
-  display: none;
-  margin: 0;
-  padding: 0;
-  max-width: 100%;
-}
-
 .sophia-welcome__text {
   margin: 0;
   padding: 0;
-  max-width: min(56ch, 100%);
-  text-wrap: balance;
+  width: 100%;
 }
 
 .sophia-welcome__line-reveal {
@@ -82,15 +76,6 @@
     filter 0.45s ease;
 }
 
-.sophia-welcome.is-inview .sophia-welcome__heading .sophia-welcome__line-part {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-  transition-delay: 0.16s;
-  transition-duration: 1.1s;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .sophia-welcome.is-inview .sophia-welcome__text .sophia-welcome__line-part {
   opacity: 1;
   transform: translateY(0);
@@ -100,12 +85,12 @@
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.sophia-welcome:not(.is-inview) .sophia-welcome__text .sophia-welcome__line-part {
-  transition-delay: 0.05s;
+.sophia-welcome.is-inview .sophia-welcome__text + .sophia-welcome__text .sophia-welcome__line-part {
+  transition-delay: 0.52s;
 }
 
-.sophia-welcome:not(.is-inview) .sophia-welcome__heading .sophia-welcome__line-part {
-  transition-delay: 0s;
+.sophia-welcome:not(.is-inview) .sophia-welcome__text .sophia-welcome__line-part {
+  transition-delay: 0.05s;
 }
 
 /* Display lead — Cormorant Garamond + italic highlight */
@@ -122,15 +107,18 @@
   transition: color 0.3s ease;
 }
 
-/* Body — same scale as subscribe section body */
+/* Body — natural wrap inside fixed inner width */
 .sophia-welcome__line-part--body {
   display: block;
+  width: 100%;
   font-family: var(--font-welcome-body);
   font-size: var(--text-editorial);
   font-weight: var(--fw-editorial);
-  line-height: 1.55;
+  line-height: var(--lh-editorial);
   letter-spacing: var(--ls-editorial);
-  text-transform: capitalize;
+  text-transform: none;
+  text-align: center;
+  text-wrap: pretty;
   color: rgba(77, 61, 88, 0.78);
 }
 
@@ -140,12 +128,13 @@
   }
 
   .sophia-welcome__statement {
-    gap: 22px;
+    width: min(22.5em, 94vw);
+    max-width: min(22.5em, 94vw);
+    gap: 28px;
   }
 
-  .sophia-welcome__text {
-    max-width: 100%;
-    padding: 0 8px;
+  .sophia-welcome__line-part--body {
+    line-height: var(--lh-editorial);
   }
 
   .sophia-welcome__line-part {
@@ -154,11 +143,6 @@
 
   .sophia-welcome.is-inview .sophia-welcome__line-part {
     transform: translateY(0);
-  }
-
-  .sophia-welcome__line-part--lead {
-    font-size: clamp(1.5rem, 5.5vw, 1.875rem);
-    line-height: 1.35;
   }
 
   .sophia-welcome__line-part--body {

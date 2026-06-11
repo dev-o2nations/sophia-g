@@ -202,8 +202,7 @@ function initHeroEffects() {
   const img     = document.querySelector(".sophia-hero__img");
   const video   = document.querySelector(".sophia-hero__video");
   const media   = img || video;
-  const content     = document.querySelector(".sophia-hero__content");
-  const scrollLabel = document.querySelector(".sophia-hero__scroll-label");
+  const content = document.querySelector(".sophia-hero__content");
 
   if (!hero) return;
 
@@ -226,11 +225,6 @@ function initHeroEffects() {
     if (content) {
       content.style.opacity   = 1 - t;
       content.style.transform = `translateY(-${t * 24}px)`;
-    }
-
-    /* Scroll label — only after CTA has disappeared; indicator stays */
-    if (scrollLabel) {
-      scrollLabel.classList.toggle("is-visible", t >= 1);
     }
   }
 
