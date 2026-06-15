@@ -187,21 +187,24 @@
   color: rgba(77, 61, 88, 0.75);
 }
 
-/* Action link — underline on hover */
+/* Action link — solid underline; slide out right / redraw from left on hover */
 .sophia-service-card__action {
   position: relative;
   display: inline-block;
   margin-top: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 1px;
   font-family: var(--font-sans);
-  font-size: var(--text-cta-link);
-  font-weight: var(--fw-cta-link);
-  letter-spacing: var(--ls-cta-link);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--cta-text);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
+.sophia-service-card__action::before,
 .sophia-service-card__action::after {
   content: "";
   position: absolute;
@@ -211,19 +214,39 @@
   height: 1px;
   pointer-events: none;
   background: currentColor;
+}
+
+.sophia-service-card__action::before {
+  z-index: 0;
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.sophia-service-card__action::after {
+  z-index: 1;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0s;
 }
 
-.sophia-service-card__link:hover .sophia-service-card__action,
+.sophia-service-card:hover .sophia-service-card__action,
 .sophia-service-card__link:focus-visible .sophia-service-card__action {
-  color: var(--cta-text-hover);
+  color: var(--color-primary);
 }
 
-.sophia-service-card__link:hover .sophia-service-card__action::after,
+.sophia-service-card:hover .sophia-service-card__action::before,
+.sophia-service-card__link:focus-visible .sophia-service-card__action::before {
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0s;
+}
+
+.sophia-service-card:hover .sophia-service-card__action::after,
 .sophia-service-card__link:focus-visible .sophia-service-card__action::after {
   transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
 }
 
 .sophia-service-card.is-inview .sophia-service-card__video {
@@ -292,7 +315,7 @@
   .sophia-service-card__action {
     margin-top: 8px;
     min-height: 44px;
-    padding: 10px 12px 8px;
+    padding: 10px 12px 2px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -316,17 +339,19 @@
     transition: none;
   }
 
-  .sophia-service-card__action {
-    transition-duration: 0.15s;
-  }
-
+  .sophia-service-card__action::before,
   .sophia-service-card__action::after {
-    transition: transform 0.15s ease;
+    transition: none;
   }
 
-  .sophia-service-card__link:hover .sophia-service-card__action::after,
-  .sophia-service-card__link:focus-visible .sophia-service-card__action::after {
+  .sophia-service-card:hover .sophia-service-card__action::before,
+  .sophia-service-card__link:focus-visible .sophia-service-card__action::before {
     transform: scaleX(1);
+  }
+
+  .sophia-service-card:hover .sophia-service-card__action::after,
+  .sophia-service-card__link:focus-visible .sophia-service-card__action::after {
+    transform: scaleX(0);
   }
 
   .sophia-service-card.is-inview .sophia-service-card__video,

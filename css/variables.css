@@ -141,7 +141,6 @@ h2 em,
 h3 em,
 h4 em,
 .sophia-services__title em,
-.sophia-subscribe__label em,
 .sophia-welcome__line-part--lead em {
   font-style: italic;
   font-weight: var(--fw-heading-accent);
@@ -160,6 +159,13 @@ h4 em,
   --header-border-scroll: rgba(252, 233, 210, 0.1);
   --header-scroll-text: rgba(252, 233, 210, 0.96);
   --header-scroll-text-muted: rgba(252, 233, 210, 0.82);
+  --header-scroll-bg: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.52) 100%
+  );
+  --header-scroll-blur: blur(24px) saturate(1.25);
+  --header-scroll-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
 
   --text-primary:   #000000;
   --text-on-dark:   var(--champagne);
@@ -177,6 +183,13 @@ h4 em,
   --header-border-scroll: rgba(252, 233, 210, 0.1);
   --header-scroll-text: rgba(252, 233, 210, 0.96);
   --header-scroll-text-muted: rgba(252, 233, 210, 0.82);
+  --header-scroll-bg: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.62) 100%
+  );
+  --header-scroll-blur: blur(24px) saturate(1.25);
+  --header-scroll-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
 
   --text-primary:   #000000;
   --text-on-dark:   var(--champagne);
@@ -275,7 +288,7 @@ video {
   display: block;
 }
 
-/* Page wrapper — light sections (welcome, services, subscribe) */
+/* Page wrapper — light sections (welcome, services) */
 .sophia-page {
   background: var(--bg-page);
 }

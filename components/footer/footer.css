@@ -2,6 +2,9 @@
 
 [data-component="footer"] {
   background-color: var(--footer-surface);
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 .sf {
@@ -11,6 +14,8 @@
   color: var(--sf-text);
   font-family: var(--font-sans);
   background-color: var(--footer-surface);
+  border: none;
+  margin: 0;
 }
 
 /* ── Top: flex row of 3 columns ── */
