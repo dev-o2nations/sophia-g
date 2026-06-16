@@ -218,13 +218,13 @@ h4 em,
 }
 
 [data-theme="light"] .sophia-header.is-scrolled {
-  color: var(--header-scroll-text);
+  color: #000000;
 }
 
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__link,
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__icon-btn,
 [data-theme="light"] .sophia-header.is-scrolled .sophia-header__menu-btn {
-  color: var(--header-scroll-text-muted);
+  color: #000000;
 }
 
 /* Light mode: full-color brand logo in all header states */

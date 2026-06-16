@@ -26,9 +26,16 @@ window.__sophiaInit = function () {
 function initHeader() {
   const header = document.getElementById("sophia-header");
   if (!header) return;
+  const logo = header.querySelector(".sophia-header__logo");
+  const defaultLogo = logo?.dataset.logoDefault || logo?.getAttribute("src") || "";
+  const scrolledLogo = logo?.dataset.logoScrolled || defaultLogo;
 
   const onScroll = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 40);
+    const isScrolled = window.scrollY > 40;
+    header.classList.toggle("is-scrolled", isScrolled);
+    if (logo) {
+      logo.setAttribute("src", isScrolled ? scrolledLogo : defaultLogo);
+    }
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });

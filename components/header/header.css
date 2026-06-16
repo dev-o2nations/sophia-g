@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  padding: 0 40px;
+  padding: 0 clamp(24px, 7vw, 80px);
 
   /* Transparent by default */
   background: transparent;
@@ -25,20 +25,20 @@
     box-shadow 0.45s ease;
 }
 
-/* ── Scrolled state — dark glass for champagne logo + white icons ── */
+/* ── Scrolled state — light band with dark logo/icons ── */
 .sophia-header.is-scrolled {
-  background: var(--header-scroll-bg);
-  -webkit-backdrop-filter: var(--header-scroll-blur);
-  backdrop-filter: var(--header-scroll-blur);
-  border-bottom-color: var(--header-glass-border);
-  box-shadow: var(--header-scroll-shadow);
-  color: var(--header-scroll-text);
+  background: var(--section-surface);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  color: #000000;
 }
 
 .sophia-header.is-scrolled .sophia-header__link,
 .sophia-header.is-scrolled .sophia-header__icon-btn,
 .sophia-header.is-scrolled .sophia-header__menu-btn {
-  color: var(--header-scroll-text-muted);
+  color: #000000;
 }
 
 .sophia-header.is-scrolled .sophia-header__logo {
@@ -200,7 +200,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .sophia-header {
-    padding: 0 24px;
+    padding: 0 clamp(24px, 7vw, 80px);
     grid-template-columns: auto 1fr;
   }
 
@@ -213,7 +213,7 @@
 @media (max-width: 640px) {
   .sophia-header {
     height: 58px;
-    padding: 0 10px;
+    padding: 0 max(20px, 5vw);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -272,7 +272,7 @@
 /* Very small screens */
 @media (max-width: 380px) {
   .sophia-header {
-    padding: 0 6px;
+    padding: 0 max(20px, 5vw);
   }
 
   .sophia-header__logo {
